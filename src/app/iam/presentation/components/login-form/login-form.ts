@@ -2,10 +2,20 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { MatFormField, MatInput, MatLabel } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
-import { MatButton } from '@angular/material/button';
+import { MatButton, MatIconButton } from '@angular/material/button';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  imports: [MatFormField, MatLabel, FormsModule, MatIcon, MatInput, MatButton],
+  imports: [
+    MatFormField,
+    MatLabel,
+    FormsModule,
+    MatIcon,
+    MatInput,
+    MatButton,
+    RouterLink,
+    MatIconButton,
+  ],
   selector: 'app-login-form',
   styleUrl: './login-form.css',
   templateUrl: './login-form.html',
