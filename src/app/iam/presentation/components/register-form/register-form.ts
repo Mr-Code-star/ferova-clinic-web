@@ -4,6 +4,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatFormField, MatInput } from '@angular/material/input';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatButton, MatIconButton } from '@angular/material/button';
+import { RouterLink } from '@angular/router';
 
 export type UserRole = 'ADMIN' | 'NURSE';
 
@@ -18,7 +19,16 @@ export interface RegisterData {
 }
 
 @Component({
-  imports: [FormsModule, MatIcon, MatFormField, MatCheckbox, MatButton, MatInput, MatIconButton],
+  imports: [
+    FormsModule,
+    MatIcon,
+    MatFormField,
+    MatCheckbox,
+    MatButton,
+    MatInput,
+    MatIconButton,
+    RouterLink,
+  ],
   selector: 'app-register-form',
   styleUrl: './register-form.css',
   templateUrl: './register-form.html',
