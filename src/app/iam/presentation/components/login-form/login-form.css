@@ -1,0 +1,254 @@
+:host {
+  font-family: 'Inter', sans-serif;
+  --primary-color: #0d5c6b;
+  --primary-hover: #0a4a56;
+  --text-dark: #1a202c;
+  --text-light: #4a5568;
+  --text-muted: #a0aec0;
+  --bg-card: #ffffff;
+  --bg-input: #f4f7fa;
+  --border-color: #e2e8f0;
+}
+
+/* ============================================
+   TARJETA PRINCIPAL
+   ============================================ */
+.login-card {
+  background-color: var(--bg-card);
+  border-radius: 20px;
+  padding: 2.5rem;
+  max-width: 556px;   /* mismo ancho que la columna de info */
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  box-shadow: 0 12px 32px rgba(13, 92, 107, 0.10);
+}
+
+/* ============================================
+   ENCABEZADO
+   ============================================ */
+.login-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.logo-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background-color: #e8f2f4;
+  margin-bottom: 1rem;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+.brand-name {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin: 0 0 0.25rem 0;
+  letter-spacing: -0.02em;
+}
+
+.brand-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin: 0;
+}
+
+/* ============================================
+   FORMULARIO
+   ============================================ */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.field-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.field-label {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.field-hint {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+.forgot-link {
+  font-size: 0.8rem;
+  color: var(--primary-color);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+}
+
+/* ============================================
+   OVERRIDES DE MAT-FORM-FIELD (¡la parte clave!)
+   ============================================ */
+
+/* 1. Ocultar la etiqueta flotante de Material */
+::ng-deep .custom-field .mat-mdc-floating-label,
+::ng-deep .custom-field .mdc-floating-label {
+  display: none !important;
+}
+
+/* 2. El contenedor del input */
+::ng-deep .custom-field {
+  width: 100%;
+}
+
+::ng-deep .custom-field .mat-mdc-text-field-wrapper {
+  background-color: #ebf3fa !important;
+  border-radius: 12px !important;
+  padding: 0 0.75rem 0 1rem !important;
+  height: 44px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* 3. Quitar el borde/outline visible */
+::ng-deep .custom-field .mdc-notched-outline__leading,
+::ng-deep .custom-field .mdc-notched-outline__notch,
+::ng-deep .custom-field .mdc-notched-outline__trailing {
+  border-color: transparent !important;
+  border-width: 0 !important;
+}
+
+/* 4. El input en sí */
+::ng-deep .custom-field .mat-mdc-input-element {
+  color: var(--text-dark) !important;
+  font-size: 0.95rem !important;
+  padding: 0 !important;
+  height: 100% !important;
+}
+
+::ng-deep .custom-field input::placeholder {
+  color: var(--text-muted) !important;
+  opacity: 1 !important;
+}
+
+/* 5. El subfijo (icono a la derecha) */
+::ng-deep .custom-field .mat-mdc-form-field-icon-suffix {
+  color: var(--primary-color) !important;
+  padding: 0 !important;
+}
+
+::ng-deep .custom-field .mat-mdc-form-field-icon-suffix .mat-icon {
+  color: var(--primary-color) !important;
+  font-size: 22px !important;
+  width: 22px !important;
+  height: 22px !important;
+}
+
+/* 6. Estado focused: añadimos un borde sutil verde azulado */
+::ng-deep .custom-field.mat-focused .mat-mdc-text-field-wrapper {
+  background-color: #eef4f6 !important;
+  box-shadow: 0 0 0 2px var(--primary-color) !important;
+}
+
+/* 7. Quitar el espacio reservado para el subscript (mensajes de error) */
+::ng-deep .custom-field .mat-mdc-form-field-subscript-wrapper {
+  display: none !important;
+}
+
+/* 8. Quitar el padding extra que agrega Material debajo */
+::ng-deep .custom-field .mat-mdc-form-field-bottom-align {
+  display: none !important;
+}
+
+/* Botón de ojo (icon-button) */
+.field-icon-btn {
+  color: var(--primary-color) !important;
+  width: 36px !important;
+  height: 36px !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.field-icon-btn .mat-icon {
+  font-size: 22px !important;
+  width: 22px !important;
+  height: 22px !important;
+  color: var(--primary-color) !important;
+}
+
+/* ============================================
+   BOTÓN PRINCIPAL
+   ============================================ */
+.submit-button {
+  height: 48px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 12px;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(90deg, #0d5c6b 0%, #0d6678 100%) !important;
+  color: #ffffff !important;
+  transition: background-color 0.2s ease;
+}
+
+.submit-button:hover:not([disabled]) {
+  background: var(--primary-hover) !important;
+}
+
+.submit-button:disabled {
+  background: #cbd5e0 !important;
+  color: #ffffff !important;
+}
+
+.submit-button .mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+/* ============================================
+   ENLACE A REGISTRO
+   ============================================ */
+.register-link {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
+.register-link a {
+  color: var(--primary-color);
+  font-weight: 700;
+  text-decoration: none;
+  margin-left: 0.35rem;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
