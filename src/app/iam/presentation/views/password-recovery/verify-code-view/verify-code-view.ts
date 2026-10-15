@@ -21,6 +21,8 @@ export class VerifyCodeView {
     //   next: () => this.router.navigate(['/auth/reset-password']),
     //   error: (err) => console.error(err),
     // });
+    void this.router.navigate(['/auth/reset-password']);
+
   }
 
   onBack(): void {
