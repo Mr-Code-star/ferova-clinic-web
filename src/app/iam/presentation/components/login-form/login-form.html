@@ -1,0 +1,79 @@
+<div class="login-card">
+
+  <!-- Encabezado: Logo + Nombre -->
+  <div class="login-header">
+    <div class="logo-container">
+      <img src="/SVG.png" alt="FerovaClinic" class="logo">
+    </div>
+    <h2 class="brand-name">FerovaClinic</h2>
+    <p class="brand-subtitle">Portal del Paciente</p>
+  </div>
+
+  <!-- Formulario -->
+  <form (ngSubmit)="onSubmit()" class="login-form">
+
+    <!-- Campo DNI -->
+    <div class="field-group">
+      <div class="field-label-row">
+        <label class="field-label">DNI (8 dígitos)</label>
+        <span class="field-hint">Documento Nacional</span>
+      </div>
+      <mat-form-field appearance="outline" class="custom-field">
+        <input
+          matInput
+          type="text"
+          [(ngModel)]="dni"
+          name="dni"
+          maxlength="8"
+          placeholder="00000000"
+          required>
+        <mat-icon matSuffix class="field-icon">badge</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <!-- Campo Contraseña -->
+    <div class="field-group">
+      <div class="field-label-row">
+        <label class="field-label">Contraseña</label>
+        <a routerLink="/auth/forgot-password" class="forgot-link">¿Olvidaste tu contraseña?</a>
+      </div>
+      <mat-form-field appearance="outline" class="custom-field">
+        <input
+          matInput
+          [type]="hidePassword ? 'password' : 'text'"
+          [(ngModel)]="password"
+          name="password"
+          placeholder="••••••••"
+          required>
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="togglePasswordVisibility()"
+          class="field-icon-btn"
+          [attr.aria-label]="'Mostrar contraseña'">
+          <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+
+    <!-- Botón Acceder -->
+    <button
+      mat-flat-button
+      type="submit"
+      class="submit-button"
+      [disabled]="dni.length !== 8 || !password">
+      Acceder al Sistema
+    </button>
+
+
+
+  </form>
+
+  <!-- Enlace a Registro -->
+  <p class="register-link">
+    ¿Primera vez aquí?
+    <a routerLink="/auth/register">Crea tu cuenta</a>
+  </p>
+
+</div>

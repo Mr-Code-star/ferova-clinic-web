@@ -1,0 +1,36 @@
+<form (ngSubmit)="onSubmit()" class="verify-form">
+
+  <!-- Inputs de código -->
+  <div class="code-inputs">
+    @for (digit of digits; track $index; let i = $index) {
+      <input
+        #codeInput
+        type="text"
+        inputmode="numeric"
+        maxlength="1"
+        class="code-input"
+        [class.filled]="digit !== ''"
+        [value]="digit"
+        (input)="onInput(i, $event)"
+        (keydown)="onKeydown(i, $event)"
+        (paste)="onPaste($event)"
+        [attr.aria-label]="'Dígito ' + (i + 1)">
+    }
+  </div>
+
+  <!-- Botón Verificar -->
+  <button
+    mat-flat-button
+    type="submit"
+    class="submit-button"
+    [disabled]="!isValid">
+    Verificar Codigo
+  </button>
+
+  <!-- Enlace Reenviar -->
+  <p class="resend-text">
+    ¿No recibistes el código?
+    <button type="button" class="resend-link" (click)="onResend()">Reenviar</button>
+  </p>
+
+</form>

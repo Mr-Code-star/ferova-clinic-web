@@ -1,0 +1,56 @@
+:host {
+  --bg-page: #eef4f7;
+  --bg-page-gradient: linear-gradient(180deg, #eef4f7 0%, #e8f0f4 100%);
+  --text-light: #4a5568;
+}
+
+.recovery-shell {
+  min-height: calc(100vh - 72px); /* Restando el header */
+  background: var(--bg-page-gradient);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+  box-sizing: border-box;
+  gap: 2rem;
+}
+
+/* Contenido central (la tarjeta que cada vista provee) */
+.recovery-shell__content {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Badge inferior de seguridad */
+.recovery-shell__footer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-light);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.shield-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: var(--text-light);
+}
+
+/* ============================================
+   RESPONSIVO
+   ============================================ */
+@media (max-width: 640px) {
+  .recovery-shell {
+    padding: 2rem 1rem;
+    gap: 1.5rem;
+  }
+
+  .recovery-shell__footer {
+    font-size: 0.8rem;
+  }
+}

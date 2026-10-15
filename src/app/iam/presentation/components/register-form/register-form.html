@@ -1,0 +1,180 @@
+<div class="register-card">
+
+  <!-- Encabezado -->
+  <div class="register-header">
+    <h2 class="title">Crea tu cuenta profesional</h2>
+    <p class="subtitle">Accede a nuestra plataforma de gestión clínica integral.</p>
+  </div>
+
+  <form (ngSubmit)="onSubmit()" class="register-form">
+
+    <!-- ============================================
+         SELECTOR DE ROL
+         ============================================ -->
+    <div class="form-group">
+      <label class="field-label">ROL PROFESIONAL</label>
+      <div class="role-selector">
+
+        <button
+          type="button"
+          class="role-option"
+          [class.selected]="selectedRole === 'ADMIN'"
+          (click)="selectRole('ADMIN')">
+          <div class="role-avatar">
+            <mat-icon>admin_panel_settings</mat-icon>
+          </div>
+          <span class="role-name">Administrador</span>
+        </button>
+
+        <button
+          type="button"
+          class="role-option"
+          [class.selected]="selectedRole === 'NURSE'"
+          (click)="selectRole('NURSE')">
+          <div class="role-avatar">
+            <mat-icon>medical_services</mat-icon>
+          </div>
+          <span class="role-name">Enfermero/a</span>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- ============================================
+         CAMPOS DEL FORMULARIO
+         ============================================ -->
+
+    <!-- Nombre -->
+    <div class="field-group">
+      <label class="field-label">Nombre Completo</label>
+      <mat-form-field appearance="outline" class="custom-field">
+        <input
+          matInput
+          type="text"
+          [(ngModel)]="firstName"
+          name="firstName"
+          placeholder="Ej: María Elena"
+          required>
+      </mat-form-field>
+    </div>
+
+    <!-- Apellido -->
+    <div class="field-group">
+      <label class="field-label">Apellido Completo</label>
+      <mat-form-field appearance="outline" class="custom-field">
+        <input
+          matInput
+          type="text"
+          [(ngModel)]="lastName"
+          name="lastName"
+          placeholder="Ej: García Lopez"
+          required>
+      </mat-form-field>
+    </div>
+
+    <!-- DNI -->
+    <div class="field-group">
+      <label class="field-label">DNI (8 dígitos)</label>
+      <mat-form-field appearance="outline" class="custom-field">
+        <input
+          matInput
+          type="text"
+          [(ngModel)]="dni"
+          name="dni"
+          maxlength="8"
+          placeholder="00000000"
+          required>
+      </mat-form-field>
+    </div>
+
+    <!-- Teléfono -->
+    <div class="field-group">
+      <label class="field-label">Teléfono</label>
+      <mat-form-field appearance="outline" class="custom-field">
+        <input
+          matInput
+          type="tel"
+          [(ngModel)]="phone"
+          name="phone"
+          placeholder="+51 987 347 182"
+          required>
+      </mat-form-field>
+    </div>
+
+    <!-- Contraseña -->
+    <div class="field-group">
+      <label class="field-label">Contraseña</label>
+      <mat-form-field appearance="outline" class="custom-field">
+        <input
+          matInput
+          [type]="hidePassword ? 'password' : 'text'"
+          [(ngModel)]="password"
+          name="password"
+          placeholder="**************"
+          required>
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="togglePasswordVisibility()"
+          class="field-icon-btn"
+          aria-label="Mostrar contraseña">
+          <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+
+    <!-- Confirmar Contraseña -->
+    <div class="field-group">
+      <label class="field-label">Confirmar contraseña</label>
+      <mat-form-field appearance="outline" class="custom-field">
+        <input
+          matInput
+          [type]="hideConfirmPassword ? 'password' : 'text'"
+          [(ngModel)]="confirmPassword"
+          name="confirmPassword"
+          placeholder="**************"
+          required>
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="toggleConfirmPasswordVisibility()"
+          class="field-icon-btn"
+          aria-label="Mostrar contraseña">
+          <mat-icon>{{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+
+    <!-- ============================================
+         CHECKBOX DE TÉRMINOS
+         ============================================ -->
+    <mat-checkbox
+      [(ngModel)]="acceptTerms"
+      name="acceptTerms"
+      class="terms-checkbox">
+      Acepto términos de confidencialidad clínica y privacidad
+    </mat-checkbox>
+
+    <!-- ============================================
+         BOTÓN DE SUBMIT
+         ============================================ -->
+    <button
+      mat-flat-button
+      type="submit"
+      class="submit-button"
+      [disabled]="!isValid">
+      Registrar Perfil
+      <mat-icon>person_add</mat-icon>
+    </button>
+
+  </form>
+
+  <!-- Enlace a Login -->
+  <p class="login-link">
+    ¿Ya tienes una cuenta?
+    <a routerLink="/auth/login">Inicia sesión</a>
+  </p>
+
+</div>

@@ -1,0 +1,22 @@
+<app-recovery-shell>
+
+  <div class="verify-card">
+
+    <!-- Botón Volver -->
+    <button type="button" class="back-button" (click)="onBack()">
+      <mat-icon>arrow_back</mat-icon>
+      <span>Volver</span>
+    </button>
+
+    <!-- Encabezado -->
+    <header class="verify-header">
+      <h1 class="title">Verificar tu identidad</h1>
+      <p class="subtitle">Hemos enviado un codigo de 4 digitos a tu correo</p>
+    </header>
+
+    <!-- Formulario -->
+    <app-verify-code-form (submitCode)="onCodeSubmit($event)"></app-verify-code-form>
+
+  </div>
+
+</app-recovery-shell>

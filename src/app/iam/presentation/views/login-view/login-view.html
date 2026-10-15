@@ -1,0 +1,16 @@
+<app-header></app-header>
+<div class="login-view">
+
+  <!-- Columna izquierda: Información de la plataforma -->
+  <div class="login-view__info">
+    <app-auth-info></app-auth-info>
+  </div>
+
+  <!-- Columna derecha: Formulario de acceso -->
+  <div class="login-view__form">
+    <app-login-form (loginSubmit)="onLogin($event)"></app-login-form>
+  </div>
+
+</div>
+
+<app-footer></app-footer>
