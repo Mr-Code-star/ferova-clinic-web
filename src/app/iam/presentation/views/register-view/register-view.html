@@ -1,0 +1,17 @@
+<app-header></app-header>
+
+<div class="register-view">
+
+  <!-- Columna izquierda: Información sobre la red -->
+  <div class="register-view__info">
+    <app-register-info></app-register-info>
+  </div>
+
+  <!-- Columna derecha: Formulario de registro -->
+  <div class="register-view__form">
+    <app-register-form (registerSubmit)="onRegister($event)"></app-register-form>
+  </div>
+
+</div>
+
+<app-footer></app-footer>
