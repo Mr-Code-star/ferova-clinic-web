@@ -32,7 +32,8 @@ export class AuthStore {
   // API pública (readonly)
   readonly loading = this.loadingSignal.asReadonly();
   readonly error = this.errorSignal.asReadonly();
-
+  readonly isSignedIn = this.isSignedInSignal.asReadonly();
+  readonly role = this.roleSignal.asReadonly();
 
   // ============================================
   // SIGN IN
@@ -141,6 +142,7 @@ export class AuthStore {
     this.emailSignal.set(null);
     this.userIdSignal.set(null);
     this.iamStore.clear();
+    void this.router.navigate(['/auth/login']);
   }
 
   /**
