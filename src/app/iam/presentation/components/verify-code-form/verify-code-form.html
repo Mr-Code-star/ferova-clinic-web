@@ -23,8 +23,14 @@
     mat-flat-button
     type="submit"
     class="submit-button"
-    [disabled]="!isValid">
-    Verificar Codigo
+    [disabled]="!isValid || loading">
+
+    @if (loading) {
+      <span class="spinner"></span>
+      Verificando...
+    } @else {
+      Verificar Codigo
+    }
   </button>
 
   <!-- Enlace Reenviar -->

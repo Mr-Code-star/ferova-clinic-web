@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatFormField, MatInput } from '@angular/material/input';
 import { MatIcon } from '@angular/material/icon';
@@ -14,6 +14,7 @@ export class ForgotPasswordForm {
   email = '';
 
   @Output() submitEmail = new EventEmitter<string>();
+  @Input() loading = false;
 
   /** Validación simple de email */
   get isValid(): boolean {

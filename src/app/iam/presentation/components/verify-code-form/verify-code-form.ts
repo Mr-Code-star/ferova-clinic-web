@@ -2,6 +2,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  Input,
   Output,
   QueryList,
   ViewChildren,
@@ -20,7 +21,7 @@ export class VerifyCodeForm {
   digits: string[] = ['', '', '', ''];
 
   @Output() submitCode = new EventEmitter<string>();
-
+  @Input() loading = false;
   @ViewChildren('codeInput') inputs!: QueryList<ElementRef<HTMLInputElement>>;
 
   ngAfterViewInit(): void {
@@ -84,7 +85,7 @@ export class VerifyCodeForm {
   }
 
   onSubmit(): void {
-    if (!this.isValid) return;
+    if (!this.isValid || this.loading) return;
     this.submitCode.emit(this.digits.join(''));
   }
 

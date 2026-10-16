@@ -1,4 +1,4 @@
-import { Component, computed, EventEmitter, Output, signal } from '@angular/core';
+import { Component, computed, EventEmitter, Input, Output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatFormField, MatInput } from '@angular/material/input';
 import { MatButton, MatIconButton } from '@angular/material/button';
@@ -20,7 +20,7 @@ export class ResetPasswordForm {
   hideConfirmPassword = true;
 
   @Output() submitPassword = new EventEmitter<string>();
-
+  @Input() loading = false;
   // ============================================
   // REQUISITOS DE SEGURIDAD (dinámicos con signals)
   // ============================================
@@ -65,7 +65,7 @@ export class ResetPasswordForm {
   }
 
   onSubmit(): void {
-    if (!this.isValid) return;
+    if (!this.isValid || this.loading) return;
     this.submitPassword.emit(this.password);
   }
 }
