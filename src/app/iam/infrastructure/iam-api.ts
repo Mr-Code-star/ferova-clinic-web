@@ -19,18 +19,23 @@ import {
   VerifyCodeResponse,
 } from './password-recovery-response';
 import { PasswordRecoveryApiEndpoint } from './password-recovery-api-endpoint';
+import { UserApiEndpoint } from './user-api-endpoint';
+import { UserResource } from './users-response';
 
 @Injectable({ providedIn: 'root' })
 export class IamApi extends BaseApi {
   private readonly signInREndpoint: SignInApiEndpoint;
   private readonly signUpEndpoint: SignUpApiEndpoint;
   private readonly passwordRecoveryEndpoint: PasswordRecoveryApiEndpoint;
+  private readonly userEndpoint: UserApiEndpoint;
 
   constructor(http: HttpClient) {
     super();
     this.signInREndpoint = new SignInApiEndpoint(http, new SignInAssembler());
     this.signUpEndpoint = new SignUpApiEndpoint(http, new SignUpAssembler());
     this.passwordRecoveryEndpoint = new PasswordRecoveryApiEndpoint(http);
+    this.userEndpoint = new UserApiEndpoint(http);
+
   }
   // ============================================
   // AUTH
@@ -59,4 +64,7 @@ export class IamApi extends BaseApi {
     return this.passwordRecoveryEndpoint.resetPassword(command);
   }
 
+  getUserById(id: string): Observable<UserResource> {
+    return this.userEndpoint.getUserById(id);
+  }
 }

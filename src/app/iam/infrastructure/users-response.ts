@@ -3,7 +3,7 @@ import { BaseResource, BaseResponse } from '../../shared/infrastructure/base-res
 export interface UserResource extends BaseResource {
   id: string;
   name: string;
-  lastName: string;
+  lastname: string;
   role: string,
   dni: string,
   email: string,
