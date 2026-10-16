@@ -1,0 +1,44 @@
+import { Routes } from '@angular/router';
+import { NurseLayout } from './components/nurse-layout/nurse-layout';
+
+const nurseHome = () =>
+  import('./views/nurse-home/nurse-home').then((m) => m.NurseHome);
+
+const nursePatients = () =>
+  import('./views/nurse-patients/nurse-patients').then((m) => m.NursePatients);
+
+const nurseConsultations = () =>
+  import('./views/nurse-consultations/nurse-consultations').then((m) => m.NurseConsultations);
+
+const nurseHistory = () =>
+  import('./views/nurse-history/nurse-history').then((m) => m.NurseHistory);
+
+export const nurseRoutes: Routes = [
+  {
+    path: '',
+    component: NurseLayout,
+    children: [
+      {
+        path: 'home',
+        loadComponent: nurseHome,
+        title: 'Inicio | FerovaClinic',
+      },
+      {
+        path: 'patients',
+        loadComponent: nursePatients,
+        title: 'Pacientes | FerovaClinic',
+      },
+      {
+        path: 'consultations',
+        loadComponent: nurseConsultations,
+        title: 'Consultas | FerovaClinic',
+      },
+      {
+        path: 'history',
+        loadComponent: nurseHistory,
+        title: 'Historial | FerovaClinic',
+      },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+    ],
+  },
+];
