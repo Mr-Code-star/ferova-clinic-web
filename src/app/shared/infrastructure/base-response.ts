@@ -5,4 +5,6 @@ export interface BaseResource {
 }
 
 
-export interface BaseResponse {}
+export interface BaseResponse {
+  error?: string
+}
