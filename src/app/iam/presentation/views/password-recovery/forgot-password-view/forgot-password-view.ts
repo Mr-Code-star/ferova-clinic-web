@@ -3,6 +3,7 @@ import { RecoveryShell } from '../../../../../shared/presentation/components/rec
 import { ForgotPasswordForm } from '../../../components/forgot-password-form/forgot-password-form';
 import { MatIcon } from '@angular/material/icon';
 import { Router, RouterLink } from '@angular/router';
+import { PasswordRecoveryStore } from '../../../../application/password-recovery-store';
 
 @Component({
   imports: [RecoveryShell, ForgotPasswordForm, MatIcon, RouterLink],
@@ -11,18 +12,12 @@ import { Router, RouterLink } from '@angular/router';
   templateUrl: './forgot-password-view.html',
 })
 export class ForgotPasswordView {
-  private readonly router = inject(Router);
+  private readonly recoveryStore = inject(PasswordRecoveryStore);
+
+  readonly loading = this.recoveryStore.loading;
+  readonly error = this.recoveryStore.error;
 
   onEmailSubmit(email: string): void {
-
-    console.log('Email recibido:', email);
-
-    // TODO: Aquí conectarás con el servicio de IAM:
-    // this.iamService.requestPasswordReset(email).subscribe({
-    //   next: () => this.router.navigate(['/auth/verify-code']),
-    //   error: (err) => console.error(err)
-    // });
-    void this.router.navigate(['/auth/verify-code']);
-
+    this.recoveryStore.requestCode(email);
   }
 }
