@@ -62,8 +62,15 @@
       mat-flat-button
       type="submit"
       class="submit-button"
-      [disabled]="dni.length !== 8 || !password">
-      Acceder al Sistema
+      [disabled]="dni.length !== 8 || !password || loading">
+
+      @if (loading) {
+        <span class="spinner"></span>
+        Verificando...
+      } @else {
+        Acceder al Sistema
+        <mat-icon>login</mat-icon>
+      }
     </button>
 
 

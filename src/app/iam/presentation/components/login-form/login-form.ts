@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatFormField, MatInput, MatLabel } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
@@ -28,6 +28,7 @@ export class LoginForm {
 
   // Emitimos el evento hacia el componente padre (login page)
   @Output() loginSubmit = new EventEmitter<{ dni: string; password: string }>();
+  @Input() loading = false;
 
   togglePasswordVisibility(): void {
     this.hidePassword = !this.hidePassword;
@@ -35,9 +36,8 @@ export class LoginForm {
 
   onSubmit(): void {
     // Validación básica antes de emitir
-    if (this.dni.length !== 8 || !this.password) {
-      return;
-    }
+    if (this.dni.length !== 8 || !this.password || this.loading) return;
+
     this.loginSubmit.emit({
       dni: this.dni,
       password: this.password,
