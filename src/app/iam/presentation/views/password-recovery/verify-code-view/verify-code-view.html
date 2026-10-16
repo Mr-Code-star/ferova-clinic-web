@@ -14,6 +14,14 @@
       <p class="subtitle">Hemos enviado un codigo de 4 digitos a tu correo</p>
     </header>
 
+    <!-- Banner de error -->
+    @if (error()) {
+      <div class="error-banner" role="alert">
+        <mat-icon class="error-icon">error_outline</mat-icon>
+        <span>{{ error() }}</span>
+      </div>
+    }
+
     <!-- Formulario -->
     <app-verify-code-form (submitCode)="onCodeSubmit($event)"></app-verify-code-form>
 
