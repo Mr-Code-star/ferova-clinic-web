@@ -40,6 +40,7 @@ app-login-form {
   width: 100%;
   max-width: var(--col-width);
   display: flex;
+  flex-direction: column;
   justify-content: center;
 }
 
@@ -59,7 +60,7 @@ app-login-form {
   font-weight: 500;
   margin-bottom: 1rem;
   width: 100%;
-  max-width: 480px;
+  max-width: 556px;
   box-sizing: border-box;
   animation: slideDown 0.25s ease-out;
 }
