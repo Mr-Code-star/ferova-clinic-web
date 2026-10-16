@@ -3,6 +3,7 @@ import { RecoveryShell } from '../../../../../shared/presentation/components/rec
 import { MatIcon } from '@angular/material/icon';
 import { ResetPasswordForm } from '../../../components/reset-password-form/reset-password-form';
 import { Router } from '@angular/router';
+import { PasswordRecoveryStore } from '../../../../application/password-recovery-store';
 
 @Component({
   imports: [RecoveryShell, MatIcon, ResetPasswordForm],
@@ -11,19 +12,14 @@ import { Router } from '@angular/router';
   templateUrl: './reset-password-view.html',
 })
 export class ResetPasswordView {
+  private readonly recoveryStore = inject(PasswordRecoveryStore);
   private readonly router = inject(Router);
 
+  readonly loading = this.recoveryStore.loading;
+  readonly error = this.recoveryStore.error;
+
   onPasswordSubmit(newPassword: string): void {
-    console.log('Nueva contraseña:', newPassword);
-
-    // TODO: Conectar con IamStore:
-    // this.iam.resetPassword(newPassword).subscribe({
-    //   next: () => this.router.navigate(['/auth/login']),
-    //   error: (err) => console.error(err),
-    // });
-
-    // Por ahora, redirigimos al login:
-    void this.router.navigate(['/auth/login']);
+    this.recoveryStore.resetPassword(newPassword);
   }
 
   onBack(): void {
