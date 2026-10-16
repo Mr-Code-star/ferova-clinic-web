@@ -24,7 +24,7 @@ export class SignUpAssembler {
   toRequestFromCommand(command: SignUpCommand): SignUpRequest {
     return {
       name: command.name,
-      lastName: command.lastName,
+      lastname: command.lastName,
       email: command.email,
       dni: command.dni,
       phone: command.phone,
