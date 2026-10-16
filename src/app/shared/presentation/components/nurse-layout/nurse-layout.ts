@@ -31,6 +31,5 @@ export class NurseLayout {
 
   onLogout(): void {
     this.authStore.logout();
-    void this.router.navigate(['/auth/login']);
   }
 }

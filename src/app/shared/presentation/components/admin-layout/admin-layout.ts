@@ -30,6 +30,5 @@ export class AdminLayout {
 
   onLogout(): void {
     this.authStore.logout();
-    void this.router.navigate(['/auth/login']);
   }
 }
