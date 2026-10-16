@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { MatFormField, MatInput } from '@angular/material/input';
@@ -12,6 +12,7 @@ export interface RegisterData {
   role: UserRole;
   firstName: string;
   lastName: string;
+  email: string
   dni: string;
   phone: string;
   password: string;
@@ -39,6 +40,7 @@ export class RegisterForm {
   firstName = '';
   lastName = '';
   dni = '';
+  email = '';
   phone = '';
   password = '';
   confirmPassword = '';
@@ -48,6 +50,7 @@ export class RegisterForm {
 
   // Emitimos el evento hacia el padre
   @Output() registerSubmit = new EventEmitter<RegisterData>();
+  @Input() loading = false;
 
   selectRole(role: UserRole): void {
     this.selectedRole = role;
@@ -66,12 +69,38 @@ export class RegisterForm {
     return (
       this.firstName.trim().length > 0 &&
       this.lastName.trim().length > 0 &&
+      this.isValidEmail(this.email) &&
       this.dni.length === 8 &&
-      this.phone.length >= 9 &&
+      this.isValidPhone(this.phone) &&
       this.password.length >= 8 &&
       this.password === this.confirmPassword &&
       this.acceptTerms
     );
+  }
+
+  onPhoneInput(value: string): void {
+    // Quita todo lo que no sea dígito o el prefijo +51
+    let digits = value.replace(/\D/g, '');
+
+    // Si empieza con 51, quítalo (para no duplicar)
+    if (digits.startsWith('51')) {
+      digits = digits.slice(2);
+    }
+
+    // Máximo 9 dígitos
+    digits = digits.slice(0, 9);
+
+    // Aplica el formato
+    this.phone = digits.length > 0 ? `+51 ${digits}` : '';
+  }
+
+  private isValidEmail(email: string): boolean {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+  }
+
+  private isValidPhone(phone: string): boolean {
+    // Formato: +51 9XXXXXXXX (exactamente +51, espacio, 9 dígitos)
+    return /^\+51\s\d{9}$/.test(phone.trim());
   }
 
   onSubmit(): void {
@@ -81,6 +110,7 @@ export class RegisterForm {
       role: this.selectedRole,
       firstName: this.firstName.trim(),
       lastName: this.lastName.trim(),
+      email: this.email.trim(),
       dni: this.dni,
       phone: this.phone,
       password: this.password,

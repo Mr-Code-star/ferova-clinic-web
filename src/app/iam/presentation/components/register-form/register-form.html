@@ -87,6 +87,21 @@
       </mat-form-field>
     </div>
 
+    <!-- Email -->
+    <div class="field-group">
+      <label class="field-label">Correo Electrónico</label>
+      <mat-form-field appearance="outline" class="custom-field">
+        <input
+          matInput
+          type="email"
+          [(ngModel)]="email"
+          name="email"
+          placeholder="ejemplo@correo.com"
+          required>
+        <mat-icon matSuffix class="field-icon">mail_outline</mat-icon>
+      </mat-form-field>
+    </div>
+
     <!-- Teléfono -->
     <div class="field-group">
       <label class="field-label">Teléfono</label>
@@ -94,9 +109,11 @@
         <input
           matInput
           type="tel"
-          [(ngModel)]="phone"
+          [ngModel]="phone"
+          (ngModelChange)="onPhoneInput($event)"
           name="phone"
-          placeholder="+51 987 347 182"
+          placeholder="+51 987654321"
+          maxlength="13"
           required>
       </mat-form-field>
     </div>
@@ -164,9 +181,16 @@
       mat-flat-button
       type="submit"
       class="submit-button"
-      [disabled]="!isValid">
-      Registrar Perfil
-      <mat-icon>person_add</mat-icon>
+      [attr.data-loading]="loading"
+      [disabled]="!isValid || loading">
+
+      @if (loading) {
+        <span class="spinner"></span>
+        Registrando...
+      } @else {
+        Registrar Perfil
+        <mat-icon>person_add</mat-icon>
+      }
     </button>
 
   </form>
