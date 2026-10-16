@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { IamApi } from '../infrastructure/iam-api';
 import { SignInCommand } from '../domain/model/sign-in.command';
 import { SignUpCommand } from '../domain/model/sign-up.command';
-import { User } from '../domain/model/user.entity';
 
 @Injectable({ providedIn: 'root' })
 export class AuthStore {
