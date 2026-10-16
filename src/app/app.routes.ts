@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './iam/infrastructure/auth-guard';
+import { roleGuard } from './iam/infrastructure/role-guard';
 
 const iamRoutes = () =>
   import('./iam/presentation/iam.routes').then((m) => m.iamRoutes);
@@ -22,12 +24,20 @@ export const routes: Routes = [
     path: 'auth',
     loadChildren: iamRoutes,
   },
+  /**
+   * Rutas protegidas por autenticación y rol Admin
+   */
   {
     path: 'admin',
+    canActivate: [authGuard, roleGuard('Admin')],
     loadChildren: adminRoutes,
   },
+  /**
+   * Rutas protegidas por autenticación y rol Nurse
+   */
   {
     path: 'nurse',
+    canActivate: [authGuard, roleGuard('Nurse')],
     loadChildren: nurseRoutes,
   },
   // Redirecciones
