@@ -6,7 +6,7 @@ import { MatCheckbox } from '@angular/material/checkbox';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 
-export type UserRole = 'ADMIN' | 'NURSE';
+export type UserRole = 'Admin' | 'Nurse';
 
 export interface RegisterData {
   role: UserRole;
@@ -35,7 +35,7 @@ export interface RegisterData {
 })
 export class RegisterForm {
   // Estado del formulario
-  selectedRole: UserRole = 'ADMIN';
+  selectedRole: UserRole = 'Admin';
   firstName = '';
   lastName = '';
   dni = '';
