@@ -13,13 +13,13 @@
     <button class="filter-btn" [class.active]="activeFilter() === 'all'" (click)="setFilter('all')">
       Todas
     </button>
-    <button class="filter-btn" [class.active]="activeFilter() === 'critical'" (click)="setFilter('critical')">
+    <button class="filter-btn" [class.active]="activeFilter() === 'HIGH'" (click)="setFilter('HIGH')">
       <span class="dot critical"></span> Crítico
     </button>
-    <button class="filter-btn" [class.active]="activeFilter() === 'moderate'" (click)="setFilter('moderate')">
+    <button class="filter-btn" [class.active]="activeFilter() === 'MEDIUM'" (click)="setFilter('MEDIUM')">
       <span class="dot moderate"></span> Moderado
     </button>
-    <button class="filter-btn" [class.active]="activeFilter() === 'good'" (click)="setFilter('good')">
+    <button class="filter-btn" [class.active]="activeFilter() === 'LOW'" (click)="setFilter('LOW')">
       <span class="dot good"></span> Bien
     </button>
   </div>
@@ -27,12 +27,20 @@
   <!-- Contenedor del Mapa -->
   <div class="map-container">
 
-    <!-- Pasamos las postas filtradas al componente hijo -->
-    <app-heat-map [posts]="filteredPosts()"></app-heat-map>
+    @if (loading()) {
+      <div class="loading-overlay">Cargando datos...</div>
+    }
+
+    @if (error()) {
+      <div class="error-overlay">{{ error() }}</div>
+    }
+
+    <!-- Mapa con los puntos del store (filtrados) -->
+    <app-heat-map [points]="filteredPoints()"></app-heat-map>
 
     <!-- Badges sobre el mapa -->
     <div class="map-badge top-left">
-      <span class="badge-dot"></span> Sectores Sanitarios Activos ({{ filteredPosts().length }})
+      <span class="badge-dot"></span> Sectores Sanitarios Activos ({{ filteredPoints().length }})
     </div>
     <div class="map-badge top-right">
       <span class="badge-dot blue"></span> Cartografía MINSA / DIRIS
