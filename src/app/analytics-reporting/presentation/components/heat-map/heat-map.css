@@ -1,0 +1,23 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.map-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #64748b;
+}
+
+::ng-deep .custom-map-label {
+  background-color: white !important;
+  padding: 4px 8px !important;
+  border-radius: 6px !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  border: 1px solid #e2e8f0 !important;
+  white-space: nowrap;
+  margin-top: 8px;
+}

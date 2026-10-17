@@ -1,0 +1,20 @@
+@if (apiLoaded | async) {
+  <google-map
+    height="100%"
+    width="100%"
+    [center]="center"
+    [zoom]="zoom"
+    [options]="{ disableDefaultUI: true }">
+
+    @for (post of posts; track post.id) {
+      <map-marker
+        [position]="{ lat: post.lat, lng: post.lng }"
+        [icon]="getHeatIcon(post.risk)"
+        [label]="getLabelIcon(post)">
+      </map-marker>
+    }
+
+  </google-map>
+} @else {
+  <div class="map-loading">Cargando mapa...</div>
+}
