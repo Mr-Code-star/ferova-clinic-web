@@ -1,7 +1,8 @@
-import { Component, signal, computed } from '@angular/core';
-import { HeatMap, HealthPost } from '../../../../analytics-reporting/presentation/components/heat-map/heat-map';
+import { Component, signal, computed, inject } from '@angular/core';
+import { HeatMap } from '../../../../analytics-reporting/presentation/components/heat-map/heat-map';
+import { AnalyticsStore } from '../../../../analytics-reporting/application/analytics.store';
 
-type RiskLevel = 'all' | 'critical' | 'moderate' | 'good';
+type RiskFilter = 'all' | 'HIGH' | 'MEDIUM' | 'LOW';
 
 @Component({
   selector: 'app-admin-map',
@@ -11,23 +12,32 @@ type RiskLevel = 'all' | 'critical' | 'moderate' | 'good';
   templateUrl: './admin-map.html',
 })
 export class AdminMap {
-  // Datos de ejemplo
-  readonly posts: HealthPost[] = [
-    { id: 1, name: 'Posta Canto Grande', shortName: 'P. Canto Grande', lat: -12.0050, lng: -77.0000, risk: 'good' },
-    { id: 2, name: 'Posta Zarate',       shortName: 'P. Zarate',       lat: -12.0150, lng: -76.9980, risk: 'moderate' },
-    { id: 3, name: 'Posta San Hilarion', shortName: 'P. San Hilarion', lat: -12.0200, lng: -76.9930, risk: 'critical' },
-    { id: 4, name: 'Posta Huascar',      shortName: 'P. Huascar',      lat: -12.0330, lng: -76.9850, risk: 'critical' },
-  ];
+  private readonly analyticsStore = inject(AnalyticsStore);
 
-  activeFilter = signal<RiskLevel>('all');
+  // ============================================
+  // ESTADO
+  // ============================================
+  readonly loading = this.analyticsStore.loading;
+  readonly error = this.analyticsStore.error;
 
-  filteredPosts = computed(() => {
+  activeFilter = signal<RiskFilter>('all');
+
+  /**
+   * Puntos filtrados por el rol seleccionado.
+   * Filtra en cliente sobre los puntos del store.
+   */
+  filteredPoints = computed(() => {
     const filter = this.activeFilter();
-    if (filter === 'all') return this.posts;
-    return this.posts.filter(post => post.risk === filter);
+    const allPoints = this.analyticsStore.points();
+
+    if (filter === 'all') return allPoints;
+    return allPoints.filter((p) => p.riskLevel === filter);
   });
 
-  setFilter(filter: RiskLevel): void {
+  // ============================================
+  // ACCIONES
+  // ============================================
+  setFilter(filter: RiskFilter): void {
     this.activeFilter.set(filter);
   }
 }
