@@ -1,6 +1,43 @@
-<div class="home-view">
+<div class="page-wrapper">
 
-  <header class="page-header">
-    <h1 class="page-title">Vista Mapa</h1>
-  </header>
+  <!-- Header -->
+  <div class="page-header">
+    <h1 class="page-title">Mapa de Calor</h1>
+    <p class="page-subtitle">
+      Distribución geoespacial de adherencia al suplemento de hierro y nivel de riesgo hematológico por postas médicas y sectores.
+    </p>
+  </div>
+
+  <!-- Barra de Filtros -->
+  <div class="filters-bar">
+    <button class="filter-btn" [class.active]="activeFilter() === 'all'" (click)="setFilter('all')">
+      Todas
+    </button>
+    <button class="filter-btn" [class.active]="activeFilter() === 'critical'" (click)="setFilter('critical')">
+      <span class="dot critical"></span> Crítico
+    </button>
+    <button class="filter-btn" [class.active]="activeFilter() === 'moderate'" (click)="setFilter('moderate')">
+      <span class="dot moderate"></span> Moderado
+    </button>
+    <button class="filter-btn" [class.active]="activeFilter() === 'good'" (click)="setFilter('good')">
+      <span class="dot good"></span> Bien
+    </button>
+  </div>
+
+  <!-- Contenedor del Mapa -->
+  <div class="map-container">
+
+    <!-- Pasamos las postas filtradas al componente hijo -->
+    <app-heat-map [posts]="filteredPosts()"></app-heat-map>
+
+    <!-- Badges sobre el mapa -->
+    <div class="map-badge top-left">
+      <span class="badge-dot"></span> Sectores Sanitarios Activos ({{ filteredPosts().length }})
+    </div>
+    <div class="map-badge top-right">
+      <span class="badge-dot blue"></span> Cartografía MINSA / DIRIS
+    </div>
+
+  </div>
+
 </div>
