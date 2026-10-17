@@ -1,18 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { GoogleMap, MapMarker } from '@angular/google-maps';
-import { HttpClient } from '@angular/common/http';
 import { AsyncPipe } from '@angular/common';
 import { catchError, map, Observable, of } from 'rxjs';
-import { environment } from '../../../../../envirotments/environment.development';
+import { HeatMap as HeatMapEntity } from '../../../../analytics-reporting/domain/model/heat-map.entity';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../../envirotments/environment';
 
-export interface HealthPost {
-  id: number;
-  name: string;
-  shortName: string;
-  lat: number;
-  lng: number;
-  risk: 'critical' | 'moderate' | 'good';
-}
+
 
 @Component({
   selector: 'app-heat-map',
@@ -23,12 +17,11 @@ export interface HealthPost {
 })
 export class HeatMap {
   apiLoaded: Observable<boolean>;
+  center: google.maps.LatLngLiteral = { lat: -12.0464, lng: -77.0428 };
+  zoom = 11;
 
-  center: google.maps.LatLngLiteral = { lat: -12.0124, lng: -76.9984 };
-  zoom = 12;
-
-  // Recibimos las postas desde el padre
-  @Input() posts: HealthPost[] = [];
+  /** Puntos recibidos desde el padre (ya filtrados) */
+  @Input() points: HeatMapEntity[] = [];
 
   constructor(httpClient: HttpClient) {
     this.apiLoaded = httpClient
@@ -42,11 +35,17 @@ export class HeatMap {
       );
   }
 
-  getHeatIcon(risk: string): google.maps.Icon {
-    let color = '#0d5c6b';
-    if (risk === 'critical') color = '#dc2626';
-    if (risk === 'moderate') color = '#f59e0b';
-    if (risk === 'good') color = '#10b981';
+  private getRiskColor(riskLevel: string): string {
+    switch (riskLevel) {
+      case 'HIGH':   return '#dc2626';
+      case 'MEDIUM': return '#f59e0b';
+      case 'LOW':    return '#10b981';
+      default:       return '#0d5c6b';
+    }
+  }
+
+  getHeatIcon(riskLevel: string): google.maps.Icon {
+    const color = this.getRiskColor(riskLevel);
 
     const svg = `
       <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120">
@@ -62,13 +61,14 @@ export class HeatMap {
     };
   }
 
-  getLabelIcon(post: HealthPost): google.maps.MarkerLabel {
+  getLabelIcon(point: HeatMapEntity): google.maps.MarkerLabel {
     return {
-      text: post.shortName,
+      text: point.name,
       color: '#1a202c',
       fontSize: '12px',
       fontWeight: '600',
-      className: 'custom-map-label'
+      className: 'custom-map-label',
     };
   }
+
 }
