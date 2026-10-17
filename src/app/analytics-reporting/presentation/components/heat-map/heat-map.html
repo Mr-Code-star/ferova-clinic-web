@@ -6,11 +6,11 @@
     [zoom]="zoom"
     [options]="{ disableDefaultUI: true }">
 
-    @for (post of posts; track post.id) {
+    @for (point of points; track point.id) {
       <map-marker
-        [position]="{ lat: post.lat, lng: post.lng }"
-        [icon]="getHeatIcon(post.risk)"
-        [label]="getLabelIcon(post)">
+        [position]="{ lat: point.latitude, lng: point.longitude }"
+        [icon]="getHeatIcon(point.riskLevel)"
+        [label]="getLabelIcon(point)">
       </map-marker>
     }
 
