@@ -1,0 +1,40 @@
+<div class="inbox-container">
+
+  <!-- Buscador -->
+  <div class="search-bar">
+    <mat-icon class="search-icon">search</mat-icon>
+    <input
+      type="text"
+      class="search-input"
+      placeholder="Buscar paciente o madre..."
+      [value]="searchTerm()"
+      (input)="onSearchChange($event)">
+  </div>
+
+  <!-- Lista de Consultas -->
+  <div class="consultations-list">
+    @for (consultation of filteredConsultations(); track consultation.id) {
+      <div class="consultation-card">
+        <div class="card-content">
+          <div class="card-header">
+            <h2 class="mother-name">{{ consultation.motherName }}</h2>
+            <p class="patient-info">
+              Paciente: <span class="patient-name">{{ consultation.patientName }}</span>
+            </p>
+          </div>
+          <p class="last-message">{{ consultation.lastMessage }}</p>
+        </div>
+        <mat-icon class="arrow-icon">chevron_right</mat-icon>
+      </div>
+    }
+
+    <!-- Estado vacío (cuando no hay resultados) -->
+    @if (filteredConsultations().length === 0) {
+      <app-empty-consultations
+        [searchTerm]="searchTerm()"
+        (clearFilter)="onClearFilter()">
+      </app-empty-consultations>
+    }
+  </div>
+
+</div>
