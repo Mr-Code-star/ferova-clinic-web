@@ -1,0 +1,23 @@
+<div class="modal-wrapper">
+
+  <div class="icon-alert">
+    <mat-icon>warning_amber</mat-icon>
+  </div>
+
+  <h2 class="title">¿Seguro que quieres cerrar esta consulta?</h2>
+
+  <p class="description">
+    Esta acción finalizará la sesión activa de teleorientación con <strong>{{ data.patientName || 'el paciente' }}</strong> y registrará el resumen clínico.
+  </p>
+
+  <div class="actions">
+    <button mat-stroked-button class="btn-cancel" (click)="onCancel()">
+      No, cancelar
+    </button>
+
+    <button mat-flat-button class="btn-confirm" (click)="onConfirm()">
+      Sí, cerrar
+    </button>
+  </div>
+
+</div>

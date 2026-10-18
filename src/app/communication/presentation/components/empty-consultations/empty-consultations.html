@@ -1,0 +1,30 @@
+<mat-card class="empty-state-card">
+  <mat-card-content class="empty-state-content">
+    <div class="content-wrapper">
+
+      <div class="icon-wrapper">
+        <mat-icon class="main-icon">chat_bubble_outline</mat-icon>
+        <div class="search-badge">
+          <mat-icon>search</mat-icon>
+        </div>
+      </div>
+
+      <h2 class="title">
+        No se encontraron consultas que coincidan<br>con tu búsqueda
+      </h2>
+
+      <p class="description">
+        No hay consultas con
+        <span class="name-search">"{{ searchTerm }}"</span>
+        en el nombre del paciente o<br>
+        de la madre. Intenta con otro término.
+      </p>
+
+      <button mat-button class="btn-clear-filter" (click)="onClearFilter()">
+        <mat-icon>close</mat-icon>
+        Borrar filtro y ver todas
+      </button>
+
+    </div>
+  </mat-card-content>
+</mat-card>

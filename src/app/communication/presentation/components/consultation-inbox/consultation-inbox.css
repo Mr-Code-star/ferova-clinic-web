@@ -1,0 +1,152 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.inbox-container {
+  /* Quitamos max-width y padding: los maneja el padre */
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ============================================
+   BUSCADOR
+   ============================================ */
+.search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: #f1f5f9;
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.search-bar:focus-within {
+  background-color: #ffffff;
+  border-color: #cbd5e0;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.search-icon {
+  color: #94a3b8;
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+  margin-right: 0.75rem;
+}
+
+.search-input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  color: #1e293b;
+  font-family: inherit;
+}
+
+.search-input::placeholder {
+  color: #94a3b8;
+}
+
+/* ============================================
+   LISTA DE CONSULTAS
+   ============================================ */
+.consultations-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.consultation-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  border: 1px solid #e2e8f0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.consultation-card:hover {
+  border-color: #318ea8;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1);
+  transform: translateY(-2px);
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+}
+
+.mother-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1d5f6e;
+  margin: 0;
+}
+
+.patient-info {
+  font-size: 0.9rem;
+  color: #02687a;
+  font-weight: 600;
+  margin: 0;
+}
+
+.patient-name {
+  color: #318ea8;
+}
+
+.last-message {
+  font-size: 0.95rem;
+  color: #64748b;
+  margin: 0.25rem 0 0 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90%;
+}
+
+.arrow-icon {
+  color: #94a3b8;
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+
+/* ============================================
+   MENSAJE SIN RESULTADOS
+   ============================================ */
+.no-results {
+  text-align: center;
+  padding: 2rem;
+  color: #64748b;
+  font-size: 1rem;
+}
+
+/* ============================================
+   RESPONSIVO
+   ============================================ */
+@media (max-width: 640px) {
+  .consultation-card {
+    padding: 1rem;
+  }
+
+  .mother-name {
+    font-size: 1rem;
+  }
+
+  .last-message {
+    font-size: 0.85rem;
+  }
+}

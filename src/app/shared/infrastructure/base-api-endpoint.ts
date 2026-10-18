@@ -47,10 +47,22 @@ export abstract class BaseApiEndpoint<
    * @param id - The numeric ID of the entity to retrieve.
    * @returns An observable of the domain entity.
    */
-  getById(id: number): Observable<TEntity> {
+  getById(id: string): Observable<TEntity> {
     return this.http.get<TResource>(`${this.endpointUrl}/${id}`).pipe(
       map((resource) => this.assembler.toEntityFromResource(resource)),
       catchError(this.handleError(`Failed to fetch entity with id ${id}`)),
+    );
+  }
+
+  getAllById(id: string): Observable<TEntity[]> {
+    return this.http.get<TResponse | TResource[]>(`${this.endpointUrl}/${id}`).pipe(
+      map((response) => {
+        if (Array.isArray(response)) {
+          return response.map((resource) => this.assembler.toEntityFromResource(resource));
+        }
+        return this.assembler.toEntitiesFromResponse(response as TResponse);
+      }),
+      catchError(this.handleError('Failed to fetch entities')),
     );
   }
 
@@ -86,7 +98,7 @@ export abstract class BaseApiEndpoint<
    * @param id - The numeric ID of the entity to delete.
    * @returns An observable that completes when deletion is done.
    */
-  delete(id: number): Observable<void> {
+  delete(id: string): Observable<void> {
     return this.http
       .delete<void>(`${this.endpointUrl}/${id}`)
       .pipe(catchError(this.handleError(`Failed to delete entity with id ${id}`)));

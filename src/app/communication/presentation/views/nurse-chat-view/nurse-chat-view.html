@@ -1,0 +1,24 @@
+<div class="chat-view-container">
+  <app-chat-header
+    [motherName]="activeConsultation()?.motherName || 'Cargando...'"
+    [patientName]="activeConsultation()?.patientName || '...'"
+    [refreshing]="refreshing()"
+    (back)="onBack()"
+    (closeConsultation)="onCloseConsultation()">
+  </app-chat-header>
+
+  <main class="chat-main">
+    @if (loading()) {
+      <div class="loading-spinner">Cargando mensajes...</div>
+    } @else if (error()) {
+      <div class="error-message">{{ error() }}</div>
+    } @else {
+      <app-chat-messages [messages]="messages()"></app-chat-messages>
+    }
+  </main>
+
+  <app-chat-input
+    [disabled]="sending()"
+    (sendMessage)="onSendMessage($event)">
+  </app-chat-input>
+</div>
