@@ -1,0 +1,22 @@
+:host {
+  display: block;
+  height: 100vh; /* Ocupa toda la pantalla */
+  background-color: #f1f5f9;
+}
+
+.chat-view-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #f1f5f9;
+}
+
+.chat-main {
+  flex: 1;
+  overflow: hidden; /* Evita doble scroll */
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* Crucial para que flexbox permita el scroll interno */
+}
