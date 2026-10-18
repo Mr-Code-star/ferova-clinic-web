@@ -13,13 +13,14 @@ export class CommunicationStore {
   private readonly statusSignal = signal<InboxStatus | null>(null);
   private readonly loadingSignal = signal<boolean>(false);
   private readonly errorSignal = signal<string | null>(null);
+  private readonly activeConsultationSignal = signal<Consultation | null>(null);
 
   // Readonly signals
   readonly consultations = this.consultationsSignal.asReadonly();
   readonly status = this.statusSignal.asReadonly();
   readonly loading = this.loadingSignal.asReadonly();
   readonly error = this.errorSignal.asReadonly();
-
+  readonly activeConsultation = this.activeConsultationSignal.asReadonly();
   // Computed Signals
   readonly hasConsultations = computed(() => this.consultations().length > 0);
 
@@ -65,5 +66,23 @@ export class CommunicationStore {
     if (error instanceof Error)
       return error.message.includes('Resource not found') ? `${fallback}: Not found` : error.message;
     return fallback;
+  }
+
+  /**
+   * Busca la consulta en la lista actual y la guarda como activa.
+   */
+  setActiveConsultation(consultationId: string): void {
+    const found = this.consultations().find(c => c.consultationId === consultationId);
+    if (found) {
+      this.activeConsultationSignal.set(found);
+    } else {
+      console.warn('No se encontró la consulta con ID:', consultationId);
+    }
+  }
+
+  removeConsultation(consultationId: string): void {
+    this.consultationsSignal.update(consultas =>
+      consultas.filter(c => c.consultationId !== consultationId)
+    );
   }
 }
