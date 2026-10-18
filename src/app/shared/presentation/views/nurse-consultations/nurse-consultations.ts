@@ -3,6 +3,8 @@ import {
   ConsultationInbox
 } from '../../../../communication/presentation/components/consultation-inbox/consultation-inbox';
 import { CommunicationStore } from '../../../../communication/application/communication.store';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   imports: [ConsultationInbox],
@@ -12,7 +14,7 @@ import { CommunicationStore } from '../../../../communication/application/commun
 })
 export class NurseConsultations implements OnInit, OnDestroy {
   private readonly store = inject(CommunicationStore);
-
+  private readonly router = inject(Router);
   // Exponemos los datos del store
   readonly consultations = this.store.consultations;
   readonly status = this.store.status;
@@ -21,8 +23,14 @@ export class NurseConsultations implements OnInit, OnDestroy {
   private searchTimeout: any;
 
   ngOnInit(): void {
-    // La carga inicial ya la hace el constructor del Store
-  }
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: any) => {
+      // Si la URL actual es la de consultas, recargamos los datos
+      if (event.urlAfterRedirects.includes('/nurse/consultations')) {
+        this.store.loadConsultations('');
+      }
+    });  }
 
   ngOnDestroy(): void {
     if (this.searchTimeout) clearTimeout(this.searchTimeout);
