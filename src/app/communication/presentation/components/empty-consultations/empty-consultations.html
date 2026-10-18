@@ -3,23 +3,19 @@
     <div class="content-wrapper">
 
       <div class="icon-wrapper">
-        <!-- Icono de Chat/Mensajes -->
         <mat-icon class="main-icon">chat_bubble_outline</mat-icon>
-
-        <!-- Badge con icono de búsqueda -->
         <div class="search-badge">
           <mat-icon>search</mat-icon>
         </div>
       </div>
 
-      <!-- Usamos un span para el texto dinámico si lo necesitas luego -->
       <h2 class="title">
         No se encontraron consultas que coincidan<br>con tu búsqueda
       </h2>
 
       <p class="description">
         No hay consultas con
-        <span class="name-search">{{ nameSearch }}</span>
+        <span class="name-search">"{{ searchTerm }}"</span>
         en el nombre del paciente o<br>
         de la madre. Intenta con otro término.
       </p>
