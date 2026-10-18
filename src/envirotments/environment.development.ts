@@ -11,6 +11,10 @@ export const environment = {
   usersEndpointPath: "/users",
 
   // ANALYTICS ENDPOINT PATH
-  analyticsEndpointPath: "/analytics"
+  analyticsEndpointPath: "/analytics",
+
+  // COMMUNICATION ENDPOINT PATH
+  communicationEndpointPath: "/communication"
+
 
 }

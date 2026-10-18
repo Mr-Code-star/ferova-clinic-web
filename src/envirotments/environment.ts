@@ -8,6 +8,12 @@ export const environment = {
   googleMapsApiUrl: `https://maps.googleapis.com/maps/api/js?key=${import.meta.env.NG_APP_GOOGLE_MAPS_API_KEY}&libraries=visualization`,
 
   // USERS ENDPOINT PATH
-  usersEndpointPath: "/users"
+  usersEndpointPath: "/users",
+
+  // ANALYTICS ENDPOINT PATH
+  analyticsEndpointPath: "/analytics",
+
+  // COMMUNICATION ENDPOINT PATH
+  communicationEndpointPath: "/communication"
 
 }
