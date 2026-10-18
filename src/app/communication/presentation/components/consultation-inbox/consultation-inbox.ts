@@ -6,6 +6,7 @@ import { EmptyPendingConsultations } from '../empty-pending-consultations/empty-
 import { Consultation } from '../../../domain/model/consultation.entity';
 import { InboxStatus } from '../../../domain/model/consultation-status.entity';
 import { EmptyPatients } from '../../../../shared/presentation/components/empty-patients/empty-patients';
+import { RouterLink } from '@angular/router';
 
 @Component({
   imports: [
@@ -13,14 +14,14 @@ import { EmptyPatients } from '../../../../shared/presentation/components/empty-
     MatIcon,
     EmptyConsultations,
     EmptyPendingConsultations,
-    EmptyPatients
+    EmptyPatients,
+    RouterLink,
   ],
   selector: 'app-consultation-inbox',
   styleUrl: './consultation-inbox.css',
   templateUrl: './consultation-inbox.html',
 })
 export class ConsultationInbox {
-
   // ============================================
   // DATOS DE ENTRADA (desde la vista padre)
   // ============================================

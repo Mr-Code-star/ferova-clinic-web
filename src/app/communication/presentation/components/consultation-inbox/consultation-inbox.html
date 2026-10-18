@@ -21,7 +21,8 @@
     <!-- 1. Mostrar consultas si las hay -->
     @if (!loading && consultations.length > 0) {
       @for (consultation of consultations; track consultation.consultationId) {
-        <div class="consultation-card">
+        <div class="consultation-card"
+             [routerLink]="['/nurse/chat', consultation.consultationId]">
           <div class="card-content">
             <div class="card-header">
               <h2 class="mother-name">{{ consultation.motherName }}</h2>
