@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MatCard, MatCardContent } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
@@ -10,5 +10,9 @@ import { MatButton } from '@angular/material/button';
   templateUrl: './empty-pending-consultations.html',
 })
 export class EmptyPendingConsultations {
-  onRefresh() {}
+  @Output() refresh = new EventEmitter<void>();
+
+  onRefresh() {
+    this.refresh.emit();
+  }
 }
