@@ -4,7 +4,7 @@ import { AsyncPipe } from '@angular/common';
 import { catchError, map, Observable, of } from 'rxjs';
 import { HeatMap as HeatMapEntity } from '../../../../analytics-reporting/domain/model/heat-map.entity';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../../../envirotments/environment';
+import { environment } from '../../../../../envirotments/environment.development';
 
 
 
