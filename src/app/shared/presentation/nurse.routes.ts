@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { NurseLayout } from './components/nurse-layout/nurse-layout';
+import { NurseChatView } from '../../communication/presentation/views/nurse-chat-view/nurse-chat-view';
 
 const nurseHome = () =>
   import('./views/nurse-home/nurse-home').then((m) => m.NurseHome);
@@ -38,6 +39,12 @@ export const nurseRoutes: Routes = [
         loadComponent: nurseHistory,
         title: 'Historial | FerovaClinic',
       },
+      {
+        path: 'chat/:id',
+        component: NurseChatView,
+        title: 'Chat de Consulta | FerovaClinic'
+      },
+
       { path: '', redirectTo: 'home', pathMatch: 'full' },
     ],
   },
