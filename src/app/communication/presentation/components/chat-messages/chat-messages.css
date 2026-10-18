@@ -1,0 +1,91 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0; /* Permite que el hijo haga scroll */
+  overflow: hidden;
+}
+
+.messages-container {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  gap: 1.5rem;
+  flex: 1;
+  overflow-y: scroll; /* ⬅️ Necesario para hacer scroll */
+  background-color: #f8fafc;
+}
+.security-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.icon-lock {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+.date-time {
+  margin-left: auto;
+}
+
+.message-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.message-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 75%;
+}
+
+.message-wrapper.nurse-message {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+
+.message-bubble {
+  padding: 1rem 1.25rem;
+  border-radius: 16px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #1e293b;
+  background-color: white;
+  border: 1px solid #e2e8f0;
+  border-top-left-radius: 4px; /* Estilo para la colita del mensaje */
+}
+
+.nurse-message .message-bubble {
+  background-color: #1d4ed8; /* Azul del diseño */
+  color: white;
+  border: none;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 4px; /* Colita a la derecha */
+}
+
+.message-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.check-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  color: #3b82f6;
+}
