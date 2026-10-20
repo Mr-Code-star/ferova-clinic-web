@@ -14,6 +14,8 @@ export const environment = {
   analyticsEndpointPath: "/analytics",
 
   // COMMUNICATION ENDPOINT PATH
-  communicationEndpointPath: "/communication"
+  communicationEndpointPath: "/communication",
 
+  // PATIENT ENDPOINT PATH
+  patientEndpointPath: "/patients"
 }
