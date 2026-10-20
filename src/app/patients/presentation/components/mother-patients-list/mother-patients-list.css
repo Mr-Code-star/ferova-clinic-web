@@ -1,0 +1,199 @@
+:host {
+  display: block;
+  background-color: #f4f7f9;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.list-view-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.btn-back {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  align-self: flex-start;
+  padding: 0;
+}
+
+.btn-back:hover {
+  color: #1e293b;
+}
+
+/* HEADER */
+.mother-name {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #1d4ed8; /* Azul brillante */
+  margin: 0 0 0.5rem 0;
+}
+
+.subtitle-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.info-icon {
+  color: #3b82f6;
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #475569;
+  margin: 0;
+}
+
+/* TARJETAS */
+.patients-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+.patient-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  border: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.child-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+.badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+}
+
+.badge-assigned {
+  background-color: #ecfdf5;
+  color: #047857;
+  border: 1px solid #a7f3d0;
+}
+
+.badge-unassigned {
+  background-color: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+.child-info {
+  font-size: 0.9rem;
+  color: #475569;
+  margin: 0;
+}
+
+.nurse-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: #94a3b8;
+  margin-bottom: 0.5rem;
+}
+
+.nurse-status mat-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+/* BOTONES */
+.btn-assign {
+  height: 44px;
+  border-radius: 8px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.btn-assign.disabled {
+  background-color: #94a3b8 !important;
+  color: white !important;
+  cursor: not-allowed;
+}
+
+.btn-assign.active {
+  background-color: #0f3b5c !important; /* Azul oscuro */
+  color: white !important;
+}
+
+/* BANNER INFORMATIVO */
+.info-banner {
+  position: relative;
+  background: #e0f2fe;
+  border-radius: 16px;
+  padding: 1.5rem 2rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.banner-content {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+}
+
+.banner-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1e3a8a;
+  margin: 0 0 0.5rem 0;
+}
+
+.banner-text {
+  font-size: 0.95rem;
+  color: #3b82f6;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.banner-bg-icon {
+  position: absolute;
+  right: -10px;
+  bottom: -20px;
+  font-size: 120px;
+  width: 120px;
+  height: 120px;
+  color: #bfdbfe;
+  z-index: 1;
+  opacity: 0.6;
+  transform: rotate(-15deg);
+}

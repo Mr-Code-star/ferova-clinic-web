@@ -1,0 +1,62 @@
+<div class="list-view-wrapper">
+
+  <button class="btn-back" (click)="onBack()">
+    <mat-icon>arrow_back</mat-icon>
+    Volver a búsqueda
+  </button>
+
+  <header class="view-header">
+    <h1 class="mother-name">{{ motherName }}</h1>
+    <div class="subtitle-row">
+      <mat-icon class="info-icon">info</mat-icon>
+      <p class="subtitle">Se encontraron {{ patients.length }} niños registrados para esta madre</p>
+    </div>
+  </header>
+
+  <div class="patients-grid">
+    @for (patient of patients; track patient.patientId) {
+      <div class="patient-card">
+
+        <div class="card-header">
+          <!-- Unimos nombre y apellido -->
+          <h2 class="child-name">{{ patient.patientName }} {{ patient.patientLastName }}</h2>
+
+          @if (patient.assigmentStatus === 'ASSIGNED') {
+            <span class="badge badge-assigned">ASIGNADO</span>
+          } @else {
+            <span class="badge badge-unassigned">SIN ASIGNAR</span>
+          }
+        </div>
+
+        <!-- Nota: No hay edad en el backend actual, solo mostramos género -->
+        <p class="child-info">{{ getGenderLabel(patient.gender) }}</p>
+
+        <div class="nurse-status">
+          <mat-icon>person_outline</mat-icon>
+          <span>Estado: {{ patient.status === 'ACTIVE' ? 'Activo' : patient.status }}</span>
+        </div>
+
+        @if (patient.assigmentStatus === 'ASSIGNED') {
+          <button class="btn-assign disabled" disabled>
+            <mat-icon>check_circle_outline</mat-icon>
+          </button>
+        } @else {
+          <button class="btn-assign active" (click)="onAssign(patient)">
+            <mat-icon>add_circle_outline</mat-icon>
+            Asignar a mi cartera
+          </button>
+        }
+
+      </div>
+    }
+  </div>
+
+  <div class="info-banner">
+    <div class="banner-content">
+      <h3 class="banner-title">Control de Crecimiento y Desarrollo</h3>
+      <p class="banner-text">Recuerda completar la ficha integral después de la asignación para el seguimiento clínico adecuado.</p>
+    </div>
+    <mat-icon class="banner-bg-icon">medical_information</mat-icon>
+  </div>
+
+</div>
