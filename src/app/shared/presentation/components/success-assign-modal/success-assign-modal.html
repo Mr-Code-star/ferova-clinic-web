@@ -1,0 +1,15 @@
+<div class="modal-wrapper">
+  <div class="icon-success">
+    <mat-icon>check_circle</mat-icon>
+  </div>
+
+  <h2 class="title">¡Paciente asignado!</h2>
+
+  <p class="description">
+    El paciente <strong>{{ data.patientName }}</strong> ha sido asignado a tu cartera correctamente.
+  </p>
+
+  <button mat-flat-button class="btn-primary" (click)="onClose()">
+    Entendido
+  </button>
+</div>
