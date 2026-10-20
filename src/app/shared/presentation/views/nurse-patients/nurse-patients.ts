@@ -7,6 +7,7 @@ import {
 } from '../../../../patients/presentation/components/mother-result-list/mother-result-list';
 import { PatientsStore } from '../../../../patients/application/patients-store';
 import { SearchResource } from '../../../../patients/infrastructure/search-term-response';
+import { Router } from '@angular/router';
 
 @Component({
   imports: [MotherSearchForm, MotherResultList],
@@ -16,6 +17,7 @@ import { SearchResource } from '../../../../patients/infrastructure/search-term-
 })
 export class NursePatients {
   private readonly store = inject(PatientsStore);
+  private readonly router = inject(Router);
 
   readonly loading = this.store.loading;
   readonly hasSearched = this.store.hasSearched;
@@ -28,12 +30,8 @@ export class NursePatients {
     this.store.searchMotherByDni(dni);
   }
 
-  // ⬇️ MÉTODO PARA CUANDO HACEN CLIC EN "VER PACIENTES"
   onShowPatients(mother: SearchResource) {
-    console.log('Ver pacientes de la madre:', mother);
-
-    // AQUÍ HAREMOS LA SIGUIENTE PETICIÓN:
-    // Buscar los hijos de esta madre usando mother.motherId
-    // Ejemplo: this.store.loadPatientsByMother(mother.motherId);
+    this.store.setActiveMother(mother);
+    void this.router.navigate(['/nurse/patients/mother', mother.motherId]);
   }
 }
