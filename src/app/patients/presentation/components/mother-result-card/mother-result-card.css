@@ -1,0 +1,84 @@
+.result-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.result-card:last-child {
+  border-bottom: none;
+}
+
+.info-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  background-color: #fee2e2; /* Fondo rosa claro */
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ef4444; /* Icono rojo */
+}
+
+.dni-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.dni {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.badge {
+  font-size: 0.75rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.badge-success {
+  background-color: #ecfdf5;
+  color: #047857;
+  border: 1px solid #a7f3d0;
+}
+
+.badge-warning {
+  background-color: #fffbeb;
+  color: #b45309;
+  border: 1px solid #fde68a;
+}
+
+.dot {
+  color: #cbd5e1;
+}
+
+.name {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #475569;
+}
+
+.btn-assign {
+  background-color: #0f3b5c !important; /* Azul oscuro del diseño */
+  color: white !important;
+  border-radius: 6px;
+}
+
+.btn-assign mat-icon {
+  margin-left: 0.5rem;
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}

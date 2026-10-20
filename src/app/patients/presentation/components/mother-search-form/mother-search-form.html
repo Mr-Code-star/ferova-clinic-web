@@ -1,0 +1,38 @@
+<div class="search-card">
+  <label class="field-label">DOCUMENTO DE LA MADRE / TITULAR</label>
+
+  <div class="search-row">
+    <div class="input-wrapper">
+      <mat-icon class="search-icon">search</mat-icon>
+      <input
+        type="text"
+        inputmode="numeric"
+        maxlength="8"
+        [(ngModel)]="searchTerm"
+        (input)="onInputChange($event)"
+        placeholder="Buscar por DNI..."
+        (keyup.enter)="onSearch()">
+
+      @if (searchTerm) {
+        <button class="clear-btn" (click)="onClear()">
+          <mat-icon>close</mat-icon>
+        </button>
+      }
+    </div>
+
+    <!-- ⬇️ Volvemos a la condición original: solo valida que no esté vacío ⬇️ -->
+    <button
+      mat-flat-button
+      class="btn-search"
+      [disabled]="!searchTerm.trim() || loading"
+      (click)="onSearch()">
+      <mat-icon>search</mat-icon>
+      Buscar
+    </button>
+  </div>
+
+  <p class="helper-text">
+    <mat-icon>info</mat-icon>
+    Utilice el número de documento sin puntos ni guiones (8 dígitos para DNI).
+  </p>
+</div>
