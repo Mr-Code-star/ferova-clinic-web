@@ -1,0 +1,51 @@
+.modal-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 1.5rem;
+  font-family: inherit;
+  background-color: #ffffff;
+}
+
+.icon-error {
+  width: 56px;
+  height: 56px;
+  background-color: #e0f2fe; /* Azul claro */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.icon-error mat-icon {
+  color: #2563eb; /* Azul */
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+}
+
+.title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #2563eb; /* Azul del título */
+  margin: 0 0 0.75rem 0;
+  line-height: 1.2;
+}
+
+.description {
+  font-size: 0.95rem;
+  color: #64748b;
+  margin: 0 0 2rem 0;
+  line-height: 1.5;
+}
+
+.btn-primary {
+  width: 100%;
+  height: 48px;
+  background-color: #2563eb !important; /* Azul sólido */
+  color: white !important;
+  border-radius: 8px;
+  font-weight: 600;
+}
