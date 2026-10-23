@@ -1,0 +1,33 @@
+<div class="agenda-card">
+  <div class="header">
+    <h3 class="title">
+      <mat-icon>calendar_today</mat-icon> Agenda del Día
+    </h3>
+    <a routerLink="/nurse/appointments" class="link">Ver todas</a>
+  </div>
+
+  <div class="agenda-list">
+    @if (appointments().length === 0) {
+      <div class="empty-state">No hay citas programadas.</div>
+    } @else {
+      @for (appointment of appointments(); track appointment.appointmentId) {
+        <div class="agenda-item">
+          <div class="avatar-box">
+            <span>{{ appointment.initials }}</span>
+          </div>
+          <div class="details">
+            <h4>{{ appointment.patientName }}</h4>
+            <p>{{ appointment.formattedDate }}</p>
+          </div>
+          <div class="status">
+            <span class="badge-confirmed"
+                  [class.badge-pending]="appointment.status !== 'CONFIRMED'">
+              {{ appointment.status }}
+            </span>
+            <span class="time">{{ appointment.appointmentTime }}</span>
+          </div>
+        </div>
+      }
+    }
+  </div>
+</div>

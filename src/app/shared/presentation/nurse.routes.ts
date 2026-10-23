@@ -14,6 +14,13 @@ import {
   RegisterControlView
 } from '../../medical-records/presentation/views/register-control-view/register-control-view';
 import { ViewControlHistory } from '../../medical-records/presentation/views/view-control-history/view-control-history';
+import { RiskPatientsView } from '../../treatment-tracking/presentation/views/risk-patients-view/risk-patients-view';
+import {
+  TreatmentDetailView
+} from '../../treatment-tracking/presentation/views/treatment-detail-view/treatment-detail-view';
+import {
+  NurseAppointmentsList
+} from '../../healthy-facility/presentation/views/nurse-appointments-list/nurse-appointments-list';
 
 const nurseHome = () =>
   import('./views/nurse-home/nurse-home').then((m) => m.NurseHome);
@@ -82,6 +89,19 @@ export const nurseRoutes: Routes = [
         path: 'history/control/register/:id',
         component: RegisterControlView,
         title: 'Nuevo Control | FerovaClinic'
+      },
+      {
+        path: 'risk/:level',
+        component: RiskPatientsView
+      },
+      {
+        path: 'patient-detail/:id',
+        component: TreatmentDetailView
+      },
+      {
+        path: 'appointments',
+        component: NurseAppointmentsList,
+        title: 'Agenda de Citas | FerovaClinic'
       },
       {
         path: 'history/controls/:patientId/:medicalRecordId',

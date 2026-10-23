@@ -1,0 +1,65 @@
+<div class="risk-view-container">
+
+  <!-- Botón Volver -->
+  <button class="btn-back" (click)="onBack()">
+    <mat-icon>arrow_back</mat-icon>
+    Volver al Dashboard
+  </button>
+
+  <!-- Header -->
+  <header class="page-header">
+    <div class="badge-row">
+      <span class="risk-badge" [ngClass]="badgeClass">{{ badgeText }}</span>
+    </div>
+    <h1 class="page-title">{{ title }}</h1>
+    <div class="subtitle-row">
+      <span class="count">{{ patients().length }} Pacientes encontrados</span>
+      <span class="dot">•</span>
+      <span class="alert-text" [ngClass]="badgeClass">{{ alertText }}</span>
+    </div>
+  </header>
+
+  <!-- Buscador (Opcional) -->
+  <div class="search-bar">
+    <mat-icon>search</mat-icon>
+    <input type="text" placeholder="Buscar paciente...">
+  </div>
+
+  <!-- Lista de Pacientes -->
+  @if (loading()) {
+    <div class="loading-state">Cargando pacientes...</div>
+  } @else if (patients().length === 0) {
+    <div class="empty-state">
+      <div class="empty-icon" [ngClass]="badgeClass">
+        <mat-icon>shield</mat-icon>
+      </div>
+      <h2>No hay pacientes con {{ riskLevel.toLowerCase() }} riesgo</h2>
+      <p>Actualmente no se registran pacientes en esta categoría en tu sector.</p>
+    </div>
+  } @else {
+    <div class="patients-list">
+      @for (patient of patients(); track patient.patientId) {
+        <div class="patient-card" (click)="goToPatient(patient.patientId)">
+          <div class="avatar-circle" [ngClass]="badgeClass">
+            {{ patient.initials }}
+          </div>
+
+          <div class="patient-info">
+            <h3>{{ patient.patientName }}</h3>
+            <p>{{ patient.patientAge }} años</p>
+          </div>
+
+          <div class="score-section">
+            <span class="score-badge" [ngClass]="badgeClass">SCORE {{ patient.score }}</span>
+            <span class="hours" [ngClass]="badgeClass">
+              <mat-icon>warning</mat-icon> {{ patient.hoursWithoutConfirmation }}h
+            </span>
+          </div>
+
+          <mat-icon class="chevron">chevron_right</mat-icon>
+        </div>
+      }
+    </div>
+  }
+
+</div>

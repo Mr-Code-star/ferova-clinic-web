@@ -1,5 +1,29 @@
-<div class="home-view">
-  <header class="page-header">
-    <h1 class="page-title">Vista Home</h1>
-  </header>
+<div class="dashboard-container">
+
+  <!-- Fila superior -->
+  <div class="top-row">
+    <app-nurse-profile-card class="profile-section"></app-nurse-profile-card>
+    <app-patient-count-card class="count-section"></app-patient-count-card>
+  </div>
+
+  <!-- Fila principal -->
+  <div class="main-grid">
+
+    <!-- Columna Izquierda (Riesgo) -->
+    <div class="col-left">
+      <app-risk-summary-card></app-risk-summary-card>
+    </div>
+
+    <!-- Columna Centro (Accesos) -->
+    <div class="col-center">
+      <app-quick-actions-grid></app-quick-actions-grid>
+    </div>
+
+    <!-- Columna Derecha (Agenda) -->
+    <div class="col-right">
+      <app-daily-agenda></app-daily-agenda>
+    </div>
+
+  </div>
+
 </div>

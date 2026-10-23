@@ -17,5 +17,12 @@ export const environment = {
   communicationEndpointPath: "/communication",
 
   // PATIENT ENDPOINT PATH
-  patientEndpointPath: "/patients"
+  patientEndpointPath: "/patients",
+
+  // HEALTHY ENDPOINT PATH
+  healthyEndpointPath: "/health-facilities",
+
+  // TREATMENT-TRACKING
+  treatmentTrackingEndpointPath: "/treatment-tracking"
+
 }

@@ -9,6 +9,7 @@ import { catchError, map, Observable, throwError } from 'rxjs';
 import { AssignPatientCommand } from '../domain/model/assign-patient.command';
 import { SearchMyPatientsAssembler } from './search-my-patients-assembler';
 import { PatientHistoryResponse } from './search-my-patients-response';
+import { ActivePatientsCountResource } from './active-patients-count-response';
 
 
 const patientUrl = `${environment.serverBasePath}${environment.patientEndpointPath}`;
@@ -58,6 +59,15 @@ export class PatientsApiEndpoint extends BaseApiEndpoint<Patient, PatientResourc
         console.error('Error fetching medical history:', err);
         return throwError(() => err);
       })
+    );
+  }
+
+  /**
+   * GET /patients/nurse/active-count
+   */
+  getActivePatientsCount(): Observable<ActivePatientsCountResource> {
+    return this.http.get<ActivePatientsCountResource>(`${patientUrl}/nurse/active-count`).pipe(
+      catchError(this.handleError('Failed to fetch active patients count'))
     );
   }
 }
