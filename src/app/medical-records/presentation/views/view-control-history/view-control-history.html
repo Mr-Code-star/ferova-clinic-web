@@ -65,7 +65,7 @@
 
       <!-- Botones de Acción -->
       <div class="footer-actions">
-        <button mat-stroked-button class="btn-download">
+        <button mat-stroked-button class="btn-download" [disabled]="!canDownload()" (click)="onDownload()">
           <mat-icon>download</mat-icon> Descargar
         </button>
         <button mat-flat-button class="btn-new-control" (click)="onNewControl()">

@@ -128,9 +128,9 @@
 
     <!-- Footer Action -->
     <div class="footer-actions">
-      <button mat-flat-button class="btn-download" (click)="onDownload()">
-        <mat-icon>download</mat-icon> Descargar
-      </button>
+    <button mat-flat-button class="btn-download" [disabled]="!canDownload()" (click)="onDownload()">
+      <mat-icon>download</mat-icon> Descargar
+    </button>
     </div>
   }
 </div>

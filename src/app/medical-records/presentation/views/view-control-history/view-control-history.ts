@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MedicalRecordStore } from '../../../application/medical-record-store';
 import { PatientsStore } from '../../../../patients/application/patients-store';
+import { MedicalRecordPdfService } from '../../../application/medical-record-pdf.service';
 
 @Component({
   selector: 'app-view-control-history',
@@ -18,6 +19,7 @@ export class ViewControlHistory implements OnInit {
   private readonly router = inject(Router);
   private readonly store = inject(MedicalRecordStore);
   private readonly patientsStore = inject(PatientsStore);
+  private readonly pdfService = inject(MedicalRecordPdfService);
 
   patientId: string = '';
   medicalRecordId: string = '';
@@ -28,6 +30,10 @@ export class ViewControlHistory implements OnInit {
   readonly patientName = computed(() => {
     const patient = this.patientsStore.selectedPatient();
     return patient ? patient.patientName : 'Paciente';
+  });
+  readonly canDownload = computed(() => {
+    const h = this.history();
+    return !!h && h.controls.length > 0 && !this.loading();
   });
 
   ngOnInit(): void {
@@ -81,5 +87,11 @@ export class ViewControlHistory implements OnInit {
     if (trend === 'UP') return { icon: 'trending_up', color: '#16a34a', text: 'Incremento positivo registrado desde inicio del tratamiento' };
     if (trend === 'DOWN') return { icon: 'trending_down', color: '#dc2626', text: 'Disminución registrada desde inicio del tratamiento' };
     return { icon: 'trending_flat', color: '#475569', text: 'Sin cambios significativos desde inicio del tratamiento' };
+  }
+
+  onDownload() {
+    const h = this.history();
+    if (!h || h.controls.length === 0 || this.loading()) return;
+    this.pdfService.downloadControlHistory(h, this.patientName());
   }
 }

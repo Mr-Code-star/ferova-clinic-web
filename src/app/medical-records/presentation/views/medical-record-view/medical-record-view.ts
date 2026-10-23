@@ -5,6 +5,7 @@ import { PatientsStore } from '../../../../patients/application/patients-store';
 import { MatIcon } from '@angular/material/icon';
 import { DatePipe } from '@angular/common';
 import { MatButton } from '@angular/material/button';
+import { MedicalRecordPdfService } from '../../../application/medical-record-pdf.service';
 
 @Component({
   imports: [MatIcon, DatePipe, MatButton],
@@ -17,12 +18,14 @@ export class ViewMedicalRecord implements OnInit {
   private readonly router = inject(Router);
   private readonly store = inject(MedicalRecordStore);
   private readonly patientsStore = inject(PatientsStore);
+  private readonly pdfService = inject(MedicalRecordPdfService);
 
   patientId: string = '';
 
   // Signals del store
   readonly record = this.store.medicalRecord;
   readonly loading = this.store.loading;
+  readonly canDownload = computed(() => !!this.record() && !this.loading());
 
   readonly patientName = computed(() => {
     const patient = this.patientsStore.selectedPatient();
@@ -54,7 +57,9 @@ export class ViewMedicalRecord implements OnInit {
 
   // Función dummy para el botón de descargar
   onDownload() {
-    console.log('Descargando PDF...');
+    const r = this.record();
+    if (!r || this.loading()) return;
+    this.pdfService.downloadMedicalRecord(r, r.patientName ?? this.patientName());
   }
 
   goToControls() {

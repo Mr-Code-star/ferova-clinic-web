@@ -202,3 +202,8 @@
   align-items: center;
   gap: 0.5rem;
 }
+
+.btn-download[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
