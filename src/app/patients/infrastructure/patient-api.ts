@@ -26,4 +26,7 @@ export class PatientsApi {
   assignPatientToNurse(command: AssignPatientCommand): Observable<any> {
     return this.patientEndpoint.assignPatient(command);
   }
+  getAssignedPatients(searchTerm?: string): Observable<Patient[]> {
+    return this.patientEndpoint.SearchMyPatient(searchTerm);
+  }
 }
