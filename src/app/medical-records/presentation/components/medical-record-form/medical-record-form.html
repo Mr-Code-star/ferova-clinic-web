@@ -6,6 +6,14 @@
     <p>Los niveles de hemoglobina se registrarán y monitorearán a través de controles diagnósticos posteriores para asegurar la precisión del tratamiento.</p>
   </div>
 
+  <!-- NUEVO: Sexo (Solo lectura) -->
+  @if (gender) {
+    <div class="form-group">
+      <label>SEXO</label>
+      <input type="text" [value]="gender" disabled class="input-disabled">
+    </div>
+  }
+
   <!-- Fila 1: Peso y Altura -->
   <div class="form-row">
     <div class="form-group">

@@ -14,6 +14,7 @@ import { TagInput } from '../tag-input/tag-input';
 export class MedicalRecordForm {
   @Input() patientId: string = '';
   @Input() loading: boolean = false;
+  @Input() initialData: any = null;
 
   @Output() save = new EventEmitter<CreateMedicalRecordCommand>();
 
@@ -24,11 +25,28 @@ export class MedicalRecordForm {
   observaciones: string = '';
   antecedentes: string[] = [];
   sintomas: string[] = [];
+  gender: string = '';
+
+  ngOnInit(): void {
+    // Si hay datos iniciales, rellenamos el formulario
+    if (this.initialData) {
+      this.weight = this.initialData.weight;
+      this.height = this.initialData.height;
+      this.motivoConsulta = this.initialData.motivoConsulta;
+      this.observaciones = this.initialData.observaciones;
+      this.gender = this.initialData.gender === 'MALE' ? 'Masculino' : 'Femenino';
+
+      // Mapeamos los antecedentes al formato de string para el TagInput
+      this.antecedentes = this.initialData.antecedentes.map(
+        (a: any) => `${a.type}: ${a.description}`
+      );
+      this.sintomas = [...this.initialData.sintomas];
+    }
+  }
 
   onSubmit() {
     if (!this.weight || !this.height || !this.motivoConsulta.trim() || !this.patientId) return;
 
-    // Convertimos los antecedentes de string[] a { type, description }[]
     const antecedentesMapped = this.antecedentes.map((ant) => {
       const [type, ...desc] = ant.split(':');
       return {

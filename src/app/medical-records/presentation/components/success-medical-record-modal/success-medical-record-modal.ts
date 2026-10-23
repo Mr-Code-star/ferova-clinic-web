@@ -13,7 +13,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 export class SuccessMedicalRecordModal {
   constructor(
     public dialogRef: MatDialogRef<SuccessMedicalRecordModal>,
-    @Inject(MAT_DIALOG_DATA) public data: { patientName: string }
+    @Inject(MAT_DIALOG_DATA) public data: { patientName: string; isUpdate?: boolean }
   ) {}
 
   onClose(): void {
