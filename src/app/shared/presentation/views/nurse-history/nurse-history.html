@@ -1,5 +1,44 @@
-<div class="home-view">
+<div class="history-view-container">
+
   <header class="page-header">
-    <h1 class="page-title">Vista Historial</h1>
+    <div class="badge-module">
+      <mat-icon>person_outline</mat-icon>
+      Módulo de Consulta Histórica
+    </div>
+    <h1 class="page-title">Historial Medico</h1>
+
+    <div class="subtitle-row">
+      <div class="text-block">
+        <h2>Seleccionar Paciente</h2>
+        <p>Busque y seleccione el paciente para consultar su historial médico integral, evolución de hemoglobina y antecedentes de suplementación con hierro.</p>
+      </div>
+      <span class="count-text">{{ patients().length }} registros disponibles</span>
+    </div>
   </header>
+
+  <main class="content">
+    <app-patient-search-bar (search)="onSearch($event)"></app-patient-search-bar>
+
+    @if (loading()) {
+      <div class="loading-state">Cargando pacientes...</div>
+    } @else {
+      <!-- Le pasamos los pacientes reales a la lista -->
+      <app-patient-history-list
+        [patients]="patients()"
+        (selectPatient)="onSelectPatient($event)"
+        (viewPatientRecord)="onViewHistory($event)"
+        (updatePatientRecord)="onUpdatePatient($event)">
+      </app-patient-history-list>
+
+      <!-- Si no hay pacientes, mostramos un mensaje (opcional) -->
+      @if (patients().length === 0) {
+        <div class="empty-state">
+          <p>No se encontraron pacientes asignados.</p>
+        </div>
+      }
+    }
+
+    <app-register-patient-banner></app-register-patient-banner>
+  </main>
+
 </div>

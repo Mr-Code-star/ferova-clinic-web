@@ -3,6 +3,9 @@ import { NurseLayout } from './components/nurse-layout/nurse-layout';
 import { NurseChatView } from '../../communication/presentation/views/nurse-chat-view/nurse-chat-view';
 import { NursePatients } from './views/nurse-patients/nurse-patients';
 import { MotherDetailsView } from '../../patients/presentation/views/mother-details-view/mother-details-view';
+import {
+  RegisterMedicalRecordView
+} from '../../medical-records/presentation/views/register-medical-record-view/register-medical-record-view';
 
 const nurseHome = () =>
   import('./views/nurse-home/nurse-home').then((m) => m.NurseHome);
@@ -52,6 +55,10 @@ export const nurseRoutes: Routes = [
       {
         path: 'patients/mother/:id', // ⬅️ Ruta para los detalles de la madre
         component: MotherDetailsView
+      },
+      {
+        path: 'history/register/:id', // ⬅️ Recibe el ID del paciente
+        component: RegisterMedicalRecordView
       },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
     ],
