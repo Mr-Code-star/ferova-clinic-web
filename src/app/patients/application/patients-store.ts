@@ -16,6 +16,7 @@ export class PatientsStore {
   private readonly errorSignal = signal<string | null>(null);
   private readonly activeMotherSignal = signal<SearchResource | null>(null);
   private readonly selectedPatientSignal = signal<Patient | null>(null);
+  private readonly activeCountSignal = signal<number>(0);
 
   readonly searchResults = this.searchResultsSignal.asReadonly();
   readonly patients = this.patientsSignal.asReadonly();
@@ -24,6 +25,7 @@ export class PatientsStore {
   readonly error = this.errorSignal.asReadonly();
   readonly activeMother = this.activeMotherSignal.asReadonly();
   readonly selectedPatient = this.selectedPatientSignal.asReadonly();
+  readonly activeCount = this.activeCountSignal.asReadonly();
 
   searchMotherByDni(dni: string): void {
     this.loadingSignal.set(true);
@@ -119,6 +121,17 @@ export class PatientsStore {
     });
   }
 
+  loadActivePatientsCount(): void {
+    this.api.getActivePatientsCount().subscribe({
+      next: (response) => {
+        this.activeCountSignal.set(response.activePatientsCount);
+      },
+      error: (err) => {
+        console.error('Error loading active patients count:', err);
+        this.activeCountSignal.set(0);
+      }
+    });
+  }
 
   setActiveMother(mother: SearchResource): void {
     this.activeMotherSignal.set(mother);
