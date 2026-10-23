@@ -1,0 +1,235 @@
+:host {
+  display: block;
+  background-color: #f8fafc;
+  min-height: 100vh;
+  padding: 3rem 1rem;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.view-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Header */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.header-left {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.btn-back-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #e2e8f0;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #1e293b;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 0.2rem 0;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.header-right {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+}
+
+.date-label {
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+.date-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+/* Cards Generales */
+.card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 1.5rem;
+}
+
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #475569;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+/* Tarjeta Paciente */
+.patient-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.patient-details {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  background: #e0f2fe;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0284c7;
+}
+
+.patient-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 0.25rem 0;
+}
+
+.patient-meta {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.dot { color: #cbd5e1; }
+
+.history-id {
+  background: #f1f5f9;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+/* Formulario */
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  background: white;
+  margin-bottom: 0.5rem;
+}
+
+.input-wrapper:focus-within {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.big-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: #0f172a;
+  padding: 0.5rem 0;
+  background: transparent;
+}
+
+.big-input::placeholder {
+  color: #cbd5e1;
+}
+
+.unit {
+  font-size: 1.1rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.helper-text {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  margin: 0 0 1rem 0;
+}
+
+/* Info Banner */
+.info-banner {
+  display: flex;
+  gap: 0.75rem;
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  padding: 1rem;
+  border-radius: 8px;
+  color: #0369a1;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.info-banner mat-icon {
+  color: #0284c7;
+}
+
+.info-banner p {
+  margin: 0;
+}
+
+/* Footer Actions */
+.footer-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.btn-cancel {
+  border-color: #cbd5e1 !important;
+  color: #475569 !important;
+  height: 48px;
+  padding: 0 2rem !important;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.btn-save {
+  background-color: #2563eb !important;
+  color: white !important;
+  height: 48px;
+  padding: 0 2rem !important;
+  border-radius: 8px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}

@@ -1,0 +1,78 @@
+<div class="view-container">
+  <div class="content-wrapper">
+
+    <!-- Header -->
+    <header class="page-header">
+      <button class="btn-back-circle" (click)="onBack()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <div class="header-text">
+        <h1 class="title">Historial de Controles</h1>
+        <p class="subtitle">Paciente: {{ history()?.patientName || patientName() }} • Última actualización: Hoy</p>
+      </div>
+    </header>
+
+    @if (loading()) {
+      <div class="loading">Cargando controles...</div>
+    } @else if (history()) {
+
+      <!-- Tarjetas de Resumen -->
+      <div class="summary-grid">
+        <!-- Promedio -->
+        <div class="summary-card">
+          <span class="label">PROMEDIO</span>
+          <div class="value-row">
+            <h2 class="value">{{ history()?.averageHemoglobin }}</h2>
+            <span class="unit">g/dL</span>
+          </div>
+          <div class="status-text green">
+            <mat-icon>check_circle_outline</mat-icon> Promedio dentro del rango de seguimiento
+          </div>
+        </div>
+
+        <!-- Evolución y Tendencia -->
+        <div class="summary-card">
+          <span class="label">EVOLUCIÓN</span>
+          <div class="value-row">
+            <h2 class="value">{{ getEvolutionValue() }}</h2>
+            <span class="unit">g/dL</span>
+          </div>
+          <div class="status-text" [style.color]="getTrendData().color">
+            <mat-icon>{{ getTrendData().icon }}</mat-icon> {{ getTrendData().text }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Lista de Registros -->
+      <div class="list-section">
+        <h3 class="section-title">Registros Recientes</h3>
+        <div class="records-list">
+          @for (control of history()?.controls; track control.id) {
+            <div class="record-item">
+              <div class="record-left">
+                <span class="date">{{ control.date | date:'dd MMM, yyyy' | uppercase }}</span>
+                <h4 class="hemoglobin-value">{{ control.hemoglobinLevel }} <small>g/dL</small></h4>
+              </div>
+              <div class="record-right">
+                <span class="badge" [ngClass]="getAnemiaBadgeClass(control.anemiaStatus)">
+                  {{ getAnemiaText(control.anemiaStatus) }}
+                </span>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Botones de Acción -->
+      <div class="footer-actions">
+        <button mat-stroked-button class="btn-download">
+          <mat-icon>download</mat-icon> Descargar
+        </button>
+        <button mat-flat-button class="btn-new-control" (click)="onNewControl()">
+          <mat-icon>add</mat-icon> Nuevo Control
+        </button>
+      </div>
+
+    }
+  </div>
+</div>
