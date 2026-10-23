@@ -14,3 +14,5 @@ export interface AppointmentsResponse {
   data: AppointmentResource[];
   count: number;
 }
+
+export type NurseAppointmentsResponse = AppointmentResource[];

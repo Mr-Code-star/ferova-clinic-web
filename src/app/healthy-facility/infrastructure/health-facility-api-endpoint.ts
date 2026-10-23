@@ -6,7 +6,7 @@ import { HealthFacility } from '../domain/model/health-facility.entity';
 import { HealthFacilityResponse } from './health-facility-response';
 import { environment } from '../../../envirotments/environment.development';
 import { Appointment } from '../domain/model/appointment.entity';
-import { AppointmentsResponse } from './appointment-response';
+import { AppointmentsResponse, NurseAppointmentsResponse } from './appointment-response';
 import { AppointmentAssembler } from './appointment-assembler';
 
 const healthFacilityUrl = `${environment.serverBasePath}${environment.healthyEndpointPath}`;
@@ -41,6 +41,18 @@ export class HealthFacilityApiEndpoint {
             return [];
           }
           return this.appointmentAssembler.toEntitiesFromResponse(response.data);
+        }),
+      );
+  }
+
+  getAllNurseAppointments(): Observable<Appointment[]> {
+    return this.http
+      .get<NurseAppointmentsResponse>(`${healthFacilityUrl}/appointments/nurse`)
+      .pipe(
+        map((response) => {
+          // Como este endpoint devuelve un array directo, solo lo mapeamos
+          if (!response || !Array.isArray(response)) return [];
+          return this.appointmentAssembler.toEntitiesFromResponse(response);
         }),
       );
   }

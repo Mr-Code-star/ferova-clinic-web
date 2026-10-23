@@ -15,4 +15,8 @@ export class HealthFacilityApi {
   getTopAppointments(limit: number = 4): Observable<Appointment[]> {
     return this.endpoint.getTopAppointments(limit);
   }
+
+  getAllNurseAppointments(): Observable<Appointment[]> {
+    return this.endpoint.getAllNurseAppointments();
+  }
 }
