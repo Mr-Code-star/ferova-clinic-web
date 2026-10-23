@@ -11,11 +11,17 @@ export class HealthFacilityStore {
   private readonly loadingSignal = signal<boolean>(false);
   private readonly errorSignal = signal<string | null>(null);
   private readonly appointmentsSignal = signal<Appointment[]>([]);
+  private readonly allAppointmentsSignal = signal<Appointment[]>([]);
+  private readonly allAppointmentsLoadingSignal = signal<boolean>(false);
+  private readonly allAppointmentsErrorSignal = signal<string | null>(null);
 
   readonly facility = this.facilitySignal.asReadonly();
   readonly loading = this.loadingSignal.asReadonly();
   readonly error = this.errorSignal.asReadonly();
   readonly appointments = this.appointmentsSignal.asReadonly();
+  readonly allAppointments = this.allAppointmentsSignal.asReadonly();
+  readonly allAppointmentsLoading = this.allAppointmentsLoadingSignal.asReadonly();
+  readonly allAppointmentsError = this.allAppointmentsErrorSignal.asReadonly();
 
   constructor() {
     this.loadMyFacility();
@@ -46,6 +52,23 @@ export class HealthFacilityStore {
       error: (err) => {
         console.error('Error loading appointments:', err);
         this.appointmentsSignal.set([]);
+      },
+    });
+  }
+
+  loadAllNurseAppointments(): void {
+    this.allAppointmentsLoadingSignal.set(true);
+    this.allAppointmentsErrorSignal.set(null);
+
+    this.api.getAllNurseAppointments().subscribe({
+      next: (appointments) => {
+        this.allAppointmentsSignal.set(appointments);
+        this.allAppointmentsLoadingSignal.set(false);
+      },
+      error: (err) => {
+        console.error('Error loading all appointments:', err);
+        this.allAppointmentsErrorSignal.set('No se pudieron cargar las citas.');
+        this.allAppointmentsLoadingSignal.set(false);
       },
     });
   }
