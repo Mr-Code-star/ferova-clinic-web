@@ -63,6 +63,26 @@ export class MedicalRecordStore {
     );
   }
 
+  updateMedicalRecord(command: CreateMedicalRecordCommand): Observable<any> {
+    this.loadingSignal.set(true);
+    this.errorSignal.set(null);
+
+    return this.api.updateMedicalRecord(command).pipe(
+      tap((response) => {
+        if (response instanceof MedicalRecord) {
+          this.medicalRecordSignal.set(response);
+        }
+        this.loadingSignal.set(false);
+      }),
+      catchError((err) => {
+        console.error('Error actualizando historial:', err);
+        this.errorSignal.set('No se pudo actualizar el historial médico.');
+        this.loadingSignal.set(false);
+        return throwError(() => err);
+      })
+    );
+  }
+
   clear(): void {
     this.medicalRecordSignal.set(null);
     this.errorSignal.set(null);
