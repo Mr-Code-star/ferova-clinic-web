@@ -9,7 +9,7 @@
   } @else if (riskOverview()) {
     <div class="risk-list">
       <!-- HIGH -->
-      <div class="risk-item risk-high">
+      <div class="risk-item risk-high" [routerLink]="['/nurse/risk/HIGH']">
         <div class="item-header">
           <mat-icon>warning</mat-icon> <strong>HIGH</strong>
         </div>
@@ -18,7 +18,7 @@
       </div>
 
       <!-- MEDIUM -->
-      <div class="risk-item risk-medium">
+      <div class="risk-item risk-medium" [routerLink]="['/nurse/risk/MEDIUM']">
         <div class="item-header">
           <mat-icon>error_outline</mat-icon> <strong>MEDIUM</strong>
         </div>
@@ -27,7 +27,7 @@
       </div>
 
       <!-- LOW -->
-      <div class="risk-item risk-low">
+      <div class="risk-item risk-low" [routerLink]="['/nurse/risk/LOW']">
         <div class="item-header">
           <mat-icon>check_circle</mat-icon> <strong>LOW</strong>
         </div>
