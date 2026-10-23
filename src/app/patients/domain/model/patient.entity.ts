@@ -10,6 +10,7 @@ export class Patient implements BaseEntity {
   private _gender: Gender;
   private _status: string;
   private _assigmentStatus: AssignmentStatus;
+  private _birthDate: string | null;
 
   constructor(patient: {
     patientId: string | null;
@@ -18,6 +19,7 @@ export class Patient implements BaseEntity {
     gender: Gender;
     status: string;
     assigmentStatus: AssignmentStatus;
+    birthDate?: string | null;
   }) {
     this._patientId = patient.patientId;
     this._patientName = patient.patientName;
@@ -25,6 +27,7 @@ export class Patient implements BaseEntity {
     this._gender = patient.gender;
     this._status = patient.status;
     this._assigmentStatus = patient.assigmentStatus;
+    this._birthDate = patient.birthDate ?? null;
   }
 
   // ===== patientId =====
@@ -83,5 +86,16 @@ export class Patient implements BaseEntity {
 
   set assigmentStatus(value: AssignmentStatus) {
     this._assigmentStatus = value;
+  }
+
+  // ⬇Getter para calcular la edad
+  get age(): string {
+    if (!this._birthDate) return '';
+    const birth = new Date(this._birthDate);
+    const today = new Date();
+    let years = today.getFullYear() - birth.getFullYear();
+    const m = today.getMonth() - birth.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) years--;
+    return `${years} años`;
   }
 }
