@@ -15,8 +15,13 @@ export class MedicalRecordApi {
   createMedicalRecord(command: CreateMedicalRecordCommand): Observable<any> {
     return this.endpoint.postMedicalRecord(command);
   }
+
   checkMedicalRecordExists(patientId: string): Observable<boolean> {
     return this.endpoint.checkMedicalRecordExists(patientId);
+  }
+
+  updateMedicalRecord(command: CreateMedicalRecordCommand): Observable<any> {
+    return this.endpoint.putMedicalRecord(command);
   }
 
 }

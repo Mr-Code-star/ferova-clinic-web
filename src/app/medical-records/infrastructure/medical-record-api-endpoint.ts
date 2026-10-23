@@ -55,4 +55,22 @@ export class MedicalRecordApiEndpoint {
   checkMedicalRecordExists(patientId: string): Observable<boolean> {
     return this.http.get<boolean>(`${medicalRecordUrl}/${patientId}/medical-record/check`);
   }
+
+  /**
+   * Actualiza un historial médico existente.
+   * PUT /api/patients/medical-record/update
+   */
+  putMedicalRecord(command: CreateMedicalRecordCommand): Observable<MedicalRecord | any> {
+    // Reutilizamos el assembler para mapear al request de actualización
+    const request: CreateMedicalRecordRequest = this.assembler.toRequestCreateMedicalRecord(command);
+
+    return this.http.put<any>(`${medicalRecordUrl}/medical-record/update`, request).pipe(
+      map(response => {
+        if (response && response.id) {
+          return this.assembler.toEntityFromResponse(response);
+        }
+        return { success: true };
+      })
+    );
+  }
 }
