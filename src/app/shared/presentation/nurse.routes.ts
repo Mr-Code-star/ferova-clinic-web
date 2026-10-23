@@ -18,6 +18,9 @@ import { RiskPatientsView } from '../../treatment-tracking/presentation/views/ri
 import {
   TreatmentDetailView
 } from '../../treatment-tracking/presentation/views/treatment-detail-view/treatment-detail-view';
+import {
+  NurseAppointmentsList
+} from '../../healthy-facility/presentation/views/nurse-appointments-list/nurse-appointments-list';
 
 const nurseHome = () =>
   import('./views/nurse-home/nurse-home').then((m) => m.NurseHome);
@@ -94,6 +97,11 @@ export const nurseRoutes: Routes = [
       {
         path: 'patient-detail/:id',
         component: TreatmentDetailView
+      },
+      {
+        path: 'appointments',
+        component: NurseAppointmentsList,
+        title: 'Agenda de Citas | FerovaClinic'
       },
       {
         path: 'history/controls/:patientId/:medicalRecordId',
