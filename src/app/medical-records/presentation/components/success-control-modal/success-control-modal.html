@@ -1,0 +1,22 @@
+<div class="modal-wrapper">
+  <div class="icon-success">
+    <mat-icon>check_circle</mat-icon>
+  </div>
+
+  <h2 class="title">¡Control Registrado!</h2>
+
+  <p class="description">
+    El nuevo control de hemoglobina para <strong>{{ data.patientName }}</strong> ha sido guardado exitosamente.
+  </p>
+
+  <div class="value-box">
+    <span class="label">NIVEL REGISTRADO</span>
+    <div class="value">
+      {{ data.hemoglobinLevel }} <small>g/dL</small>
+    </div>
+  </div>
+
+  <button mat-flat-button class="btn-primary" (click)="onClose()">
+    Ver Historial del Paciente
+  </button>
+</div>
