@@ -7,6 +7,9 @@ import { MedicalRecord } from '../domain/model/medical-record.entity';
 import { MedicalRecordDetailResponse } from './medical-record-detail-response';
 import { CreateMedicalRecordCommand } from '../domain/model/create-medical-record.command';
 import { CreateMedicalRecordRequest } from './create-medical-record.request';
+import { CreateControlCommand } from '../domain/model/create-control.command';
+import { CreateControlRequest } from './create-control.request';
+import { ControlHistoryResponse } from './control-history-reponse';
 
 const medicalRecordUrl = `${environment.serverBasePath}${environment.patientEndpointPath}`;
 
@@ -73,4 +76,27 @@ export class MedicalRecordApiEndpoint {
       })
     );
   }
+
+  /**
+   * Crea un nuevo control de hemoglobina.
+   * POST /api/patients/hemoglobin-control
+   */
+  postHemoglobinControl(command: CreateControlCommand): Observable<any> {
+    const request: CreateControlRequest = this.assembler.toRequestCreateControl(command);
+
+    return this.http.post<any>(`${medicalRecordUrl}/hemoglobin-control`, request).pipe(
+      map(response => {
+        return { success: true, data: response };
+      })
+    );
+  }
+
+  /**
+   * Obtiene el historial de controles de un registro médico.
+   * GET /api/patients/medical-record/{medicalRecordId}/controls
+   */
+  getControlsByMedicalRecordId(medicalRecordId: string): Observable<ControlHistoryResponse> {
+    return this.http.get<ControlHistoryResponse>(`${medicalRecordUrl}/medical-record/${medicalRecordId}/controls`);
+  }
+
 }

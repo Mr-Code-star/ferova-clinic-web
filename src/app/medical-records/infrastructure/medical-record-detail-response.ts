@@ -1,17 +1,12 @@
 import { AnemiaStatus } from '../domain/model/control.entity';
 import { BaseResponse } from '../../shared/infrastructure/base-response';
+import { ControlResource } from './control-history-reponse';
 
 export interface AntecedenteResource {
   type: string;
   description: string;
 }
 
-export interface ControlResource {
-  id: string;
-  date: string;
-  hemoglobinLevel: number;
-  anemiaStatus: AnemiaStatus;
-}
 
 export interface MedicalRecordDetailResponse extends BaseResponse{
   id: string;

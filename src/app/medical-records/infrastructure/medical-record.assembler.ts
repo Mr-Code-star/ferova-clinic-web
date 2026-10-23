@@ -3,6 +3,8 @@ import { MedicalRecord } from '../domain/model/medical-record.entity';
 import { Control } from '../domain/model/control.entity';
 import { CreateMedicalRecordCommand } from '../domain/model/create-medical-record.command';
 import { CreateMedicalRecordRequest } from './create-medical-record.request';
+import { CreateControlCommand } from '../domain/model/create-control.command';
+import { CreateControlRequest } from './create-control.request';
 
 export class MedicalRecordAssembler {
   toEntityFromResponse(response: MedicalRecordDetailResponse): MedicalRecord {
@@ -31,6 +33,13 @@ export class MedicalRecordAssembler {
       })),
       nurseId: response.nurseId
     });
+  }
+
+  toRequestCreateControl(command: CreateControlCommand): CreateControlRequest {
+    return {
+      patientId: command.patientId,
+      hemoglobinLevel: command.hemoglobinLevel
+    };
   }
 
   toRequestCreateMedicalRecord(command: CreateMedicalRecordCommand ): CreateMedicalRecordRequest  {
