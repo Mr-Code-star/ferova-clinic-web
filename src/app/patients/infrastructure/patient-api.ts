@@ -6,6 +6,7 @@ import { SearchResource } from './search-term-response';
 import { PatientsApiEndpoint } from './patients-api-endpoint';
 import { Patient } from '../domain/model/patient.entity';
 import { AssignPatientCommand } from '../domain/model/assign-patient.command';
+import { ActivePatientsCountResource } from './active-patients-count-response';
 
 @Injectable({ providedIn: 'root' })
 export class PatientsApi {
@@ -28,5 +29,8 @@ export class PatientsApi {
   }
   getAssignedPatients(searchTerm?: string): Observable<Patient[]> {
     return this.patientEndpoint.SearchMyPatient(searchTerm);
+  }
+  getActivePatientsCount(): Observable<ActivePatientsCountResource> {
+    return this.patientEndpoint.getActivePatientsCount();
   }
 }
