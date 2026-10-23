@@ -49,8 +49,13 @@ export class Appointment {
   // Helper para formatear la fecha (ej. "Martes 21 Abril")
   get formattedDate(): string {
     if (!this._appointmentDate) return '';
-    const [day, month, year] = this._appointmentDate.split('/');
+
+    // Acepta "/" o "-" como separador
+    const [day, month, year] = this._appointmentDate.split(/[/-]/);
+
     const date = new Date(`${year}-${month}-${day}`);
+
+    if (isNaN(date.getTime())) return this._appointmentDate; // fallback seguro
 
     return date.toLocaleDateString('es-ES', {
       weekday: 'long',
