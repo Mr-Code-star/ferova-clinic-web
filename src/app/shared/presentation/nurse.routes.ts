@@ -6,6 +6,7 @@ import { MotherDetailsView } from '../../patients/presentation/views/mother-deta
 import {
   RegisterMedicalRecordView
 } from '../../medical-records/presentation/views/register-medical-record-view/register-medical-record-view';
+import { ViewMedicalRecord } from '../../medical-records/presentation/views/medical-record-view/medical-record-view';
 
 const nurseHome = () =>
   import('./views/nurse-home/nurse-home').then((m) => m.NurseHome);
@@ -55,6 +56,11 @@ export const nurseRoutes: Routes = [
       {
         path: 'patients/mother/:id', // ⬅️ Ruta para los detalles de la madre
         component: MotherDetailsView
+      },
+      {
+        path: 'history/view/:id',
+        component: ViewMedicalRecord,
+        title: 'Ver Historial | FerovaClinic'
       },
       {
         path: 'history/register/:id', // ⬅️ Recibe el ID del paciente

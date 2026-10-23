@@ -51,9 +51,7 @@ export class NurseHistory {
   }
 
   onViewHistory(patient: Patient) {
-    // Esto se ejecuta desde el botón "Ver Historial"
     this.store.setSelectedPatient(patient);
-    // Aquí a futuro podrías ir a una vista de lectura: /nurse/history/view/:id
     this.router.navigate(['/nurse/history/view/', patient.id]);
   }
 
