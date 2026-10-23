@@ -1,9 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { HealthFacilityStore } from '../../../application/health-facility-store';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  imports: [MatIcon],
+  imports: [MatIcon, RouterLink],
   selector: 'app-daily-agenda',
   styleUrl: './daily-agenda.css',
   templateUrl: './daily-agenda.html',
