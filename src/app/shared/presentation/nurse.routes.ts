@@ -7,6 +7,9 @@ import {
   RegisterMedicalRecordView
 } from '../../medical-records/presentation/views/register-medical-record-view/register-medical-record-view';
 import { ViewMedicalRecord } from '../../medical-records/presentation/views/medical-record-view/medical-record-view';
+import {
+  UpdateMedicalRecordView
+} from '../../medical-records/presentation/views/update-medical-record-view/update-medical-record-view';
 
 const nurseHome = () =>
   import('./views/nurse-home/nurse-home').then((m) => m.NurseHome);
@@ -65,6 +68,11 @@ export const nurseRoutes: Routes = [
       {
         path: 'history/register/:id', // ⬅️ Recibe el ID del paciente
         component: RegisterMedicalRecordView
+      },
+      {
+        path: 'history/update/:id',
+        component: UpdateMedicalRecordView,
+        title: 'Actualizar Historial | FerovaClinic'
       },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
     ],
