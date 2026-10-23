@@ -1,0 +1,39 @@
+<div class="modal-wrapper">
+  <header class="modal-header">
+    <h2 class="title">Añadir Síntoma</h2>
+  </header>
+
+  <div class="modal-body">
+    <div class="form-group">
+      <label>BUSCAR O SELECCIONAR SÍNTOMA</label>
+      <div class="search-box">
+        <mat-icon class="search-icon">search</mat-icon>
+        <input
+          type="text"
+          [(ngModel)]="searchTerm"
+          placeholder="Ej: Palidez, Taquicardia...">
+      </div>
+    </div>
+
+    <div class="frequent-symptoms">
+      <label>SÍNTOMAS FRECUENTES</label>
+      <div class="symptoms-grid">
+        @for (symptom of frequentSymptoms; track symptom) {
+          <button
+            class="symptom-chip"
+            [class.selected]="searchTerm === symptom"
+            (click)="selectSymptom(symptom)">
+            {{ symptom }}
+          </button>
+        }
+      </div>
+    </div>
+  </div>
+
+  <footer class="modal-footer">
+    <button class="btn-cancel" (click)="onCancel()">Cancelar</button>
+    <button class="btn-add" [disabled]="!isValid()" (click)="onAdd()">
+      <mat-icon>check</mat-icon> Añadir
+    </button>
+  </footer>
+</div>

@@ -1,0 +1,15 @@
+<div class="modal-wrapper">
+  <div class="icon-success">
+    <mat-icon>check_circle</mat-icon>
+  </div>
+
+  <h2 class="title">¡Historial Creado!</h2>
+
+  <p class="description">
+    El historial médico de <strong>{{ data.patientName }}</strong> se ha registrado exitosamente.
+  </p>
+
+  <button mat-flat-button class="btn-primary" (click)="onClose()">
+    Ir al historial
+  </button>
+</div>

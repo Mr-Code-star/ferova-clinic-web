@@ -1,0 +1,10 @@
+<div class="list-container">
+  @for (patient of patients; track patient.id) {
+    <app-patient-history-card
+      [patient]="patient"
+      (select)="onSelect($event)"
+      (viewHistory)="viewMedicalRecord($event)"
+      (updateRecord)="onUpdate($event)">
+    </app-patient-history-card>
+  }
+</div>

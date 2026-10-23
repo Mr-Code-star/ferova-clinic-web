@@ -1,0 +1,59 @@
+<form (ngSubmit)="onSubmit()" class="record-form">
+
+  <!-- Banner informativo -->
+  <div class="info-banner">
+    <mat-icon>info_outline</mat-icon>
+    <p>Los niveles de hemoglobina se registrarán y monitorearán a través de controles diagnósticos posteriores para asegurar la precisión del tratamiento.</p>
+  </div>
+
+  <!-- Fila 1: Peso y Altura -->
+  <div class="form-row">
+    <div class="form-group">
+      <label>PESO (KG)</label>
+      <input type="number" [(ngModel)]="weight" name="weight" placeholder="0.0" step="0.1" required>
+    </div>
+    <div class="form-group">
+      <label>ALTURA (CM)</label>
+      <input type="number" [(ngModel)]="height" name="height" placeholder="0" required>
+    </div>
+  </div>
+
+  <!-- Motivo de consulta -->
+  <div class="form-group">
+    <label>MOTIVO DE CONSULTA</label>
+    <textarea [(ngModel)]="motivoConsulta" name="motivoConsulta" placeholder="Describa la razón de la visita..." rows="3" required></textarea>
+  </div>
+
+  <!-- Observaciones -->
+  <div class="form-group">
+    <label>OBSERVACIONES</label>
+    <textarea [(ngModel)]="observaciones" name="observaciones" placeholder="Notas adicionales del profesional..." rows="3"></textarea>
+  </div>
+
+  <!-- Antecedentes -->
+  <app-tag-input
+    label="ANTECEDENTES"
+    type="antecedente"
+    [tags]="antecedentes"
+    (tagsChange)="antecedentes = $event">
+  </app-tag-input>
+
+  <!-- Síntomas -->
+  <app-tag-input
+    label="SÍNTOMAS REPORTADOS"
+    type="sintoma"
+    [tags]="sintomas"
+    (tagsChange)="sintomas = $event">
+  </app-tag-input>
+
+  <!-- Botón Guardar -->
+  <button
+    mat-flat-button
+    type="submit"
+    class="btn-save"
+    [disabled]="!weight || !height || !motivoConsulta.trim() || loading">
+    <mat-icon>save</mat-icon>
+    {{ loading ? 'Guardando...' : 'Guardar Historial' }}
+  </button>
+
+</form>
