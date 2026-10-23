@@ -22,7 +22,7 @@ export class MedicalRecordStore {
   /**
    * Carga el historial médico de un paciente.
    */
-  loadMedicalRecord(patientId: string): void {
+  loadMedicalRecordByPatientId(patientId: string): void {
     this.loadingSignal.set(true);
     this.errorSignal.set(null);
 
