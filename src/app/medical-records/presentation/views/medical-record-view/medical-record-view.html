@@ -64,7 +64,7 @@
           <span class="label">HEMOGLOBINA</span>
           @if (hasHemoglobinData()) {
             <h2 class="value">{{ record()?.hemoglobinLevel }} <small>g/dL</small></h2>
-            <button class="btn-link" (click)="onRegisterFirstControl()">
+            <button class="btn-link" (click)="goToControls()">
               <mat-icon>visibility</mat-icon> VER HISTORIAL DE CONTROLES
             </button>
           } @else {

@@ -4,9 +4,10 @@ import { MedicalRecordStore } from '../../../application/medical-record-store';
 import { PatientsStore } from '../../../../patients/application/patients-store';
 import { MatIcon } from '@angular/material/icon';
 import { DatePipe } from '@angular/common';
+import { MatButton } from '@angular/material/button';
 
 @Component({
-  imports: [MatIcon, DatePipe],
+  imports: [MatIcon, DatePipe, MatButton],
   selector: 'app-medical-record-view',
   styleUrl: './medical-record-view.css',
   templateUrl: './medical-record-view.html',
@@ -54,5 +55,12 @@ export class ViewMedicalRecord implements OnInit {
   // Función dummy para el botón de descargar
   onDownload() {
     console.log('Descargando PDF...');
+  }
+
+  goToControls() {
+    const currentRecord = this.record();
+    if (currentRecord) {
+      this.router.navigate(['/nurse/history/controls', this.patientId, currentRecord.id]);
+    }
   }
 }
