@@ -1,0 +1,30 @@
+<div class="register-view-container">
+
+  <button class="btn-back" (click)="onBack()">
+    <mat-icon>arrow_back</mat-icon>
+    {{ patientName() }}
+  </button>
+
+  <div class="form-card">
+    <header class="form-header">
+      <h1 class="title">Actualizar Historial Médico</h1>
+      <p class="subtitle">Actualice los datos de salud del paciente para el seguimiento de su tratamiento actual.</p>
+    </header>
+
+    @if (error()) {
+      <div class="error-banner">
+        <mat-icon>error_outline</mat-icon>
+        <span>{{ error() }}</span>
+      </div>
+    }
+
+    <!-- Le pasamos los datos cargados mediante [initialData] -->
+    <app-medical-record-form
+      [patientId]="patientId"
+      [loading]="loading()"
+      [initialData]="medicalRecord()"
+      (save)="onSave($event)">
+    </app-medical-record-form>
+  </div>
+
+</div>
