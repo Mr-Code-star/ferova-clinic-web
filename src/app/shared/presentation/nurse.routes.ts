@@ -3,6 +3,17 @@ import { NurseLayout } from './components/nurse-layout/nurse-layout';
 import { NurseChatView } from '../../communication/presentation/views/nurse-chat-view/nurse-chat-view';
 import { NursePatients } from './views/nurse-patients/nurse-patients';
 import { MotherDetailsView } from '../../patients/presentation/views/mother-details-view/mother-details-view';
+import {
+  RegisterMedicalRecordView
+} from '../../medical-records/presentation/views/register-medical-record-view/register-medical-record-view';
+import { ViewMedicalRecord } from '../../medical-records/presentation/views/medical-record-view/medical-record-view';
+import {
+  UpdateMedicalRecordView
+} from '../../medical-records/presentation/views/update-medical-record-view/update-medical-record-view';
+import {
+  RegisterControlView
+} from '../../medical-records/presentation/views/register-control-view/register-control-view';
+import { ViewControlHistory } from '../../medical-records/presentation/views/view-control-history/view-control-history';
 
 const nurseHome = () =>
   import('./views/nurse-home/nurse-home').then((m) => m.NurseHome);
@@ -52,6 +63,30 @@ export const nurseRoutes: Routes = [
       {
         path: 'patients/mother/:id', // ⬅️ Ruta para los detalles de la madre
         component: MotherDetailsView
+      },
+      {
+        path: 'history/view/:id',
+        component: ViewMedicalRecord,
+        title: 'Ver Historial | FerovaClinic'
+      },
+      {
+        path: 'history/register/:id', // ⬅️ Recibe el ID del paciente
+        component: RegisterMedicalRecordView
+      },
+      {
+        path: 'history/update/:id',
+        component: UpdateMedicalRecordView,
+        title: 'Actualizar Historial | FerovaClinic'
+      },
+      {
+        path: 'history/control/register/:id',
+        component: RegisterControlView,
+        title: 'Nuevo Control | FerovaClinic'
+      },
+      {
+        path: 'history/controls/:patientId/:medicalRecordId',
+        component: ViewControlHistory,
+        title: 'Historial de Controles | FerovaClinic'
       },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
     ],

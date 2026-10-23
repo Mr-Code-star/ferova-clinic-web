@@ -5,14 +5,18 @@ import { PatientsAssembler } from './patients-assembler';
 import { environment } from '../../../envirotments/environment.development';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, map, Observable } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { AssignPatientCommand } from '../domain/model/assign-patient.command';
+import { SearchMyPatientsAssembler } from './search-my-patients-assembler';
+import { PatientHistoryResponse } from './search-my-patients-response';
 
 
 const patientUrl = `${environment.serverBasePath}${environment.patientEndpointPath}`;
 
 @Injectable({providedIn: 'root'})
 export class PatientsApiEndpoint extends BaseApiEndpoint<Patient, PatientResource, PatientResponse, PatientsAssembler>{
+
+  private readonly searchMyPatientsAssembler = new SearchMyPatientsAssembler();
 
   constructor(http: HttpClient) {
     super(http, patientUrl, new PatientsAssembler());
@@ -34,6 +38,26 @@ export class PatientsApiEndpoint extends BaseApiEndpoint<Patient, PatientResourc
 
     return this.http.post<any>(`${patientUrl}/assign-nurse`, request).pipe(
       catchError(this.handleError('Failed to assign patient'))
+    );
+  }
+
+  SearchMyPatient(searchTerm?: string): Observable<Patient[]> {
+    const url = searchTerm
+      ? `${patientUrl}/nurse?searchTerm=${encodeURIComponent(searchTerm)}`
+      : patientUrl;
+
+    return this.http.get<PatientHistoryResponse>(url).pipe(
+      map(response => {
+        // Si el backend dice EMPTY, devolvemos un array vacío
+        if (response.status === 'EMPTY') {
+          return [];
+        }
+        return this.searchMyPatientsAssembler.toEntitiesFromResponse(response);
+      }),
+      catchError((err) => {
+        console.error('Error fetching medical history:', err);
+        return throwError(() => err);
+      })
     );
   }
 }

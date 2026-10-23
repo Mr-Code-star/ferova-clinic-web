@@ -15,6 +15,7 @@ export class PatientsStore {
   private readonly hasSearchedSignal = signal<boolean>(false);
   private readonly errorSignal = signal<string | null>(null);
   private readonly activeMotherSignal = signal<SearchResource | null>(null);
+  private readonly selectedPatientSignal = signal<Patient | null>(null);
 
   readonly searchResults = this.searchResultsSignal.asReadonly();
   readonly patients = this.patientsSignal.asReadonly();
@@ -22,6 +23,7 @@ export class PatientsStore {
   readonly hasSearched = this.hasSearchedSignal.asReadonly();
   readonly error = this.errorSignal.asReadonly();
   readonly activeMother = this.activeMotherSignal.asReadonly();
+  readonly selectedPatient = this.selectedPatientSignal.asReadonly();
 
   searchMotherByDni(dni: string): void {
     this.loadingSignal.set(true);
@@ -99,9 +101,31 @@ export class PatientsStore {
     );
   }
 
+  loadAssignedPatients(searchTerm: string = ''): void {
+    this.loadingSignal.set(true);
+    this.errorSignal.set(null);
+
+    this.api.getAssignedPatients(searchTerm).subscribe({
+      next: (patients) => {
+        this.patientsSignal.set(patients);
+        this.loadingSignal.set(false);
+      },
+      error: (err) => {
+        console.error('Error loading assigned patients:', err);
+        this.patientsSignal.set([]);
+        this.errorSignal.set('No se pudieron cargar los pacientes.');
+        this.loadingSignal.set(false);
+      }
+    });
+  }
+
 
   setActiveMother(mother: SearchResource): void {
     this.activeMotherSignal.set(mother);
+  }
+
+  setSelectedPatient(patient: Patient): void {
+    this.selectedPatientSignal.set(patient);
   }
 
   clearActiveMother(): void {

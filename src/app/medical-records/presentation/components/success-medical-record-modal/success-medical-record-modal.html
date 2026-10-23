@@ -1,0 +1,21 @@
+<div class="modal-wrapper">
+  <div class="icon-success">
+    <mat-icon>check_circle</mat-icon>
+  </div>
+
+  <!-- Título dinámico -->
+  <h2 class="title">
+    {{ data.isUpdate ? '¡Historial Actualizado!' : '¡Historial Creado!' }}
+  </h2>
+
+  <!-- Descripción dinámica -->
+  <p class="description">
+    El historial médico de <strong>{{ data.patientName }}</strong>
+    se ha {{ data.isUpdate ? 'actualizado' : 'registrado' }} exitosamente.
+  </p>
+
+  <!-- Botón dinámico (opcional) -->
+  <button mat-flat-button class="btn-primary" (click)="onClose()">
+    {{ data.isUpdate ? 'Volver al historial' : 'Ir al historial' }}
+  </button>
+</div>
