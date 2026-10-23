@@ -1,0 +1,152 @@
+<div class="detail-view-container">
+
+  <!-- Botón Volver -->
+  <button class="btn-back" (click)="onBack()">
+    <mat-icon>arrow_back</mat-icon> Volver
+  </button>
+
+  <header class="page-header">
+    <div class="breadcrumb">
+      Pacientes en Seguimiento > <span class="current">Clinical Monitor</span>
+    </div>
+    <h1 class="page-title">Monitor Clínico de Suplementación</h1>
+  </header>
+
+  @if (loading()) {
+    <div class="loading-state">Cargando detalles...</div>
+  } @else if (detail()) {
+
+    <!-- Tarjeta Principal del Paciente -->
+    <div class="patient-summary" [ngClass]="detail()!.riskLevel === 'HIGH' ? 'border-high' : detail()!.riskLevel === 'MEDIUM' ? 'border-medium' : 'border-low'">
+      <div class="summary-left">
+        <div class="avatar-box">
+          <mat-icon>child_care</mat-icon>
+        </div>
+        <div class="patient-info">
+          <div class="name-row">
+            <h2>{{ detail()!.patientName }}</h2>
+            <span class="risk-badge" [ngClass]="detail()!.riskBadgeClass">{{ detail()!.riskText }}</span>
+          </div>
+          <p class="meta-info">
+            Edad: {{ detail()!.patientYearOld }} años <span class="dot">•</span> Madre tutora: {{ detail()!.motherName }}
+          </p>
+        </div>
+      </div>
+      <div class="summary-right">
+        <span class="score">{{ detail()!.score }}</span>
+        <span class="score-label">SCORE</span>
+      </div>
+    </div>
+
+    <!-- Grid de Detalles -->
+    <div class="detail-grid">
+
+    <!-- Columna Adherencia -->
+    <div class="card adherence-card">
+      <div class="card-header">
+        <div class="header-title"><mat-icon class="icon-blue">bar_chart</mat-icon> Adherencia</div>
+        <span class="badge-blue">En Seguimiento</span>
+      </div>
+
+      <!-- Porcentaje grande -->
+      <div class="adherence-value">{{ detail()!.adherenceScore }}%</div>
+      <p class="adherence-sub">Cumplimiento terapéutico</p>
+
+      <!-- Stats -->
+      <div class="adherence-stats">
+        <div class="stat-item">
+          <span class="stat-label">Dosis confirmadas:</span>
+          <span class="stat-value">{{ detail()!.totalConfirmed }}</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Dosis omitidas:</span>
+          <span class="stat-value">{{ detail()!.totalOmitted }}</span>
+        </div>
+      </div>
+
+      <!-- ⬇️ NUEVO BLOQUE: MINI GRÁFICO Y PRÓXIMA DOSIS ⬇️ -->
+      <div class="adherence-extra">
+
+        <!-- Mini gráfico de barras (últimos 7 días) -->
+        <div class="weekly-chart">
+          <span class="chart-label">Últimos 7 días</span>
+          <div class="bars-container">
+            @for (day of weeklyAdherence()?.days ?? []; track day.date) {
+              <div
+                class="bar"
+                [ngClass]="day.cssClass"
+                [style.height.%]="day.heightPercentage"
+                [title]="day.dayLabel + ' - ' + day.status">
+              </div>
+            }
+          </div>
+          <div class="bars-legend">
+            <span class="legend-dot confirmed"></span> Tomada
+            <span class="legend-dot omitted"></span> Omitida
+          </div>
+        </div>
+
+        <!-- Próxima dosis -->
+        <div class="next-dose">
+          <mat-icon>schedule</mat-icon>
+          <div>
+            <span class="next-label">Próxima dosis</span>
+            <span class="next-time">{{ nextDose()?.displayLabel ?? '—' }}</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Umbral MINSA -->
+      <div class="threshold-info" [ngClass]="detail()!.adherenceScore >= 85 ? 'text-green' : 'text-amber'">
+        <mat-icon>{{ detail()!.adherenceScore >= 85 ? 'check_circle' : 'warning' }}</mat-icon>
+        Umbral mínimo recomendado por MINSA: 85%
+      </div>
+    </div>
+
+      <!-- Columna Tratamiento -->
+      <div class="card treatment-card">
+        <div class="card-header">
+          <div class="header-title"><mat-icon class="icon-red">medication</mat-icon> Tratamiento</div>
+          <span class="badge-green">Vigente</span>
+        </div>
+
+        <div class="supplement-info">
+          <div class="supplement-icon"><mat-icon>medication_liquid</mat-icon></div>
+          <div>
+            <span class="label-small">SUPLEMENTO</span>
+            <h3 class="supplement-name">{{ detail()!.supplementName }}</h3>
+            <p class="supplement-meta">Dosis: {{ detail()!.quantity }} <span class="dot">•</span> Hora: {{ detail()!.dosageHours }}</p>
+          </div>
+        </div>
+
+        <div class="duration-box">
+          <div class="duration-header">
+            <span><mat-icon>calendar_today</mat-icon> DURACIÓN</span>
+            <span>{{ detail()!.totalDays }} días</span>
+          </div>
+          <div class="duration-dates">
+            <span>{{ detail()!.formatDate(detail()!.startDate) }}</span>
+            <mat-icon>arrow_forward</mat-icon>
+            <span>{{ detail()!.formatDate(detail()!.endDate) }}</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" [style.width.%]="detail()!.progressPercentage"></div>
+          </div>
+          <div class="duration-footer">
+            <span>Día {{ detail()!.daysPassed }} transcurrido</span>
+            <span>Faltan {{ detail()!.daysLeft }} días</span>
+          </div>
+        </div>
+
+        <div class="nurse-indication">
+          <mat-icon>info</mat-icon>
+          <p>Administrar con agua o jugo rico en vitamina C para optimizar la absorción. Evitar lácteos 2 horas antes y después.</p>
+        </div>
+      </div>
+
+    </div>
+  } @else {
+    <div class="error-state">No se pudo cargar el detalle del tratamiento.</div>
+  }
+</div>
