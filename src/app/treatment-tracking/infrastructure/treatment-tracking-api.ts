@@ -12,6 +12,7 @@ import {TreatmentApiEndpoint} from './treatment-api-endpoint';
 import {CreateTreatmentCommand} from '../domain/model/create-treatment.command';
 import {CreateTreatmentApiEndpoint} from './create-treatment-api-endpoint';
 import {NurseTreatment} from '../domain/model/nurse-treatment.entity';
+import {JustifyTreatmentCommand} from '../domain/model/justify-treatment.command';
 
 @Injectable({ providedIn: 'root' })
 export class TreatmentTrackingApi {
@@ -51,4 +52,17 @@ export class TreatmentTrackingApi {
   getNurseTreatments(status?: string): Observable<NurseTreatment[]> {
     return this.treatmentEndpoint.getNurseTreatments(status);
   }
+
+  getTreatmentDetailById(treatmentId: string) {
+    return this.treatmentEndpoint.getTreatmentDetailById(treatmentId);
+  }
+
+  completeTreatment(command: JustifyTreatmentCommand): Observable<any> {
+    return this.treatmentEndpoint.completeTreatment(command);
+  }
+
+  abandonTreatment(command: JustifyTreatmentCommand): Observable<any> {
+    return this.treatmentEndpoint.abandonTreatment(command);
+  }
+
 }

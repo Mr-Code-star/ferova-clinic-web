@@ -60,5 +60,6 @@ export class MyTreatmentsView implements OnInit {
   }
 
   onViewDetails(treatment: NurseTreatment) {
+    this.router.navigate(['/nurse/my-treatments/detail', treatment.treatmentId]);
   }
 }

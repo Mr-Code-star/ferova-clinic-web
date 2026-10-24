@@ -12,6 +12,11 @@ import {NextDose} from '../domain/model/next-dose.entity';
 import {NurseTreatmentsResponse} from './nurse-treatments-response';
 import {NurseTreatment} from '../domain/model/nurse-treatment.entity';
 import {NurseTreatmentsAssembler} from './nurse-treatments-assembler';
+import {TreatmentDetailById} from '../domain/model/treatment-detail-by-id.entity';
+import {TreatmentDetailByIdResource} from './treatment-detail-by-id-response';
+import {TreatmentDetailByIdAssembler} from './treatment-detail-by-id-assembler';
+import {JustifyTreatmentCommand} from '../domain/model/justify-treatment.command';
+import {JustifyTreatmentRequest} from './justify-treatment.request';
 
 const treatmentTrackingUrl = `${environment.serverBasePath}${environment.treatmentTrackingEndpointPath}`;
 
@@ -21,6 +26,7 @@ export class TreatmentApiEndpoint {
   private readonly weeklyAssembler = new WeeklyAdherenceAssembler();
   private readonly nextDoseAssembler = new NextDoseAssembler();
   private readonly nurseTreatmentsAssembler = new NurseTreatmentsAssembler();
+  private readonly detailByIdAssembler = new TreatmentDetailByIdAssembler();
 
   constructor(private http: HttpClient) {}
 
@@ -54,5 +60,27 @@ export class TreatmentApiEndpoint {
     return this.http.get<NurseTreatmentsResponse>(url).pipe(
       map(response => this.nurseTreatmentsAssembler.toEntitiesFromResponse(response))
     );
+  }
+
+  getTreatmentDetailById(treatmentId: string): Observable<TreatmentDetailById> {
+    return this.http.get<TreatmentDetailByIdResource>(`${treatmentTrackingUrl}/treatments/${treatmentId}`).pipe(
+      map(response => this.detailByIdAssembler.toEntityFromResource(response))
+    );
+  }
+
+  completeTreatment(command: JustifyTreatmentCommand): Observable<any> {
+    const request: JustifyTreatmentRequest = {
+      treatmentId: command.treatmentId,
+      observation: command.observation
+    };
+    return this.http.put<any>(`${treatmentTrackingUrl}/treatments/complete`, request);
+  }
+
+  abandonTreatment(command: JustifyTreatmentCommand): Observable<any> {
+    const request: JustifyTreatmentRequest = {
+      treatmentId: command.treatmentId,
+      observation: command.observation
+    };
+    return this.http.put<any>(`${treatmentTrackingUrl}/treatments/abandon`, request);
   }
 }
