@@ -141,6 +141,10 @@ export class PatientsStore {
     this.selectedPatientSignal.set(patient);
   }
 
+  checkMedicalRecord(patientId: string): Observable<boolean> {
+    return this.api.checkMedicalRecord(patientId);
+  }
+
   clearActiveMother(): void {
     this.activeMotherSignal.set(null);
   }

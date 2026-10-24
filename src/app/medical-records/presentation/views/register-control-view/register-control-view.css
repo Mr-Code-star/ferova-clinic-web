@@ -2,7 +2,8 @@
   display: block;
   background-color: #f8fafc;
   min-height: 100vh;
-  padding: 3rem 1rem;
+  padding: 10rem 2rem;
+  box-sizing: border-box;
   font-family: 'Inter', system-ui, sans-serif;
 }
 
