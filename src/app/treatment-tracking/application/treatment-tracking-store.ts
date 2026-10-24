@@ -10,6 +10,8 @@ import {PendingPatientsResponse} from '../infrastructure/pending-patients-respon
 import {CreateTreatmentCommand} from '../domain/model/create-treatment.command';
 import {Observable, tap} from 'rxjs';
 import {NurseTreatment} from '../domain/model/nurse-treatment.entity';
+import {TreatmentDetailById} from '../domain/model/treatment-detail-by-id.entity';
+import {JustifyTreatmentCommand} from '../domain/model/justify-treatment.command';
 
 @Injectable({ providedIn: 'root' })
 export class TreatmentTrackingStore {
@@ -26,6 +28,7 @@ export class TreatmentTrackingStore {
   private readonly pendingStateSignal = signal<PendingPatientsResponse | null>(null);
   private readonly selectedPendingPatientSignal = signal<PendingPatient | null>(null);
   private readonly nurseTreatmentsSignal = signal<NurseTreatment[]>([]);
+  private readonly treatmentDetailByIdSignal = signal<TreatmentDetailById | null>(null);
 
   readonly riskOverview = this.riskOverviewSignal.asReadonly();
   readonly loading = this.loadingSignal.asReadonly();
@@ -38,6 +41,7 @@ export class TreatmentTrackingStore {
   readonly pendingState = this.pendingStateSignal.asReadonly();
   readonly selectedPendingPatient = this.selectedPendingPatientSignal.asReadonly();
   readonly nurseTreatments = this.nurseTreatmentsSignal.asReadonly();
+  readonly treatmentDetailById = this.treatmentDetailByIdSignal.asReadonly();
 
   constructor() {
     this.loadRiskOverview();
@@ -166,8 +170,42 @@ export class TreatmentTrackingStore {
     });
   }
 
+  loadTreatmentDetailById(treatmentId: string): void {
+    this.loadingSignal.set(true);
+    this.api.getTreatmentDetailById(treatmentId).subscribe({
+      next: (detail) => {
+        this.treatmentDetailByIdSignal.set(detail);
+        this.loadingSignal.set(false);
+      },
+      error: (err) => {
+        console.error('Error loading treatment detail:', err);
+        this.treatmentDetailByIdSignal.set(null);
+        this.loadingSignal.set(false);
+      }
+    });
+  }
+
   setSelectedPendingPatient(patient: PendingPatient): void {
     this.selectedPendingPatientSignal.set(patient);
   }
 
+  completeTreatment(command: JustifyTreatmentCommand): Observable<any> {
+    this.loadingSignal.set(true);
+    return this.api.completeTreatment(command).pipe(
+      tap({
+        next: () => this.loadingSignal.set(false),
+        error: () => this.loadingSignal.set(false)
+      })
+    );
+  }
+
+  abandonTreatment(command: JustifyTreatmentCommand): Observable<any> {
+    this.loadingSignal.set(true);
+    return this.api.abandonTreatment(command).pipe(
+      tap({
+        next: () => this.loadingSignal.set(false),
+        error: () => this.loadingSignal.set(false)
+      })
+    );
+  }
 }
