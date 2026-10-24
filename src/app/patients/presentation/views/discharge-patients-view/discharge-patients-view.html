@@ -1,0 +1,79 @@
+<div class="discharge-view-container">
+
+  <!-- Header -->
+  <header class="page-header">
+    <button class="btn-back" (click)="onBack()">
+      <mat-icon>arrow_back</mat-icon> Volver a Pacientes
+    </button>
+  </header>
+
+  <div class="title-row">
+    <div>
+      <span class="badge-module">Gestión de Cartera Activa</span>
+      <h1 class="page-title">Dar de Alta Paciente</h1>
+      <p class="subtitle">Seleccione el paciente que desea dar de alta de su cartera activa</p>
+    </div>
+    <div class="count-badge">
+      <mat-icon>groups</mat-icon>
+      <div>
+        <span class="count-label">CARTERA ACTUAL</span>
+        <span class="count-value">{{ activeCount() }} Pacientes Activos</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Estado: Sin Pacientes -->
+  @if (loading()) {
+    <div class="loading-state">Cargando pacientes...</div>
+  } @else if (patients().length === 0) {
+    <div class="empty-state-card">
+      <div class="empty-illustration">
+        <mat-icon>person_off</mat-icon>
+        <div class="badge-alert"><mat-icon>assignment_late</mat-icon></div>
+      </div>
+      <h2>No hay pacientes para dar de alta</h2>
+      <p>Actualmente no tienes pacientes asignados en tu cartera activa que puedan ser procesados para el alta médica.</p>
+
+      <button mat-flat-button class="btn-assign" (click)="onAssignPatient()">
+        Asignar un Paciente
+      </button>
+
+      <div class="info-box">
+        <mat-icon>info</mat-icon>
+        <div>
+          <strong>REVISIÓN DE CARTERA</strong>
+          <p>Si crees que esto es un error, por favor contacta al administrador de piso o verifica tus pacientes en tratamiento.</p>
+        </div>
+      </div>
+    </div>
+  } @else {
+    <!-- Estado: Con Pacientes -->
+    <div class="search-bar">
+      <mat-icon>search</mat-icon>
+      <input
+        type="text"
+        placeholder="Buscar por nombre..."
+        [value]="searchTerm()"
+        (input)="onSearchChange($event)">
+      <span class="hint">Haga clic en un paciente o presione "Dar de Alta" para iniciar el proceso</span>
+    </div>
+
+    <div class="patients-grid">
+      @for (patient of filteredPatients(); track patient.patientId) {
+        <div class="patient-card">
+          <div class="card-header">
+            <div class="avatar">{{ patient.patientName[0] }}</div>
+            <div class="info">
+              <h3>{{ patient.patientName }} {{ patient.patientLastName }}</h3>
+              <span class="status-badge">Tratamiento Completo</span>
+            </div>
+          </div>
+          <button mat-flat-button class="btn-discharge" (click)="onDischarge(patient)">
+            Dar de Alta
+          </button>
+        </div>
+      }
+    </div>
+  }
+
+</div>
