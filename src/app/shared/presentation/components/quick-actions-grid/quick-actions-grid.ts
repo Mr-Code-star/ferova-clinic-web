@@ -20,4 +20,8 @@ export class QuickActionsGrid {
   goToDischarge() {
     this.router.navigate(['/nurse/discharge-patients']);
   }
+
+  goToStartTreatment() {
+    this.router.navigate(['/nurse/start-treatment']);
+  }
 }

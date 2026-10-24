@@ -6,10 +6,18 @@ import { RiskPatient } from '../domain/model/risk-patient.entity';
 import { TreatmentDetail } from '../domain/model/treatment-detail.entity';
 import { WeeklyAdherence } from '../domain/model/weekly-adherence.entity';
 import { NextDose } from '../domain/model/next-dose.entity';
+import {PendingPatientsApiEndpoint} from './pending-patients-api-endpoint';
+import {PendingPatientsResponse} from './pending-patients-response';
+import {TreatmentApiEndpoint} from './treatment-api-endpoint';
+import {CreateTreatmentCommand} from '../domain/model/create-treatment.command';
+import {CreateTreatmentApiEndpoint} from './create-treatment-api-endpoint';
 
 @Injectable({ providedIn: 'root' })
 export class TreatmentTrackingApi {
   private readonly riskEndpoint = inject(RiskOverviewApiEndpoint);
+  private readonly pendingEndpoint = inject(PendingPatientsApiEndpoint);
+  private readonly treatmentEndpoint = inject(TreatmentApiEndpoint);
+  private readonly createTreatmentEndpoint = inject(CreateTreatmentApiEndpoint)
 
   getRiskOverview(): Observable<RiskOverview> {
     return this.riskEndpoint.getRiskOverview();
@@ -20,14 +28,22 @@ export class TreatmentTrackingApi {
   }
 
   getTreatmentDetail(patientId: string): Observable<TreatmentDetail>{
-    return this.riskEndpoint.getTreatmentDetail(patientId);
+    return this.treatmentEndpoint.getTreatmentDetail(patientId);
   }
 
   getWeeklyAdherence(patientId: string): Observable<WeeklyAdherence> {
-    return this.riskEndpoint.getWeeklyAdherence(patientId);
+    return this.treatmentEndpoint.getWeeklyAdherence(patientId);
   }
 
   getNextDose(patientId: string): Observable<NextDose> {
-    return this.riskEndpoint.getNextDose(patientId);
+    return this.treatmentEndpoint.getNextDose(patientId);
+  }
+
+  getPendingPatients(): Observable<PendingPatientsResponse> {
+    return this.pendingEndpoint.getPendingPatients();
+  }
+
+  createTreatment(command: CreateTreatmentCommand): Observable<any> {
+    return this.createTreatmentEndpoint.createTreatment(command);
   }
 }

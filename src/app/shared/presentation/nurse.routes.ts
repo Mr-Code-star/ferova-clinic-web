@@ -26,6 +26,12 @@ import {
   MissingMedicalRecordView
 } from '../../medical-records/presentation/views/missing-medical-record-view/missing-medical-record-view';
 import {DischargePatientsView} from '../../patients/presentation/views/discharge-patients-view/discharge-patients-view';
+import {
+  StartTreatmentView
+} from '../../treatment-tracking/presentation/views/start-treatment-view/start-treatment-view';
+import {
+  StartTreatmentFormView
+} from '../../treatment-tracking/presentation/views/start-treatment-form-view/start-treatment-form-view';
 
 const nurseHome = () =>
   import('./views/nurse-home/nurse-home').then((m) => m.NurseHome);
@@ -69,6 +75,16 @@ export const nurseRoutes: Routes = [
     path: 'chat/:id',
     component: NurseChatView,
     title: 'Chat de Consulta | FerovaClinic'
+  },
+  {
+    path: 'start-treatment',
+    component: StartTreatmentView,
+    title: 'Iniciar Tratamiento | FerovaClinic'
+  },
+  {
+    path: 'start-treatment/form/:id',
+    component: StartTreatmentFormView,
+    title: 'Configurar Tratamiento | FerovaClinic'
   },
   {
     path: '',
