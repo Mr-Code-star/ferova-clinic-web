@@ -9,6 +9,7 @@ import {PendingPatient} from '../domain/model/pending-patient.entity';
 import {PendingPatientsResponse} from '../infrastructure/pending-patients-response';
 import {CreateTreatmentCommand} from '../domain/model/create-treatment.command';
 import {Observable, tap} from 'rxjs';
+import {NurseTreatment} from '../domain/model/nurse-treatment.entity';
 
 @Injectable({ providedIn: 'root' })
 export class TreatmentTrackingStore {
@@ -24,6 +25,7 @@ export class TreatmentTrackingStore {
   private readonly pendingPatientsSignal = signal<PendingPatient[]>([]);
   private readonly pendingStateSignal = signal<PendingPatientsResponse | null>(null);
   private readonly selectedPendingPatientSignal = signal<PendingPatient | null>(null);
+  private readonly nurseTreatmentsSignal = signal<NurseTreatment[]>([]);
 
   readonly riskOverview = this.riskOverviewSignal.asReadonly();
   readonly loading = this.loadingSignal.asReadonly();
@@ -35,6 +37,7 @@ export class TreatmentTrackingStore {
   readonly pendingPatients = this.pendingPatientsSignal.asReadonly();
   readonly pendingState = this.pendingStateSignal.asReadonly();
   readonly selectedPendingPatient = this.selectedPendingPatientSignal.asReadonly();
+  readonly nurseTreatments = this.nurseTreatmentsSignal.asReadonly();
 
   constructor() {
     this.loadRiskOverview();
@@ -144,6 +147,23 @@ export class TreatmentTrackingStore {
         }
       })
     );
+  }
+
+  loadNurseTreatments(status?: string): void {
+    this.loadingSignal.set(true);
+    this.errorSignal.set(null);
+
+    this.api.getNurseTreatments(status).subscribe({
+      next: (treatments) => {
+        this.nurseTreatmentsSignal.set(treatments);
+        this.loadingSignal.set(false);
+      },
+      error: (err) => {
+        console.error('Error loading nurse treatments:', err);
+        this.nurseTreatmentsSignal.set([]);
+        this.loadingSignal.set(false);
+      }
+    });
   }
 
   setSelectedPendingPatient(patient: PendingPatient): void {
