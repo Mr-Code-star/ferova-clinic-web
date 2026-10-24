@@ -16,4 +16,8 @@ export class QuickActionsGrid {
       queryParams: { from: 'quick-actions' }
     });
   }
+
+  goToDischarge() {
+    this.router.navigate(['/nurse/discharge-patients']);
+  }
 }
