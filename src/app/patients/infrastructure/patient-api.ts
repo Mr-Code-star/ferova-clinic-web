@@ -33,4 +33,7 @@ export class PatientsApi {
   getActivePatientsCount(): Observable<ActivePatientsCountResource> {
     return this.patientEndpoint.getActivePatientsCount();
   }
+  checkMedicalRecord(patientId: string): Observable<boolean> {
+    return this.patientEndpoint.checkMedicalRecord(patientId);
+  }
 }

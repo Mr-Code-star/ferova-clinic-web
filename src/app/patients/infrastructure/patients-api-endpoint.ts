@@ -45,11 +45,10 @@ export class PatientsApiEndpoint extends BaseApiEndpoint<Patient, PatientResourc
   SearchMyPatient(searchTerm?: string): Observable<Patient[]> {
     const url = searchTerm
       ? `${patientUrl}/nurse?searchTerm=${encodeURIComponent(searchTerm)}`
-      : patientUrl;
+      : `${patientUrl}/nurse`;
 
     return this.http.get<PatientHistoryResponse>(url).pipe(
       map(response => {
-        // Si el backend dice EMPTY, devolvemos un array vacío
         if (response.status === 'EMPTY') {
           return [];
         }
@@ -68,6 +67,12 @@ export class PatientsApiEndpoint extends BaseApiEndpoint<Patient, PatientResourc
   getActivePatientsCount(): Observable<ActivePatientsCountResource> {
     return this.http.get<ActivePatientsCountResource>(`${patientUrl}/nurse/active-count`).pipe(
       catchError(this.handleError('Failed to fetch active patients count'))
+    );
+  }
+
+  checkMedicalRecord(patientId: string): Observable<boolean> {
+    return this.http.get<boolean>(`${patientUrl}/${patientId}/medical-record/check`).pipe(
+      catchError(this.handleError('Failed to check medical record'))
     );
   }
 }
