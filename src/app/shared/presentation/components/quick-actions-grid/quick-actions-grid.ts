@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
+import {Router} from '@angular/router';
 
 @Component({
   imports: [MatIcon],
@@ -7,4 +8,12 @@ import { MatIcon } from '@angular/material/icon';
   styleUrl: './quick-actions-grid.css',
   templateUrl: './quick-actions-grid.html',
 })
-export class QuickActionsGrid {}
+export class QuickActionsGrid {
+  private readonly router = inject(Router);
+
+  goToRegisterControl() {
+    this.router.navigate(['/nurse/hemoglobin-control'], {
+      queryParams: { from: 'quick-actions' }
+    });
+  }
+}
