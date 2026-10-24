@@ -1,0 +1,21 @@
+<div class="modal-wrapper">
+  <header class="modal-header">
+    <h2>Justificar Acción</h2>
+    <button class="btn-close" (click)="onCancel()"><mat-icon>close</mat-icon></button>
+  </header>
+
+  <div class="modal-body">
+    <label>NOTAS ADICIONALES</label>
+    <textarea
+      [(ngModel)]="observation"
+      placeholder="El paciente ha completado el ciclo de... Se observa una mejora significativa..."
+      rows="6"></textarea>
+  </div>
+
+  <footer class="modal-footer">
+    <button class="btn-cancel" (click)="onCancel()">Cancelar</button>
+    <button class="btn-confirm" [disabled]="!observation.trim()" (click)="onConfirm()">
+      <mat-icon>check_circle</mat-icon> Confirmar
+    </button>
+  </footer>
+</div>
