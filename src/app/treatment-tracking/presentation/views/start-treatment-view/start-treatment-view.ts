@@ -49,7 +49,7 @@ export class StartTreatmentView implements OnInit {
   }
 
   onStartControl(patient: PendingPatient) {
-    // Aquí podrías navegar al formulario para iniciar el tratamiento
-    console.log('Iniciar control para:', patient);
+    this.store.setSelectedPendingPatient(patient);
+    this.router.navigate(['/nurse/start-treatment/form', patient.patientId]);
   }
 }
