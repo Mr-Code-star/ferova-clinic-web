@@ -7,6 +7,8 @@ import { WeeklyAdherence } from '../domain/model/weekly-adherence.entity';
 import { NextDose } from '../domain/model/next-dose.entity';
 import {PendingPatient} from '../domain/model/pending-patient.entity';
 import {PendingPatientsResponse} from '../infrastructure/pending-patients-response';
+import {CreateTreatmentCommand} from '../domain/model/create-treatment.command';
+import {Observable, tap} from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class TreatmentTrackingStore {
@@ -21,6 +23,7 @@ export class TreatmentTrackingStore {
   private readonly nextDoseSignal = signal<NextDose | null>(null);
   private readonly pendingPatientsSignal = signal<PendingPatient[]>([]);
   private readonly pendingStateSignal = signal<PendingPatientsResponse | null>(null);
+  private readonly selectedPendingPatientSignal = signal<PendingPatient | null>(null);
 
   readonly riskOverview = this.riskOverviewSignal.asReadonly();
   readonly loading = this.loadingSignal.asReadonly();
@@ -31,6 +34,7 @@ export class TreatmentTrackingStore {
   readonly nextDose = this.nextDoseSignal.asReadonly();
   readonly pendingPatients = this.pendingPatientsSignal.asReadonly();
   readonly pendingState = this.pendingStateSignal.asReadonly();
+  readonly selectedPendingPatient = this.selectedPendingPatientSignal.asReadonly();
 
   constructor() {
     this.loadRiskOverview();
@@ -120,4 +124,30 @@ export class TreatmentTrackingStore {
       }
     });
   }
+
+  startTreatment(command: CreateTreatmentCommand): Observable<any> {
+    this.loadingSignal.set(true);
+    this.errorSignal.set(null);
+
+    return this.api.createTreatment(command).pipe(
+      tap({
+        next: () => {
+          this.loadingSignal.set(false);
+          this.pendingPatientsSignal.update(patients =>
+            patients.filter(p => p.patientId !== command.patientId)
+          );
+        },
+        error: (err) => {
+          console.error('Error starting treatment:', err);
+          this.errorSignal.set('No se pudo iniciar el tratamiento.');
+          this.loadingSignal.set(false);
+        }
+      })
+    );
+  }
+
+  setSelectedPendingPatient(patient: PendingPatient): void {
+    this.selectedPendingPatientSignal.set(patient);
+  }
+
 }
