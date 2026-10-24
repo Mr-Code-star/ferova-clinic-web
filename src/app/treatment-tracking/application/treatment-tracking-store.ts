@@ -5,6 +5,8 @@ import { RiskPatient } from '../domain/model/risk-patient.entity';
 import { TreatmentDetail } from '../domain/model/treatment-detail.entity';
 import { WeeklyAdherence } from '../domain/model/weekly-adherence.entity';
 import { NextDose } from '../domain/model/next-dose.entity';
+import {PendingPatient} from '../domain/model/pending-patient.entity';
+import {PendingPatientsResponse} from '../infrastructure/pending-patients-response';
 
 @Injectable({ providedIn: 'root' })
 export class TreatmentTrackingStore {
@@ -17,6 +19,8 @@ export class TreatmentTrackingStore {
   private readonly treatmentDetailSignal = signal<TreatmentDetail | null>(null);
   private readonly weeklyAdherenceSignal = signal<WeeklyAdherence | null>(null);
   private readonly nextDoseSignal = signal<NextDose | null>(null);
+  private readonly pendingPatientsSignal = signal<PendingPatient[]>([]);
+  private readonly pendingStateSignal = signal<PendingPatientsResponse | null>(null);
 
   readonly riskOverview = this.riskOverviewSignal.asReadonly();
   readonly loading = this.loadingSignal.asReadonly();
@@ -25,6 +29,8 @@ export class TreatmentTrackingStore {
   readonly treatmentDetail = this.treatmentDetailSignal.asReadonly();
   readonly weeklyAdherence = this.weeklyAdherenceSignal.asReadonly();
   readonly nextDose = this.nextDoseSignal.asReadonly();
+  readonly pendingPatients = this.pendingPatientsSignal.asReadonly();
+  readonly pendingState = this.pendingStateSignal.asReadonly();
 
   constructor() {
     this.loadRiskOverview();
@@ -94,6 +100,24 @@ export class TreatmentTrackingStore {
         console.error('Error loading next dose:', err);
         this.nextDoseSignal.set(null);
       },
+    });
+  }
+
+  loadPendingPatients(): void {
+    this.loadingSignal.set(true);
+    this.api.getPendingPatients().subscribe({
+      next: (response) => {
+        this.pendingStateSignal.set(response);
+        this.pendingPatientsSignal.set(
+          response.pendingPatients.map(p => new PendingPatient(p))
+        );
+        this.loadingSignal.set(false);
+      },
+      error: (err) => {
+        console.error('Error loading pending patients:', err);
+        this.pendingPatientsSignal.set([]);
+        this.loadingSignal.set(false);
+      }
     });
   }
 }
