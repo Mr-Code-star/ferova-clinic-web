@@ -17,6 +17,7 @@ export class PatientsStore {
   private readonly activeMotherSignal = signal<SearchResource | null>(null);
   private readonly selectedPatientSignal = signal<Patient | null>(null);
   private readonly activeCountSignal = signal<number>(0);
+  private readonly dischargePatientsSignal = signal<Patient[]>([]);
 
   readonly searchResults = this.searchResultsSignal.asReadonly();
   readonly patients = this.patientsSignal.asReadonly();
@@ -26,6 +27,7 @@ export class PatientsStore {
   readonly activeMother = this.activeMotherSignal.asReadonly();
   readonly selectedPatient = this.selectedPatientSignal.asReadonly();
   readonly activeCount = this.activeCountSignal.asReadonly();
+  readonly dischargePatients = this.dischargePatientsSignal.asReadonly();
 
   searchMotherByDni(dni: string): void {
     this.loadingSignal.set(true);
@@ -131,6 +133,31 @@ export class PatientsStore {
         this.activeCountSignal.set(0);
       }
     });
+  }
+
+  loadDischargePatients(searchTerm: string = ''): void {
+    this.loadingSignal.set(true);
+    this.api.getDischargePatients(searchTerm).subscribe({
+      next: (patients) => {
+        this.dischargePatientsSignal.set(patients);
+        this.loadingSignal.set(false);
+      },
+      error: (err) => {
+        console.error('Error loading discharge patients:', err);
+        this.dischargePatientsSignal.set([]);
+        this.loadingSignal.set(false);
+      }
+    });
+  }
+
+  dischargePatient(patientId: string): Observable<any> {
+    return this.api.dischargePatient(patientId).pipe(
+      tap(() => {
+        this.dischargePatientsSignal.update(patients =>
+          patients.filter(p => p.patientId !== patientId)
+        );
+      })
+    );
   }
 
   setActiveMother(mother: SearchResource): void {

@@ -36,4 +36,10 @@ export class PatientsApi {
   checkMedicalRecord(patientId: string): Observable<boolean> {
     return this.patientEndpoint.checkMedicalRecord(patientId);
   }
+  getDischargePatients(searchTerm?: string): Observable<Patient[]> {
+    return this.patientEndpoint.getDischargePatients(searchTerm);
+  }
+  dischargePatient(patientId: string): Observable<any> {
+    return this.patientEndpoint.dischargePatient(patientId);
+  }
 }

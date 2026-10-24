@@ -25,6 +25,7 @@ import {HemoglobinControlView} from '../../patients/presentation/views/hemoglobi
 import {
   MissingMedicalRecordView
 } from '../../medical-records/presentation/views/missing-medical-record-view/missing-medical-record-view';
+import {DischargePatientsView} from '../../patients/presentation/views/discharge-patients-view/discharge-patients-view';
 
 const nurseHome = () =>
   import('./views/nurse-home/nurse-home').then((m) => m.NurseHome);
@@ -116,6 +117,12 @@ export const nurseRoutes: Routes = [
         component: NurseAppointmentsList,
         title: 'Agenda de Citas | FerovaClinic'
       },
+      {
+        path: 'discharge-patients',
+        component: DischargePatientsView,
+        title: 'Dar de Alta Paciente | FerovaClinic'
+      },
+
       {
         path: 'history/controls/:patientId/:medicalRecordId',
         component: ViewControlHistory,
