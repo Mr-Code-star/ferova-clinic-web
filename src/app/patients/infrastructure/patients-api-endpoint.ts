@@ -10,6 +10,8 @@ import { AssignPatientCommand } from '../domain/model/assign-patient.command';
 import { SearchMyPatientsAssembler } from './search-my-patients-assembler';
 import { PatientHistoryResponse } from './search-my-patients-response';
 import { ActivePatientsCountResource } from './active-patients-count-response';
+import {DischargePatientsResponse} from './discharge-patients-response';
+import {DischargePatientRequest} from './discharge-patient.request';
 
 
 const patientUrl = `${environment.serverBasePath}${environment.patientEndpointPath}`;
@@ -73,6 +75,27 @@ export class PatientsApiEndpoint extends BaseApiEndpoint<Patient, PatientResourc
   checkMedicalRecord(patientId: string): Observable<boolean> {
     return this.http.get<boolean>(`${patientUrl}/${patientId}/medical-record/check`).pipe(
       catchError(this.handleError('Failed to check medical record'))
+    );
+  }
+
+  dischargePatient(patientId: string): Observable<any> {
+    const request: DischargePatientRequest = { patientId };
+    return this.http.put<any>(`${patientUrl}/discharge`, request).pipe(
+      catchError(this.handleError('Failed to discharge patient'))
+    );
+  }
+
+  getDischargePatients(searchTerm?: string): Observable<Patient[]> {
+    const url = searchTerm
+      ? `${patientUrl}/discharge/nurse?searchTerm=${encodeURIComponent(searchTerm)}`
+      : `${patientUrl}/discharge/nurse`;
+
+    return this.http.get<DischargePatientsResponse>(url).pipe(
+      map(response => {
+        if (response.status === 'EMPTY') return [];
+        return this.searchMyPatientsAssembler.toEntitiesFromResponse(response as any);
+      }),
+      catchError(this.handleError('Failed to fetch discharge patients'))
     );
   }
 }
