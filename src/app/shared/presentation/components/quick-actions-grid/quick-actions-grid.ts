@@ -24,4 +24,8 @@ export class QuickActionsGrid {
   goToStartTreatment() {
     this.router.navigate(['/nurse/start-treatment']);
   }
+
+  goToMyTreatments() {
+    this.router.navigate(['/nurse/my-treatments']);
+  }
 }
