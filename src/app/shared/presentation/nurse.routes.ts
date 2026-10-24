@@ -33,6 +33,9 @@ import {
   StartTreatmentFormView
 } from '../../treatment-tracking/presentation/views/start-treatment-form-view/start-treatment-form-view';
 import {MyTreatmentsView} from '../../treatment-tracking/presentation/views/my-treatments-view/my-treatments-view';
+import {
+  TreatmentDetailByIdView
+} from '../../treatment-tracking/presentation/views/treatment-detail-by-id-view/treatment-detail-by-id-view';
 
 const nurseHome = () =>
   import('./views/nurse-home/nurse-home').then((m) => m.NurseHome);
@@ -91,6 +94,11 @@ export const nurseRoutes: Routes = [
     path: 'my-treatments',
     component: MyTreatmentsView,
     title: 'Mis Tratamientos | FerovaClinic'
+  },
+  {
+    path: 'my-treatments/detail/:id',
+    component: TreatmentDetailByIdView,
+    title: 'Detalle de Tratamiento | FerovaClinic'
   },
   {
     path: '',
