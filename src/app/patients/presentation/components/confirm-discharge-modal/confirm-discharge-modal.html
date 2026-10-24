@@ -1,0 +1,23 @@
+<div class="modal-wrapper">
+
+  <header class="modal-header">
+    <h2 class="title">¿Confirmar Alta de Paciente?</h2>
+  </header>
+
+  <div class="modal-body">
+    <p class="description">
+      ¿Estás seguro de que quieres dar de alta a este paciente? Esta acción lo removerá de tu lista de pacientes activos.
+    </p>
+  </div>
+
+  <footer class="modal-footer">
+    <button class="btn-confirm" (click)="onConfirm()">
+      <mat-icon>person_add</mat-icon>
+      Sí, Dar de Alta
+    </button>
+    <button class="btn-cancel" (click)="onCancel()">
+      No, Cancelar
+    </button>
+  </footer>
+
+</div>
