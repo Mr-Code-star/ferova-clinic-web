@@ -35,8 +35,35 @@ export class RegisterControlView implements OnInit {
     this.patientId = this.route.snapshot.paramMap.get('id') || '';
   }
 
+  private getOrigin(): string {
+    return this.route.snapshot.queryParamMap.get('from') ?? 'hemoglobin-control';
+  }
+
   onBack() {
-    this.router.navigate(['/nurse/history/view', this.patientId]);
+    const from = this.getOrigin();
+
+    switch (from) {
+      case 'quick-actions':
+        // Volver al dashboard del enfermero
+        this.router.navigate(['/nurse/hemoglobin-control']);
+        break;
+      case 'medical-record':
+        // Volver al historial del paciente
+        this.router.navigate(['/nurse/history/view', this.patientId]);
+        break;
+      case 'controls-history':
+        // Volver al historial de controles
+        const record = this.store.medicalRecord();
+        this.router.navigate([
+          '/nurse/history/controls',
+          this.patientId,
+          record?.id
+        ]);
+        break;
+      default:
+        // Fallback: historial del paciente
+        this.router.navigate(['/nurse/history/view', this.patientId]);
+    }
   }
 
   onSave() {
