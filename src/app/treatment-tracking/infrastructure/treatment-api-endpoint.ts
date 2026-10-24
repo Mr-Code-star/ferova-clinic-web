@@ -9,6 +9,9 @@ import {WeeklyAdherenceAssembler} from './weekly-adherence-assembler';
 import {NextDoseAssembler} from './next-dose-assembler';
 import {WeeklyAdherence} from '../domain/model/weekly-adherence.entity';
 import {NextDose} from '../domain/model/next-dose.entity';
+import {NurseTreatmentsResponse} from './nurse-treatments-response';
+import {NurseTreatment} from '../domain/model/nurse-treatment.entity';
+import {NurseTreatmentsAssembler} from './nurse-treatments-assembler';
 
 const treatmentTrackingUrl = `${environment.serverBasePath}${environment.treatmentTrackingEndpointPath}`;
 
@@ -17,6 +20,7 @@ export class TreatmentApiEndpoint {
   private readonly treatmentAssembler = new TreatmentDetailAssembler();
   private readonly weeklyAssembler = new WeeklyAdherenceAssembler();
   private readonly nextDoseAssembler = new NextDoseAssembler();
+  private readonly nurseTreatmentsAssembler = new NurseTreatmentsAssembler();
 
   constructor(private http: HttpClient) {}
 
@@ -40,5 +44,15 @@ export class TreatmentApiEndpoint {
     return this.http
       .get<NextDoseResponse>(`${treatmentTrackingUrl}/patients/${patientId}/next-dose`)
       .pipe(map(r => this.nextDoseAssembler.toEntityFromResponse(r)));
+  }
+
+  getNurseTreatments(status?: string): Observable<NurseTreatment[]> {
+    const url = status
+      ? `${treatmentTrackingUrl}/nurses/treatments?status=${status}`
+      : `${treatmentTrackingUrl}/nurses/treatments`;
+
+    return this.http.get<NurseTreatmentsResponse>(url).pipe(
+      map(response => this.nurseTreatmentsAssembler.toEntitiesFromResponse(response))
+    );
   }
 }

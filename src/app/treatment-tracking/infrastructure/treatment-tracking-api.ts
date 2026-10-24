@@ -11,6 +11,7 @@ import {PendingPatientsResponse} from './pending-patients-response';
 import {TreatmentApiEndpoint} from './treatment-api-endpoint';
 import {CreateTreatmentCommand} from '../domain/model/create-treatment.command';
 import {CreateTreatmentApiEndpoint} from './create-treatment-api-endpoint';
+import {NurseTreatment} from '../domain/model/nurse-treatment.entity';
 
 @Injectable({ providedIn: 'root' })
 export class TreatmentTrackingApi {
@@ -45,5 +46,9 @@ export class TreatmentTrackingApi {
 
   createTreatment(command: CreateTreatmentCommand): Observable<any> {
     return this.createTreatmentEndpoint.createTreatment(command);
+  }
+
+  getNurseTreatments(status?: string): Observable<NurseTreatment[]> {
+    return this.treatmentEndpoint.getNurseTreatments(status);
   }
 }
