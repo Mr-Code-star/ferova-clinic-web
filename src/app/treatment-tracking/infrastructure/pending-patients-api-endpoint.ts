@@ -5,7 +5,7 @@ import {Observable} from 'rxjs';
 import {PendingPatientsResponse} from './pending-patients-response';
 import {environment} from '../../../envirotments/environment.development';
 
-const pendingUrl = `${environment.serverBasePath}${environment.treatmentTrackingEndpointPath}`;
+const pendingUrl = `${environment.serverBasePath}${environment.treatmentTrackingEndpointPath}/nurses/pending-patients`;
 
 @Injectable({providedIn: "root"})
 export class PendingPatientsApiEndpoint {
@@ -15,6 +15,6 @@ export class PendingPatientsApiEndpoint {
   }
 
   getPendingPatients(): Observable<PendingPatientsResponse> {
-    return this.http.get<PendingPatientsResponse>(`${pendingUrl}/nurses/pending-patients`);
+    return this.http.get<PendingPatientsResponse>(`${pendingUrl}`);
   }
 }
