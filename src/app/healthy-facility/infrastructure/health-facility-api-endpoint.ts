@@ -8,6 +8,9 @@ import { environment } from '../../../envirotments/environment.development';
 import { Appointment } from '../domain/model/appointment.entity';
 import { AppointmentsResponse, NurseAppointmentsResponse } from './appointment-response';
 import { AppointmentAssembler } from './appointment-assembler';
+import {HealthFacilityList} from '../domain/model/health-facility-list.entity';
+import {HealthFacilitiesListResponse} from './health-facilities-list-response';
+import {HealthFacilitiesListAssembler} from './health-facilities-list-assembler';
 
 const healthFacilityUrl = `${environment.serverBasePath}${environment.healthyEndpointPath}`;
 
@@ -15,6 +18,7 @@ const healthFacilityUrl = `${environment.serverBasePath}${environment.healthyEnd
 export class HealthFacilityApiEndpoint {
   private readonly assembler = new HealthFacilityAssembler();
   private readonly appointmentAssembler = new AppointmentAssembler();
+  private readonly listAssembler = new HealthFacilitiesListAssembler();
 
   constructor(private http: HttpClient) {}
 
@@ -55,5 +59,11 @@ export class HealthFacilityApiEndpoint {
           return this.appointmentAssembler.toEntitiesFromResponse(response);
         }),
       );
+  }
+
+  getAllFacilities(): Observable<HealthFacilityList[]> {
+    return this.http.get<HealthFacilitiesListResponse>(`${healthFacilityUrl}`).pipe(
+      map(response => this.listAssembler.toEntitiesFromResponse(response))
+    );
   }
 }

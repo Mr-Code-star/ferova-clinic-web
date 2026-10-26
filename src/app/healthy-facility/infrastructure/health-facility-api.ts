@@ -3,6 +3,7 @@ import { HealthFacilityApiEndpoint } from './health-facility-api-endpoint';
 import { Observable } from 'rxjs';
 import { HealthFacility } from '../domain/model/health-facility.entity';
 import { Appointment } from '../domain/model/appointment.entity';
+import {HealthFacilityList} from '../domain/model/health-facility-list.entity';
 
 @Injectable({ providedIn: 'root' })
 export class HealthFacilityApi {
@@ -18,5 +19,9 @@ export class HealthFacilityApi {
 
   getAllNurseAppointments(): Observable<Appointment[]> {
     return this.endpoint.getAllNurseAppointments();
+  }
+
+  getAllFacilities(): Observable<HealthFacilityList[]> {
+    return this.endpoint.getAllFacilities()
   }
 }
