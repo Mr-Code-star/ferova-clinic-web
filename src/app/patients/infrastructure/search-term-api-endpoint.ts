@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environment/environment.development';
+import { environment } from '../../../environment/environment';
 import { SearchTermAssembler } from './search-term-assembler';
 import { ErrorHandlingEnabledBaseType } from '../../shared/infrastructure/error-handling-enabled-base-type';
 import { catchError, map, Observable } from 'rxjs';

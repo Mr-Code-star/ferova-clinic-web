@@ -3,7 +3,7 @@ import { GoogleMap, MapMarker } from '@angular/google-maps';
 import { HttpClient } from '@angular/common/http';
 import { AsyncPipe } from '@angular/common';
 import { catchError, map, Observable, of } from 'rxjs';
-import {environment} from '../../../../../environment/environment.development';
+import {environment} from '../../../../../environment/environment';
 
 @Component({
   selector: 'app-location-picker-map',

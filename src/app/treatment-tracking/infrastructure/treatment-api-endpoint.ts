@@ -4,7 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {map, Observable} from 'rxjs';
 import {TreatmentDetail} from '../domain/model/treatment-detail.entity';
 import {NextDoseResponse, TreatmentDetailResource, WeeklyAdherenceResponse} from './treatment-detail-response';
-import {environment} from '../../../environment/environment.development';
+import {environment} from '../../../environment/environment';
 import {WeeklyAdherenceAssembler} from './weekly-adherence-assembler';
 import {NextDoseAssembler} from './next-dose-assembler';
 import {WeeklyAdherence} from '../domain/model/weekly-adherence.entity';

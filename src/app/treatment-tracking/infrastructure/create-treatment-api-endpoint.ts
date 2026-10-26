@@ -3,7 +3,7 @@ import {CreateTreatmentAssembler} from './create-treatment-assembler';
 import {CreateTreatmentCommand} from '../domain/model/create-treatment.command';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../environment/environment.development';
+import {environment} from '../../../environment/environment';
 
 const createTreatmentUrl = `${environment.serverBasePath}${environment.treatmentTrackingEndpointPath}/treatments`;
 
