@@ -1,0 +1,30 @@
+.welcome-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.greeting {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #0f3b5c;
+  margin: 0;
+}
+
+.name {
+  color: #2563eb;
+}
+
+.role {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #b91c1c;
+  margin: 0;
+}
+
+.date {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin: 0;
+}
