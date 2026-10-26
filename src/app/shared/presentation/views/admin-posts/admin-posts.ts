@@ -50,6 +50,9 @@ export class AdminPosts {
   }
 
   onAssignNurse(facility: HealthFacilityList) {
-    
+    this.router.navigate(
+      ['/admin/facilities/assign-nurse', facility.id],
+      { queryParams: { name: facility.name } }
+    );
   }
 }
