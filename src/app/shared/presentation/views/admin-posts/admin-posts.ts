@@ -45,8 +45,11 @@ export class AdminPosts {
     this.router.navigate(['/admin/facilities/register']);
   }
 
+  onNewFacility() {
+    this.router.navigate(['/admin/facilities/register']);
+  }
+
   onAssignNurse(facility: HealthFacilityList) {
-    console.log('Asignar enfermero a:', facility.name);
-    // Aquí iría la navegación al modal de asignación
+    
   }
 }

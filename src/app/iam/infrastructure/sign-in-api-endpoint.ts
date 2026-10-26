@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { SignInAssembler } from './sign-in-assembler';
-import { environment } from '../../../envirotments/environment.development';
+import { environment } from '../../../environment/environment.development';
 import { ErrorHandlingEnabledBaseType } from '../../shared/infrastructure/error-handling-enabled-base-type';
 import { SignInCommand } from '../domain/model/sign-in.command';
 import { catchError, map, Observable } from 'rxjs';

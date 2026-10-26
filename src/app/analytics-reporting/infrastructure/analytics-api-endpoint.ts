@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { environment } from '../../../envirotments/environment.development';
+import { environment } from '../../../environment/environment.development';
 import { AdminDashboardSummaryResponse } from './admin-dashboard-summary-response';
 import { TopFacilitiesResponse } from './facility-status-response';
 import { AdminDashboardSummary } from '../domain/model/admin-dashboard-summary.entity';

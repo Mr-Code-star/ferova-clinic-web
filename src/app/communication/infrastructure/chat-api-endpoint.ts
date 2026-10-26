@@ -3,7 +3,7 @@ import { BaseApiEndpoint } from '../../shared/infrastructure/base-api-endpoint';
 import { Message } from '../domain/model/messages.entity';
 import { MessageResource, MessageResponse } from './chat-response';
 import { ChatAssembler } from './chat-assembler';
-import { environment } from '../../../envirotments/environment.development';
+import { environment } from '../../../environment/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { SendMessageCommand } from '../domain/model/send-message.command';
 import { map, Observable } from 'rxjs';

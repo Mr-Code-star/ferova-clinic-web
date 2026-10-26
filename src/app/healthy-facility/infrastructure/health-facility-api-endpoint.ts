@@ -4,13 +4,15 @@ import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { HealthFacility } from '../domain/model/health-facility.entity';
 import { HealthFacilityResponse } from './health-facility-response';
-import { environment } from '../../../envirotments/environment.development';
+import { environment } from '../../../environment/environment.development';
 import { Appointment } from '../domain/model/appointment.entity';
 import { AppointmentsResponse, NurseAppointmentsResponse } from './appointment-response';
 import { AppointmentAssembler } from './appointment-assembler';
 import {HealthFacilityList} from '../domain/model/health-facility-list.entity';
 import {HealthFacilitiesListResponse} from './health-facilities-list-response';
 import {HealthFacilitiesListAssembler} from './health-facilities-list-assembler';
+import {DistrictResource} from './district-response';
+import {CreateHealthFacilityRequest} from './create-health-facility.request';
 
 const healthFacilityUrl = `${environment.serverBasePath}${environment.healthyEndpointPath}`;
 
@@ -66,4 +68,13 @@ export class HealthFacilityApiEndpoint {
       map(response => this.listAssembler.toEntitiesFromResponse(response))
     );
   }
+
+  getDistricts(): Observable<DistrictResource[]> {
+    return this.http.get<DistrictResource[]>(`${healthFacilityUrl}/districts`);
+  }
+
+  createFacility(request: CreateHealthFacilityRequest): Observable<any> {
+    return this.http.post<any>(`${healthFacilityUrl}`, request);
+  }
+
 }
