@@ -2,6 +2,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { HealthFacilityApi } from '../infrastructure/health-facility-api';
 import { HealthFacility } from '../domain/model/health-facility.entity';
 import { Appointment } from '../domain/model/appointment.entity';
+import {HealthFacilityList} from '../domain/model/health-facility-list.entity';
 
 @Injectable({ providedIn: 'root' })
 export class HealthFacilityStore {
@@ -14,6 +15,7 @@ export class HealthFacilityStore {
   private readonly allAppointmentsSignal = signal<Appointment[]>([]);
   private readonly allAppointmentsLoadingSignal = signal<boolean>(false);
   private readonly allAppointmentsErrorSignal = signal<string | null>(null);
+  private readonly facilitiesListSignal = signal<HealthFacilityList[]>([]);
 
   readonly facility = this.facilitySignal.asReadonly();
   readonly loading = this.loadingSignal.asReadonly();
@@ -22,6 +24,7 @@ export class HealthFacilityStore {
   readonly allAppointments = this.allAppointmentsSignal.asReadonly();
   readonly allAppointmentsLoading = this.allAppointmentsLoadingSignal.asReadonly();
   readonly allAppointmentsError = this.allAppointmentsErrorSignal.asReadonly();
+  readonly facilitiesList = this.facilitiesListSignal.asReadonly();
 
   constructor() {
     this.loadMyFacility();
@@ -70,6 +73,21 @@ export class HealthFacilityStore {
         this.allAppointmentsErrorSignal.set('No se pudieron cargar las citas.');
         this.allAppointmentsLoadingSignal.set(false);
       },
+    });
+  }
+
+  loadAllFacilities(): void {
+    this.loadingSignal.set(true);
+    this.api.getAllFacilities().subscribe({
+      next: (facilities) => {
+        this.facilitiesListSignal.set(facilities);
+        this.loadingSignal.set(false);
+      },
+      error: (err) => {
+        console.error('Error loading facilities list:', err);
+        this.facilitiesListSignal.set([]);
+        this.loadingSignal.set(false);
+      }
     });
   }
 }
