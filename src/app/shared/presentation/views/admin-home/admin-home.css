@@ -1,0 +1,32 @@
+:host {
+  display: block;
+  background-color: #f4f7f9;
+  min-height: 100vh;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.admin-home-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.left-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.right-column {
+  padding-top: 6.8rem;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 900px) {
+  .admin-home-container {
+    grid-template-columns: 1fr;
+  }
+}
