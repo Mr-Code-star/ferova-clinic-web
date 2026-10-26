@@ -1,0 +1,91 @@
+<div class="facility-details-container">
+
+  <!-- Header superior (Volver) -->
+  <header class="page-header">
+    <button class="btn-back" (click)="onBack()">
+      <mat-icon>arrow_back</mat-icon> Volver al Dashboard
+    </button>
+  </header>
+
+  @if (loading()) {
+    <div class="loading-state">Cargando datos...</div>
+  } @else if (summary()) {
+
+    <!-- Tarjeta de Adherencia Global -->
+    <div class="global-card">
+      <!-- Barra superior de colores -->
+      <div class="gradient-bar"></div>
+
+      <div class="global-header">
+        <div>
+          <span class="label">ADHERENCIA GLOBAL</span>
+          <h1 class="percentage">{{ summary()!.globalAdherenceRate }}%</h1>
+          <p class="description">
+            Promedio ponderado de entrega oportuna y consumo de suplementación de hierro en
+            <strong>{{ counters().total }} establecimientos</strong> adscritos.
+          </p>
+        </div>
+        <div class="icon-box">
+          <mat-icon>bar_chart</mat-icon>
+        </div>
+      </div>
+
+      <!-- Indicadores de rango -->
+      <div class="ranges-row">
+        <div class="range-item">
+          <span class="dot dot-red"></span>
+          <div>
+            <span class="range-label">BAJO RENDIMIENTO (&lt;50%)</span>
+            <span class="range-value">{{ counters().low }} Postas Médicas</span>
+          </div>
+        </div>
+        <div class="range-item">
+          <span class="dot dot-yellow"></span>
+          <div>
+            <span class="range-label">EN SEGUIMIENTO (50–75%)</span>
+            <span class="range-value">{{ counters().medium }} Posta Médica</span>
+          </div>
+        </div>
+        <div class="range-item">
+          <span class="dot dot-green"></span>
+          <div>
+            <span class="range-label">META MINISTERIAL (≥80%)</span>
+            <span class="range-value">{{ counters().high }} Posta Médica</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lista de Establecimientos -->
+    <div class="list-section">
+      <div class="list-header">
+        <div>
+          <h2 class="list-title">Detalle por Establecimiento</h2>
+          <p class="list-subtitle">
+            Jurisdicción territorial San Juan de Lurigancho - {{ counters().total }} entidades registradas
+          </p>
+        </div>
+        <button
+          mat-flat-button
+          class="btn-export"
+          [disabled]="facilities().length === 0"
+          (click)="onExport()">
+          <mat-icon>download</mat-icon> Exportar
+        </button>
+      </div>
+
+      <div class="facilities-list">
+        @for (facility of facilities(); track facility.facilityId) {
+          <div class="facility-card">
+            <span class="dot" [style.background]="facility.riskColor"></span>
+            <div class="info">
+              <h3>{{ facility.facilityName }}</h3>
+              <p>{{ facility.districtName }}</p>
+            </div>
+            <span class="percentage">{{ facility.adherenceRate }}%</span>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>
