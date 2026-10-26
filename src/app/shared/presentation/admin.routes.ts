@@ -1,5 +1,8 @@
 import { Routes } from '@angular/router';
 import { AdminLayout } from './components/admin-layout/admin-layout';
+import {
+  FacilityDetailsView
+} from '../../analytics-reporting/presentation/views/facility-details-view/facility-details-view';
 
 const adminHome = () =>
   import('./views/admin-home/admin-home').then((m) => m.AdminHome);
@@ -9,6 +12,11 @@ const adminMap = () =>
 const adminPosts = () =>
   import('./views/admin-posts/admin-posts').then((m) => m.AdminPosts);
 export const adminRoutes: Routes = [
+  {
+    path: 'facilities',
+    component: FacilityDetailsView,
+    title: 'Detalle de Postas | FerovaClinic'
+  },
   {
     path: '',
     component: AdminLayout,
