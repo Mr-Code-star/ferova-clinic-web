@@ -13,6 +13,13 @@ import {HealthFacilitiesListResponse} from './health-facilities-list-response';
 import {HealthFacilitiesListAssembler} from './health-facilities-list-assembler';
 import {DistrictResource} from './district-response';
 import {CreateHealthFacilityRequest} from './create-health-facility.request';
+import {
+  AssignNurseRequest,
+  AssignNurseResponse,
+  CanRegisterResponse,
+  UnassignedNursesResponse
+} from './assign-nurse-response';
+import {UnassignedNurse} from '../domain/model/unassigned-nurse.entity';
 
 const healthFacilityUrl = `${environment.serverBasePath}${environment.healthyEndpointPath}`;
 
@@ -75,6 +82,20 @@ export class HealthFacilityApiEndpoint {
 
   createFacility(request: CreateHealthFacilityRequest): Observable<any> {
     return this.http.post<any>(`${healthFacilityUrl}`, request);
+  }
+
+  checkCanRegister(): Observable<CanRegisterResponse> {
+    return this.http.get<CanRegisterResponse>(`${healthFacilityUrl}/can-register`);
+  }
+
+  getUnassignedNurses(): Observable<UnassignedNurse[]> {
+    return this.http.get<UnassignedNursesResponse>(`${healthFacilityUrl}/nurses/unassigned`).pipe(
+      map(response => response.data.map(n => new UnassignedNurse(n.id, n.fullName)))
+    );
+  }
+
+  assignNurse(request: AssignNurseRequest): Observable<AssignNurseResponse> {
+    return this.http.post<AssignNurseResponse>(`${healthFacilityUrl}/assign-nurse`, request);
   }
 
 }
