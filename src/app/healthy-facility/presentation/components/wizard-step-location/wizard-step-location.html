@@ -1,0 +1,39 @@
+<div class="step-header">
+  <div class="icon-box"><span class="material-icons">location_on</span></div>
+  <div class="header-row">
+    <div>
+      <h2>Ubicación Geográfica</h2>
+      <p>Haga clic en el mapa para seleccionar la ubicación exacta</p>
+    </div>
+    <div class="coords-display">
+      <div>
+        <span>LATITUD</span>
+        <strong>{{ data.latitude | number:'1.4-4' }}</strong>
+      </div>
+      <div>
+        <span>LONGITUD</span>
+        <strong>{{ data.longitude | number:'1.4-4' }}</strong>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ⬇️ Usamos el nuevo componente de mapa -->
+<div class="map-container">
+  <app-location-picker-map
+    [latitude]="data.latitude"
+    [longitude]="data.longitude"
+    (locationSelected)="onLocationSelected($event)">
+  </app-location-picker-map>
+</div>
+
+<div class="manual-coords">
+  <div class="form-group">
+    <label>LATITUD MANUAL</label>
+    <input type="number" [ngModel]="data.latitude" (ngModelChange)="onInput('latitude', $event)" step="0.0001">
+  </div>
+  <div class="form-group">
+    <label>LONGITUD MANUAL</label>
+    <input type="number" [ngModel]="data.longitude" (ngModelChange)="onInput('longitude', $event)" step="0.0001">
+  </div>
+</div>

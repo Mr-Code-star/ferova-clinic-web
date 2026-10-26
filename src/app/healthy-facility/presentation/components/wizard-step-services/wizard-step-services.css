@@ -1,0 +1,73 @@
+.step-header { display: flex; gap: 1rem; margin-bottom: 2rem; border-bottom: 1px solid #f1f5f9; padding-bottom: 1rem;}
+.icon-box { width: 40px; height: 40px; background: #e0f2fe; color: #0284c7; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.step-header h2 { font-size: 1.2rem; color: #0f172a; margin: 0 0 0.25rem 0; }
+.step-header p { font-size: 0.85rem; color: #64748b; margin: 0; }
+
+.services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.service-card {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1.25rem; border: 2px solid #e2e8f0; border-radius: 12px;
+  cursor: pointer; transition: all 0.2s;
+}
+.service-card.selected { border-color: #2563eb; background: #eff6ff; }
+.checkbox { width: 20px; height: 20px; border: 2px solid #cbd5e1; border-radius: 4px; display: flex; align-items: center; justify-content: center; }
+.service-card.selected .checkbox { background: #2563eb; border-color: #2563eb; color: white; }
+.checkbox span { font-size: 14px; }
+.service-name { flex: 1; font-weight: 600; color: #1e293b; }
+.service-icon { color: #94a3b8; }
+.service-card.selected .service-icon { color: #2563eb; }
+.add-service-container {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed #e2e8f0;
+}
+
+.add-service-container label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #64748b;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.add-service-row {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.add-service-row input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  outline: none;
+  font-size: 0.95rem;
+}
+
+.add-service-row input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.btn-add-service {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background-color: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  padding: 0 1.25rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-add-service:hover:not(:disabled) {
+  background-color: #dbeafe;
+}
+
+.btn-add-service:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
