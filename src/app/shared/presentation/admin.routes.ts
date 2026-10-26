@@ -6,6 +6,7 @@ import {
 import {
   RegisterFacilityView
 } from '../../healthy-facility/presentation/views/register-facility-view/register-facility-view';
+import {AssignNurseView} from '../../healthy-facility/presentation/views/assign-nurse-view/assign-nurse-view';
 
 const adminHome = () =>
   import('./views/admin-home/admin-home').then((m) => m.AdminHome);
@@ -24,6 +25,11 @@ export const adminRoutes: Routes = [
     path: 'facilities/register',
     component: RegisterFacilityView,
     title: 'Nueva Posta | FerovaClinic'
+  },
+  {
+    path: 'facilities/assign-nurse/:id',
+    component: AssignNurseView,
+    title: 'Asignar Enfermero | FerovaClinic'
   },
   {
     path: '',
