@@ -1,4 +1,4 @@
-import { environment } from '../../../environment/environment.development';
+import { environment } from '../../../environment/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MedicalRecordAssembler } from './medical-record.assembler';

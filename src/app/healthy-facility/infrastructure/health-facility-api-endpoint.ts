@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { HealthFacility } from '../domain/model/health-facility.entity';
 import { HealthFacilityResponse } from './health-facility-response';
-import { environment } from '../../../environment/environment.development';
+import { environment } from '../../../environment/environment';
 import { Appointment } from '../domain/model/appointment.entity';
 import { AppointmentsResponse, NurseAppointmentsResponse } from './appointment-response';
 import { AppointmentAssembler } from './appointment-assembler';

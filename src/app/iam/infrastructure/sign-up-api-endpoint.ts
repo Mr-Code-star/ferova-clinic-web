@@ -4,7 +4,7 @@ import { SignUpAssembler } from './sign-up-assembler';
 import { SignUpCommand } from '../domain/model/sign-up.command';
 import { catchError, map, Observable } from 'rxjs';
 import { SignUpResource } from './sign-up-response';
-import { environment } from '../../../environment/environment.development';
+import { environment } from '../../../environment/environment';
 
 const signUpApiUrl = `${environment.serverBasePath}${environment.usersEndpointPath}`;
 
