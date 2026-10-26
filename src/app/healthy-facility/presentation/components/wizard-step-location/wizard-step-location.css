@@ -1,0 +1,22 @@
+.step-header { display: flex; flex-direction: column; margin-bottom: 1.5rem; border-bottom: 1px solid #f1f5f9; padding-bottom: 1rem; }
+.icon-box { width: 40px; height: 40px; background: #e0f2fe; color: #0284c7; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;}
+.header-row { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+.step-header h2 { font-size: 1.2rem; color: #0f172a; margin: 0 0 0.25rem 0; }
+.step-header p { font-size: 0.85rem; color: #64748b; margin: 0; }
+
+.coords-display { display: flex; gap: 1rem; background: #f8fafc; border: 1px solid #e2e8f0; padding: 0.5rem 1rem; border-radius: 8px; }
+.coords-display span { font-size: 0.65rem; color: #94a3b8; font-weight: 700; display: block; }
+.coords-display strong { font-size: 1rem; color: #1e293b; }
+
+.map-container {
+  height: 350px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 1.5rem;
+}
+
+.manual-coords { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+.form-group label { font-size: 0.75rem; font-weight: 700; color: #475569; }
+.form-group input { padding: 0.85rem 1rem; border: 1px solid #cbd5e1; border-radius: 8px; outline: none; }

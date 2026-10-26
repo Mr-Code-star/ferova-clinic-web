@@ -1,0 +1,36 @@
+<div class="step-header">
+  <div class="icon-box"><span class="material-icons">medical_services</span></div>
+  <div>
+    <h2>Servicios</h2>
+    <p>Seleccione la cartera de servicios habilitada en este centro</p>
+  </div>
+</div>
+
+<div class="services-grid">
+  @for (service of availableServices; track service.name) {
+    <div class="service-card"
+         [class.selected]="isSelected(service.name)"
+         (click)="toggleService(service.name)">
+      <div class="checkbox">
+        @if (isSelected(service.name)) { <span class="material-icons">check</span> }
+      </div>
+      <span class="service-name">{{ service.name }}</span>
+      <span class="material-icons service-icon">{{ service.icon }}</span>
+    </div>
+  }
+</div>
+
+<!-- ⬇️ NUEVO: Input para agregar servicio personalizado -->
+<div class="add-service-container">
+  <label>¿No encuentra un servicio? Agréguelo aquí:</label>
+  <div class="add-service-row">
+    <input
+      type="text"
+      [(ngModel)]="newServiceName"
+      placeholder="Ej: Obstetricia, Nutrición..."
+      (keyup.enter)="addCustomService()">
+    <button class="btn-add-service" (click)="addCustomService()" [disabled]="!newServiceName.trim()">
+      <span class="material-icons">add</span> Agregar
+    </button>
+  </div>
+</div>

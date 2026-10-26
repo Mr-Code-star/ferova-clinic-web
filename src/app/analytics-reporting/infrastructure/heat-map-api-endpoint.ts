@@ -1,4 +1,4 @@
-import { environment } from '../../../envirotments/environment.development';
+import { environment } from '../../../environment/environment.development';
 import { Injectable } from '@angular/core';
 import { BaseApiEndpoint } from '../../shared/infrastructure/base-api-endpoint';
 import { HeatMap } from '../domain/model/heat-map.entity';

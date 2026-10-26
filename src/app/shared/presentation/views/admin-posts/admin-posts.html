@@ -1,6 +1,87 @@
-<div class="home-view">
+<div class="facilities-view-container">
 
+  <!-- Header -->
   <header class="page-header">
-    <h1 class="page-title">Vista Postas</h1>
+    <div>
+      <h1 class="page-title">Mis Postas</h1>
+      <p class="page-subtitle">Gestione y supervise las instalaciones de salud asignadas a su red.</p>
+    </div>
+    <div class="total-badge">
+      <span class="dot"></span>
+      Total instaladas: <strong>{{ facilities().length }}</strong>
+    </div>
   </header>
+
+  @if (loading()) {
+    <div class="loading-state">Cargando postas...</div>
+  } @else if (facilities().length === 0) {
+    <!-- Estado Vacío -->
+    <div class="empty-state-card">
+      <div class="empty-icon-box">
+        <mat-icon>add</mat-icon>
+      </div>
+      <h2>No hay postas registradas aún</h2>
+      <p>Comience a organizar su red de salud agregando la primera posta médica para gestionar personal y pacientes.</p>
+      <button mat-flat-button class="btn-primary" (click)="onRegisterFirst()">
+        <mat-icon>add</mat-icon>
+        Registrar Primera Posta
+      </button>
+    </div>
+  } @else {
+    <!-- Buscador y Header de la lista -->
+    <div class="list-header">
+      <button mat-flat-button class="btn-new" (click)="onRegisterFirst()">
+        <mat-icon>add</mat-icon> Nueva Posta
+      </button>
+    </div>
+
+    <div class="search-bar">
+      <mat-icon>search</mat-icon>
+      <input
+        type="text"
+        placeholder="Filter facilities..."
+        [value]="searchTerm()"
+        (input)="onSearchChange($event)">
+    </div>
+
+    <!-- Lista de Postas -->
+    <div class="facilities-list">
+      @for (facility of filteredFacilities(); track facility.id) {
+        <div class="facility-card">
+          <div class="card-header">
+            <h3 class="facility-name">{{ facility.name }}</h3>
+            <p class="facility-address">
+              <mat-icon>place</mat-icon> {{ facility.address }}
+            </p>
+          </div>
+
+          <!-- Si no tiene enfermero asignado -->
+          @if (!facility.hasNurseAssigned) {
+            <div class="warning-banner">
+              <mat-icon>warning</mat-icon>
+              <span>{{ facility.displayMessage || 'No nurse assigned yet' }}</span>
+            </div>
+            <button class="btn-assign" (click)="onAssignNurse(facility)">
+              <mat-icon>person_add</mat-icon>
+              Asignar Enfermero
+            </button>
+          } @else {
+            <!-- Si ya tiene enfermero -->
+            <div class="assigned-box">
+              <div class="nurse-info">
+                <div class="avatar"><mat-icon>person</mat-icon></div>
+                <div>
+                  <span class="label">ASSIGNED PERSONNEL</span>
+                  <strong class="nurse-name">{{ facility.assignedNurseName }}</strong>
+                </div>
+              </div>
+              <span class="status-badge">
+                <mat-icon>circle</mat-icon> Asignado
+              </span>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  }
 </div>

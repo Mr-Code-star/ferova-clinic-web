@@ -1,0 +1,51 @@
+<div class="step-header">
+  <div class="icon-box"><span class="material-icons">calendar_month</span></div>
+  <div>
+    <h2>Disponibilidad</h2>
+    <p>Configure los días de atención y franjas horarias habilitadas</p>
+  </div>
+</div>
+
+<div class="section">
+  <label>DÍAS DE ATENCIÓN</label>
+  <div class="days-row">
+    @for (day of daysOfWeek; track day.value) {
+      <button class="day-btn"
+              [class.selected]="isDaySelected(day.value)"
+              (click)="toggleDay(day.value)">
+        {{ day.short }}
+      </button>
+    }
+  </div>
+  <p class="helper">Haga clic en cada día para activar o desactivar la atención presencial.</p>
+</div>
+
+<div class="section">
+  <div class="slots-header">
+    <label>SLOTS DE ATENCIÓN (HH:MM)</label>
+
+    @if (!isAddingSlot) {
+      <button class="link-btn" (click)="showAddSlotInput()">+ Agregar franja personalizada</button>
+    } @else {
+      <div class="add-slot-inline">
+        <input type="time" [(ngModel)]="newSlotTime" class="time-input">
+        <button class="btn-save-slot" (click)="addCustomSlot()">
+          <span class="material-icons">check</span>
+        </button>
+        <button class="btn-cancel-slot" (click)="cancelAddSlot()">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+    }
+  </div>
+
+  <div class="slots-grid">
+    @for (slot of slots; track slot) {
+      <button class="slot-btn"
+              [class.selected]="isSlotSelected(slot)"
+              (click)="toggleSlot(slot)">
+        {{ slot }}
+      </button>
+    }
+  </div>
+</div>

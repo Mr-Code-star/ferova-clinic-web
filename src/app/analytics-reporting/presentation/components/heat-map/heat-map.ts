@@ -4,7 +4,7 @@ import { AsyncPipe } from '@angular/common';
 import { catchError, map, Observable, of } from 'rxjs';
 import { HeatMap as HeatMapEntity } from '../../../../analytics-reporting/domain/model/heat-map.entity';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../../../envirotments/environment.development';
+import { environment } from '../../../../../environment/environment.development';
 
 
 
@@ -24,6 +24,7 @@ export class HeatMap {
   @Input() points: HeatMapEntity[] = [];
 
   constructor(httpClient: HttpClient) {
+    console.log('MAPS URL:', environment.googleMapsApiUrl);
     this.apiLoaded = httpClient
       .jsonp(environment.googleMapsApiUrl, 'callback')
       .pipe(

@@ -2,7 +2,7 @@ import { BaseApiEndpoint } from '../../shared/infrastructure/base-api-endpoint';
 import { Patient } from '../domain/model/patient.entity';
 import { PatientResource, PatientResponse } from './patients-response';
 import { PatientsAssembler } from './patients-assembler';
-import { environment } from '../../../envirotments/environment.development';
+import { environment } from '../../../environment/environment.development';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map, Observable, throwError } from 'rxjs';

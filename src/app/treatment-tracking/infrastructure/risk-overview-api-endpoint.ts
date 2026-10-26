@@ -1,4 +1,4 @@
-import { environment } from '../../../envirotments/environment.development';
+import { environment } from '../../../environment/environment.development';
 import { Injectable } from '@angular/core';
 import { RiskOverviewAssembler } from './risk-overview-assembler';
 import { HttpClient } from '@angular/common/http';

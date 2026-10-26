@@ -1,0 +1,48 @@
+<div class="step-header">
+  <div class="icon-box"><span class="material-icons">info</span></div>
+  <div>
+    <h2>Información General</h2>
+    <p>Datos identificatorios de la posta sanitaria o consultorio periférico</p>
+  </div>
+</div>
+
+<div class="form-grid">
+  <!-- Nombre -->
+  <div class="form-group full-width">
+    <label>NOMBRE DE LA POSTA *</label>
+    <input type="text"
+           [ngModel]="data.name"
+           (ngModelChange)="onInput('name', $event)"
+           placeholder="Ej: Posta Sanitaria Norte">
+  </div>
+
+  <!-- Distrito -->
+  <div class="form-group full-width">
+    <label>DISTRITO *</label>
+    <select [ngModel]="data.districtId" (ngModelChange)="onInput('districtId', $event)">
+      <option value="" disabled>Seleccionar Distrito</option>
+      @for (d of districts; track d.id) {
+        <option [value]="d.id">{{ d.name }}</option>
+      }
+    </select>
+  </div>
+
+  <!-- Dirección -->
+  <div class="form-group full-width">
+    <label>DIRECCIÓN COMPLETA *</label>
+    <input type="text"
+           [ngModel]="data.address"
+           (ngModelChange)="onInput('address', $event)"
+           placeholder="Calle, Número, Referencia">
+  </div>
+
+  <!-- Teléfono (CON MÁSCARA +51) -->
+  <div class="form-group full-width">
+    <label>TELÉFONO DE CONTACTO</label>
+    <input type="tel"
+           [ngModel]="data.phoneNumber"
+           (input)="onPhoneInput($event)"
+           placeholder="+51 987654321"
+           maxlength="13">
+  </div>
+</div>

@@ -3,7 +3,7 @@ import {PendingPatientsAssembler} from './pending-patients-assembler';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {PendingPatientsResponse} from './pending-patients-response';
-import {environment} from '../../../envirotments/environment.development';
+import {environment} from '../../../environment/environment.development';
 
 const pendingUrl = `${environment.serverBasePath}${environment.treatmentTrackingEndpointPath}/nurses/pending-patients`;
 

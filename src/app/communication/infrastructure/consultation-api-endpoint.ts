@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BaseApiEndpoint } from '../../shared/infrastructure/base-api-endpoint';
 import { HttpClient } from '@angular/common/http';
 import { ConsultationAssembler } from './consultation-assembler';
-import { environment } from '../../../envirotments/environment.development';
+import { environment } from '../../../environment/environment.development';
 import { catchError, map, Observable } from 'rxjs';
 import {
   ConsultationResource,
