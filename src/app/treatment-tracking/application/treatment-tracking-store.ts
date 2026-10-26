@@ -1,0 +1,211 @@
+import { inject, Injectable, signal } from '@angular/core';
+import { TreatmentTrackingApi } from '../infrastructure/treatment-tracking-api';
+import { RiskOverview } from '../domain/model/risk-overview.entity';
+import { RiskPatient } from '../domain/model/risk-patient.entity';
+import { TreatmentDetail } from '../domain/model/treatment-detail.entity';
+import { WeeklyAdherence } from '../domain/model/weekly-adherence.entity';
+import { NextDose } from '../domain/model/next-dose.entity';
+import {PendingPatient} from '../domain/model/pending-patient.entity';
+import {PendingPatientsResponse} from '../infrastructure/pending-patients-response';
+import {CreateTreatmentCommand} from '../domain/model/create-treatment.command';
+import {Observable, tap} from 'rxjs';
+import {NurseTreatment} from '../domain/model/nurse-treatment.entity';
+import {TreatmentDetailById} from '../domain/model/treatment-detail-by-id.entity';
+import {JustifyTreatmentCommand} from '../domain/model/justify-treatment.command';
+
+@Injectable({ providedIn: 'root' })
+export class TreatmentTrackingStore {
+  private readonly api = inject(TreatmentTrackingApi);
+
+  private readonly riskOverviewSignal = signal<RiskOverview | null>(null);
+  private readonly loadingSignal = signal<boolean>(false);
+  private readonly errorSignal = signal<string | null>(null);
+  private readonly riskPatientsSignal = signal<RiskPatient[]>([]);
+  private readonly treatmentDetailSignal = signal<TreatmentDetail | null>(null);
+  private readonly weeklyAdherenceSignal = signal<WeeklyAdherence | null>(null);
+  private readonly nextDoseSignal = signal<NextDose | null>(null);
+  private readonly pendingPatientsSignal = signal<PendingPatient[]>([]);
+  private readonly pendingStateSignal = signal<PendingPatientsResponse | null>(null);
+  private readonly selectedPendingPatientSignal = signal<PendingPatient | null>(null);
+  private readonly nurseTreatmentsSignal = signal<NurseTreatment[]>([]);
+  private readonly treatmentDetailByIdSignal = signal<TreatmentDetailById | null>(null);
+
+  readonly riskOverview = this.riskOverviewSignal.asReadonly();
+  readonly loading = this.loadingSignal.asReadonly();
+  readonly error = this.errorSignal.asReadonly();
+  readonly riskPatients = this.riskPatientsSignal.asReadonly();
+  readonly treatmentDetail = this.treatmentDetailSignal.asReadonly();
+  readonly weeklyAdherence = this.weeklyAdherenceSignal.asReadonly();
+  readonly nextDose = this.nextDoseSignal.asReadonly();
+  readonly pendingPatients = this.pendingPatientsSignal.asReadonly();
+  readonly pendingState = this.pendingStateSignal.asReadonly();
+  readonly selectedPendingPatient = this.selectedPendingPatientSignal.asReadonly();
+  readonly nurseTreatments = this.nurseTreatmentsSignal.asReadonly();
+  readonly treatmentDetailById = this.treatmentDetailByIdSignal.asReadonly();
+
+  constructor() {
+    this.loadRiskOverview();
+  }
+
+  loadRiskOverview(): void {
+    this.loadingSignal.set(true);
+    this.errorSignal.set(null);
+
+    this.api.getRiskOverview().subscribe({
+      next: (overview) => {
+        this.riskOverviewSignal.set(overview);
+        this.loadingSignal.set(false);
+      },
+      error: (err) => {
+        console.error('Error loading risk overview:', err);
+        this.errorSignal.set('No se pudo cargar el estado de riesgo.');
+        this.loadingSignal.set(false);
+      }
+    });
+  }
+
+  loadPatientsByRiskLevel(riskLevel: string): void {
+    this.loadingSignal.set(true);
+    this.api.getPatientsByRiskLevel(riskLevel).subscribe({
+      next: (patients) => {
+        this.riskPatientsSignal.set(patients);
+        this.loadingSignal.set(false);
+      },
+      error: (err) => {
+        console.error('Error loading risk patients:', err);
+        this.riskPatientsSignal.set([]);
+        this.loadingSignal.set(false);
+      }
+    });
+  }
+
+  loadTreatmentDetail(patientId: string): void {
+    this.loadingSignal.set(true);
+    this.api.getTreatmentDetail(patientId).subscribe({
+      next: (detail) => {
+        this.treatmentDetailSignal.set(detail);
+        this.loadingSignal.set(false);
+      },
+      error: (err) => {
+        console.error('Error loading treatment detail:', err);
+        this.treatmentDetailSignal.set(null);
+        this.loadingSignal.set(false);
+      }
+    });
+  }
+
+  loadWeeklyAdherence(patientId: string): void {
+    this.api.getWeeklyAdherence(patientId).subscribe({
+      next: (data) => this.weeklyAdherenceSignal.set(data),
+      error: (err) => {
+        console.error('Error loading weekly adherence:', err);
+        this.weeklyAdherenceSignal.set(null);
+      },
+    });
+  }
+
+  loadNextDose(patientId: string): void {
+    this.api.getNextDose(patientId).subscribe({
+      next: (data) => this.nextDoseSignal.set(data),
+      error: (err) => {
+        console.error('Error loading next dose:', err);
+        this.nextDoseSignal.set(null);
+      },
+    });
+  }
+
+  loadPendingPatients(): void {
+    this.loadingSignal.set(true);
+    this.api.getPendingPatients().subscribe({
+      next: (response) => {
+        this.pendingStateSignal.set(response);
+        this.pendingPatientsSignal.set(
+          response.pendingPatients.map(p => new PendingPatient(p))
+        );
+        this.loadingSignal.set(false);
+      },
+      error: (err) => {
+        console.error('Error loading pending patients:', err);
+        this.pendingPatientsSignal.set([]);
+        this.loadingSignal.set(false);
+      }
+    });
+  }
+
+  startTreatment(command: CreateTreatmentCommand): Observable<any> {
+    this.loadingSignal.set(true);
+    this.errorSignal.set(null);
+
+    return this.api.createTreatment(command).pipe(
+      tap({
+        next: () => {
+          this.loadingSignal.set(false);
+          this.pendingPatientsSignal.update(patients =>
+            patients.filter(p => p.patientId !== command.patientId)
+          );
+        },
+        error: (err) => {
+          console.error('Error starting treatment:', err);
+          this.errorSignal.set('No se pudo iniciar el tratamiento.');
+          this.loadingSignal.set(false);
+        }
+      })
+    );
+  }
+
+  loadNurseTreatments(status?: string): void {
+    this.loadingSignal.set(true);
+    this.errorSignal.set(null);
+
+    this.api.getNurseTreatments(status).subscribe({
+      next: (treatments) => {
+        this.nurseTreatmentsSignal.set(treatments);
+        this.loadingSignal.set(false);
+      },
+      error: (err) => {
+        console.error('Error loading nurse treatments:', err);
+        this.nurseTreatmentsSignal.set([]);
+        this.loadingSignal.set(false);
+      }
+    });
+  }
+
+  loadTreatmentDetailById(treatmentId: string): void {
+    this.loadingSignal.set(true);
+    this.api.getTreatmentDetailById(treatmentId).subscribe({
+      next: (detail) => {
+        this.treatmentDetailByIdSignal.set(detail);
+        this.loadingSignal.set(false);
+      },
+      error: (err) => {
+        console.error('Error loading treatment detail:', err);
+        this.treatmentDetailByIdSignal.set(null);
+        this.loadingSignal.set(false);
+      }
+    });
+  }
+
+  setSelectedPendingPatient(patient: PendingPatient): void {
+    this.selectedPendingPatientSignal.set(patient);
+  }
+
+  completeTreatment(command: JustifyTreatmentCommand): Observable<any> {
+    this.loadingSignal.set(true);
+    return this.api.completeTreatment(command).pipe(
+      tap({
+        next: () => this.loadingSignal.set(false),
+        error: () => this.loadingSignal.set(false)
+      })
+    );
+  }
+
+  abandonTreatment(command: JustifyTreatmentCommand): Observable<any> {
+    this.loadingSignal.set(true);
+    return this.api.abandonTreatment(command).pipe(
+      tap({
+        next: () => this.loadingSignal.set(false),
+        error: () => this.loadingSignal.set(false)
+      })
+    );
+  }
+}

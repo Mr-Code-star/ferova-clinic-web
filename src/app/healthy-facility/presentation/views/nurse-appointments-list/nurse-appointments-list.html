@@ -1,0 +1,110 @@
+<div class="page-container">
+  <!-- Breadcrumb -->
+  <a (click)="onBack()" class="back-link">
+    <mat-icon>arrow_back</mat-icon> Volver al Menú Principal
+  </a>
+
+  <div class="page-header">
+    <h1>Agenda de Citas</h1>
+    <p>Monitoreo de citas y atenciones programadas de pacientes en tratamiento de anemia.</p>
+  </div>
+
+  <!-- Tarjetas de Estadísticas -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon blue"><mat-icon>calendar_today</mat-icon></div>
+      <div class="stat-info">
+        <span class="stat-label">TOTAL CITAS</span>
+        <h2 class="stat-value">{{ totalAppointments() }} Pacientes</h2>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon green"><mat-icon>check_circle</mat-icon></div>
+      <div class="stat-info">
+        <span class="stat-label">CONFIRMADAS</span>
+        <h2 class="stat-value">{{ confirmedAppointments() }} (100%)</h2>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon orange"><mat-icon>schedule</mat-icon></div>
+      <div class="stat-info">
+        <span class="stat-label">PRÓXIMA ATENCIÓN</span>
+        <h2 class="stat-value">{{ nextAppointmentTime() }}</h2>
+        <span class="stat-subtext">Control Hemogl.</span>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon cyan"><mat-icon>local_hospital</mat-icon></div>
+      <div class="stat-info">
+        <span class="stat-label">CENTRO DE SALUD</span>
+        <h2 class="stat-value">{{ facility()?.facilityName || 'Sin asignar' }}</h2>
+      </div>
+    </div>
+  </div>
+
+  <!-- Barra de Búsqueda y Filtros -->
+  <div class="search-bar">
+    <mat-icon>search</mat-icon>
+    <!-- ⬇️ CONECTAMOS EL INPUT AQUÍ ⬇️ -->
+    <input
+      type="text"
+      placeholder="Buscar cita por paciente, código PAC o fecha..."
+      [value]="searchTerm()"
+      (input)="onSearch($event)"
+    >
+
+  </div>
+
+  <!-- Grid de Citas -->
+  @if (loading()) {
+    <div class="loading-state">Cargando citas...</div>
+  } @else if (error()) {
+    <div class="error-state">{{ error() }}</div>
+  } @else {
+    <div class="appointments-grid">
+      <!-- ⬇️ CAMBIAMOS AQUÍ: Usar filteredAppointments() ⬇️ -->
+      @for (appointment of filteredAppointments(); track appointment.appointmentId) {
+        <div class="appointment-card">
+          <div class="card-header">
+            <div class="patient-info">
+              <div class="avatar-circle">{{ appointment.initials }}</div>
+              <div class="patient-details">
+                <h3>{{ appointment.patientName }}</h3>
+                <p>{{ appointment.formattedDate }}</p>
+              </div>
+            </div>
+            <span class="badge" [class.badge-confirmed]="appointment.status === 'CONFIRMED'"
+                  [class.badge-pending]="appointment.status !== 'CONFIRMED'">
+              {{ appointment.status }}
+            </span>
+          </div>
+
+          <div class="card-divider"></div>
+
+          <div class="card-footer">
+            <div class="footer-left">
+              <span class="label">HORA PROGRAMADA</span>
+              <strong class="time">{{ appointment.appointmentTime }}</strong>
+            </div>
+            <div class="footer-right">
+              <span class="label">ID: PAC-{{ appointment.patientId.substring(0, 4) }}</span>
+              <span class="facility-name">{{ appointment.facilityName }}</span>
+            </div>
+          </div>
+        </div>
+      } @empty {
+        <!-- ⬇️ Mensaje dinámico si no hay resultados ⬇️ -->
+        <div class="empty-state">
+          @if (searchTerm()) {
+            No se encontraron citas que coincidan con "{{ searchTerm() }}".
+          } @else {
+            No hay citas registradas.
+          }
+        </div>
+      }
+    </div>
+  }
+</div>

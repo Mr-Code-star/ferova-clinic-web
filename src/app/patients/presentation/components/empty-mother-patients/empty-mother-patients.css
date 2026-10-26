@@ -1,0 +1,134 @@
+:host {
+  display: block;
+  background-color: #f4f7f9;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.empty-view-wrapper {
+  max-width: 650px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.btn-back {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  align-self: flex-start;
+  padding: 0;
+}
+
+.btn-back:hover {
+  color: #1e293b;
+}
+
+.empty-card {
+  background: white;
+  border-radius: 40px;
+  padding: 3rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.icon-main {
+  width: 80px;
+  height: 80px;
+  background-color: #e0f2fe;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.icon-main mat-icon {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+  color: #0f3b5c;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #0f3b5c;
+  margin: 0 0 1rem 0;
+  line-height: 1.2;
+}
+
+.description {
+  font-size: 1rem;
+  color: #64748b;
+  line-height: 1.6;
+  margin: 0 0 2rem 0;
+  max-width: 480px;
+}
+
+/* Cajas informativas */
+.info-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  background: white;
+  border: 1px solid #e2e8f0;
+  padding: 1.25rem;
+  border-radius: 12px;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.info-box:last-child {
+  margin-bottom: 0;
+}
+
+.info-icon {
+  width: 40px;
+  height: 40px;
+  background-color: #e0f2fe;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.info-icon mat-icon {
+  color: #0f3b5c;
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.info-text h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 0.25rem 0;
+}
+
+.info-text p {
+  font-size: 0.85rem;
+  color: #64748b;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.link {
+  color: #0f3b5c;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}

@@ -1,0 +1,20 @@
+@if (apiLoaded | async) {
+  <google-map
+    height="100%"
+    width="100%"
+    [center]="center"
+    [zoom]="zoom"
+    [options]="{ disableDefaultUI: true }">
+
+    @for (point of points; track point.id) {
+      <map-marker
+        [position]="{ lat: point.latitude, lng: point.longitude }"
+        [icon]="getHeatIcon(point.riskLevel)"
+        [label]="getLabelIcon(point)">
+      </map-marker>
+    }
+
+  </google-map>
+} @else {
+  <div class="map-loading">Cargando mapa...</div>
+}

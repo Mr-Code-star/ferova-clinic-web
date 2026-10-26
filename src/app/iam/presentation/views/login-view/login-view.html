@@ -1,0 +1,32 @@
+<app-header></app-header>
+<div class="login-view">
+
+  <!-- Columna izquierda: Información de la plataforma -->
+  <div class="login-view__info">
+    <app-auth-info></app-auth-info>
+  </div>
+
+  <!-- Columna derecha: Formulario de acceso -->
+  <div class="login-view__form">
+    <!-- Banner de error -->
+    @if (error()) {
+      <div class="error-banner" role="alert">
+        <mat-icon class="error-icon">error_outline</mat-icon>
+        <span>{{ error() }}</span>
+        <button
+          type="button"
+          class="error-close"
+          aria-label="Cerrar"
+          (click)="onClearError()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    }
+    <app-login-form
+      [loading]="loading()"
+      (loginSubmit)="onLogin($event)">
+    </app-login-form>  </div>
+
+</div>
+
+<app-footer></app-footer>

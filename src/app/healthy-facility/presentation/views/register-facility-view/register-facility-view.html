@@ -1,0 +1,58 @@
+<div class="wizard-container">
+
+  <!-- Header -->
+  <header class="page-header">
+    <div>
+      <h1 class="page-title">Nueva Posta</h1>
+      <p class="page-subtitle">Registrar un nuevo establecimiento de salud en el sistema para la incorporación a la red de monitoreo FerovaClinic.</p>
+    </div>
+    <div class="autosave-badge">
+      <mat-icon>save</mat-icon> Borrador guardado automáticamente (14:32)
+    </div>
+  </header>
+
+  <!-- Stepper -->
+  <div class="stepper">
+    @for (step of steps; track step.num) {
+      <div class="step-item" [class.active]="currentStep() === step.num" [class.completed]="currentStep() > step.num">
+        <div class="step-icon">
+          @if (currentStep() > step.num) { <mat-icon>check</mat-icon> }
+          @else { <span>{{ step.num }}</span> }
+        </div>
+        <div class="step-text">
+          <span class="step-num">PASO {{ step.num }}</span>
+          <span class="step-title">{{ step.title }}</span>
+          <span class="step-subtitle">{{ step.subtitle }}</span>
+        </div>
+      </div>
+      @if (!$last) { <div class="step-line" [class.filled]="currentStep() > step.num"></div> }
+    }
+  </div>
+
+  <!-- Contenido Dinámico -->
+  <div class="wizard-card">
+    @switch (currentStep()) {
+      @case (1) { <app-wizard-step-general [data]="formData" [districts]="districts()" (dataChange)="onDataChange($event)"></app-wizard-step-general> }
+      @case (2) { <app-wizard-step-location [data]="formData" (dataChange)="onDataChange($event)"></app-wizard-step-location> }
+      @case (3) { <app-wizard-step-services [data]="formData" (dataChange)="onDataChange($event)"></app-wizard-step-services> }
+      @case (4) { <app-wizard-step-availability [data]="formData" (dataChange)="onDataChange($event)"></app-wizard-step-availability> }
+    }
+  </div>
+
+  <!-- Footer -->
+  <div class="wizard-footer">
+    <button class="btn-back" (click)="prevStep()">
+      <mat-icon>close</mat-icon> Volver
+    </button>
+
+    @if (currentStep() < 4) {
+      <button class="btn-next" (click)="nextStep()">
+        Siguiente <mat-icon>arrow_forward</mat-icon>
+      </button>
+    } @else {
+      <button class="btn-submit" [disabled]="loading()" (click)="onSubmit()">
+        <mat-icon>save</mat-icon> Registrar Posta
+      </button>
+    }
+  </div>
+</div>

@@ -1,0 +1,187 @@
+/* Variables de color basadas en la imagen */
+:host {
+  --primary-color: #0d5c6b;
+  --text-dark: #1a202c;
+  --text-light: #4a5568;
+  --bg-footer: #ffffff;
+  --border-color: #e2e8f0;
+}
+
+.footer-container {
+  background-color: var(--bg-footer);
+  border-top: 1px solid var(--border-color);
+  padding: 3rem 2rem;
+  color: var(--text-light);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3rem;
+}
+
+/* ============================================
+   COLUMNA 1: LOGO Y DESCRIPCIÓN
+   ============================================ */
+.brand-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
+}
+
+.brand-logo {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  /* Si tu icono es negro y lo quieres verde azulado,
+     descomenta la siguiente línea (funciona solo si el PNG es monocromático): */
+  /* filter: invert(28%) sepia(51%) saturate(1676%) hue-rotate(157deg) brightness(93%) contrast(94%); */
+}
+
+.brand-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  letter-spacing: -0.01em;
+}
+
+.brand-description {
+  margin-bottom: 1.25rem;
+  line-height: 1.6;
+}
+
+/* Badge de seguridad (icono candado + texto) */
+.security-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--primary-color);
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.security-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  /* Mismo truco de color si quieres teñir el icono */
+  /* filter: invert(28%) sepia(51%) saturate(1676%) hue-rotate(157deg) brightness(93%) contrast(94%); */
+}
+
+/* ============================================
+   TÍTULOS Y LISTAS GENERALES
+   ============================================ */
+.column-title {
+  color: var(--text-dark);
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 1.25rem 0;
+}
+
+.footer-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* ============================================
+   COLUMNA 2: HORARIOS Y ENLACE URGENTE
+   ============================================ */
+.urgent-link {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0;
+  min-width: auto;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+/* ============================================
+   COLUMNA 3: CONTACTO
+   ============================================ */
+.contact-info p {
+  margin: 0 0 0.25rem 0;
+}
+
+.phone-link {
+  display: block;
+  color: var(--primary-color);
+  font-weight: 700;
+  font-size: 1.125rem;
+  text-decoration: none;
+  margin: 0.25rem 0 0.75rem 0;
+}
+
+.phone-link:hover {
+  text-decoration: underline;
+}
+
+.contact-detail {
+  font-size: 0.8125rem;
+  margin-bottom: 0.25rem;
+}
+
+/* ============================================
+   COLUMNA 4: ENLACES LEGALES
+   ============================================ */
+.legal-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+}
+
+.legal-links a[mat-button] {
+  padding: 0;
+  min-width: auto;
+  line-height: 1.5;
+  height: auto;
+  color: var(--text-light);
+  font-weight: 400;
+  font-size: 0.875rem;
+  text-align: left;
+  border-radius: 0;
+}
+
+.legal-links a[mat-button]:hover {
+  color: var(--primary-color);
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+.brand-icon {
+  color: var(--primary-color);
+
+}
+
+/* ============================================
+   RESPONSIVO
+   ============================================ */
+@media (max-width: 1024px) {
+  .footer-content {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-container {
+    padding: 2rem 1rem;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}

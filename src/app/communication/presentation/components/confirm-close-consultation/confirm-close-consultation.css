@@ -1,0 +1,86 @@
+/* Contenedor principal del modal */
+.modal-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 32px 24px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #ffffff;
+  border-radius: 16px; /* Bordes redondeados del modal */
+}
+
+/* --- Icono de Alerta --- */
+.icon-alert {
+  width: 56px;
+  height: 56px;
+  background-color: #ffe4e6; /* Rosa muy clarito */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.icon-alert mat-icon {
+  color: #e11d48; /* Rojo/Rosa oscuro */
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- Textos --- */
+.title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 12px 0;
+  line-height: 1.3;
+}
+
+.description {
+  font-size: 0.95rem;
+  color: #64748b;
+  line-height: 1.5;
+  margin: 0 0 28px 0;
+  max-width: 320px; /* Para forzar el salto de línea como en el diseño */
+}
+
+/* --- Botones --- */
+.actions {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.actions button {
+  flex: 1; /* Hace que ambos botones midan lo mismo */
+  height: 46px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* Botón Cancelar (Borde gris) */
+.btn-cancel {
+  border-color: #e2e8f0 !important;
+  color: #334155 !important;
+  background-color: #ffffff !important;
+}
+
+.btn-cancel:hover {
+  background-color: #f8fafc !important;
+}
+
+/* Botón Confirmar (Azul sólido) */
+.btn-confirm {
+  background-color: #0066cc !important;
+  color: #ffffff !important;
+}
+
+.btn-confirm:hover {
+  background-color: #0052a3 !important;
+}

@@ -1,0 +1,46 @@
+<div class="chat-input-area">
+
+  <!-- Plantillas rápidas -->
+  <div class="quick-replies">
+    <span class="quick-label"><mat-icon>lightbulb</mat-icon> Pautas rápidas:</span>
+    @for (reply of quickReplies; track reply) {
+      <button
+        class="reply-chip"
+        [disabled]="disabled"
+        (click)="useQuickReply(reply)">
+        {{ reply }}
+      </button>
+    }
+  </div>
+
+  <!-- Caja de texto -->
+  <div class="input-box" [class.disabled]="disabled">
+    <button mat-icon-button class="icon-btn" [disabled]="disabled">
+      <mat-icon>attach_file</mat-icon>
+    </button>
+    <button mat-icon-button class="icon-btn" [disabled]="disabled">
+      <mat-icon>note_add</mat-icon>
+    </button>
+
+    <input
+      type="text"
+      placeholder="Escribe una respuesta médica o indicación..."
+      [(ngModel)]="messageText"
+      [disabled]="disabled"
+      (keyup.enter)="onSend()">
+
+    <button mat-icon-button class="icon-btn" [disabled]="disabled">
+      <mat-icon>sentiment_satisfied_alt</mat-icon>
+    </button>
+
+    <button
+      mat-flat-button
+      class="btn-send"
+      [disabled]="disabled || !messageText.trim()"
+      (click)="onSend()">
+      Enviar respuesta
+      <mat-icon>send</mat-icon>
+    </button>
+  </div>
+
+</div>

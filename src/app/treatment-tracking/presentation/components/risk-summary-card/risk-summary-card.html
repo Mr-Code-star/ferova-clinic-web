@@ -1,0 +1,41 @@
+<div class="risk-card">
+  <div class="header">
+    <h3 class="title">Estado de Riesgo Clínico</h3>
+    <span class="badge">Total: {{ riskOverview()?.total || 0 }}</span>
+  </div>
+
+  @if (loading()) {
+    <div class="loading-state">Cargando datos...</div>
+  } @else if (riskOverview()) {
+    <div class="risk-list">
+      <!-- HIGH -->
+      <div class="risk-item risk-high" [routerLink]="['/nurse/risk/HIGH']">
+        <div class="item-header">
+          <mat-icon>warning</mat-icon> <strong>HIGH</strong>
+        </div>
+        <span class="count">{{ riskOverview()!.high.count }} pacientes</span>
+        <span class="subtext">{{ riskOverview()!.high.description }}</span>
+      </div>
+
+      <!-- MEDIUM -->
+      <div class="risk-item risk-medium" [routerLink]="['/nurse/risk/MEDIUM']">
+        <div class="item-header">
+          <mat-icon>error_outline</mat-icon> <strong>MEDIUM</strong>
+        </div>
+        <span class="count">{{ riskOverview()!.medium.count }} pacientes</span>
+        <span class="subtext">{{ riskOverview()!.medium.description }}</span>
+      </div>
+
+      <!-- LOW -->
+      <div class="risk-item risk-low" [routerLink]="['/nurse/risk/LOW']">
+        <div class="item-header">
+          <mat-icon>check_circle</mat-icon> <strong>LOW</strong>
+        </div>
+        <span class="count">{{ riskOverview()!.low.count }} pacientes</span>
+        <span class="subtext">{{ riskOverview()!.low.description }}</span>
+      </div>
+    </div>
+  } @else {
+    <div class="empty-state">No hay datos de riesgo disponibles.</div>
+  }
+</div>

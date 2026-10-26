@@ -1,0 +1,80 @@
+:host {
+  --primary-color: #0d5c6b;
+  --text-dark: #1a202c;
+  --bg-header: #ffffff;
+  --border-color: #e2e8f0;
+}
+
+.header-container {
+  background-color: var(--bg-header);
+  border-bottom: 1px solid var(--border-color);
+  padding: 1rem 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.6rem;
+}
+
+/* Logo */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.brand-logo {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.brand-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  letter-spacing: -0.01em;
+}
+
+/* Si más adelante añades navegación, este estilo te sirve */
+.header-nav {
+  margin-left: auto;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.header-nav a {
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+.header-nav a:hover {
+  color: var(--primary-color);
+}
+
+/* Responsivo */
+@media (max-width: 640px) {
+  .header-container {
+    padding: 0.75rem 1rem;
+  }
+
+  .brand-logo {
+    width: 30px;
+    height: 30px;
+  }
+
+  .brand-name {
+    font-size: 1.25rem;
+  }
+}
+
+.brand-icon {
+  color: var(--primary-color);
+
+}

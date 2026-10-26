@@ -1,0 +1,35 @@
+<app-header></app-header>
+
+<div class="register-view">
+
+  <!-- Columna izquierda: Información sobre la red -->
+  <div class="register-view__info">
+    <app-register-info></app-register-info>
+  </div>
+
+  <!-- Banner de error -->
+  @if (error()) {
+    <div class="error-banner" role="alert">
+      <mat-icon class="error-icon">error_outline</mat-icon>
+      <span>{{ error() }}</span>
+      <button
+        type="button"
+        class="error-close"
+        aria-label="Cerrar"
+        (click)="onClearError()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  }
+
+  <!-- Columna derecha: Formulario de registro -->
+  <div class="register-view__form">
+    <app-register-form
+      [loading]="loading()"
+      (registerSubmit)="onRegister($event)"
+    ></app-register-form>
+  </div>
+
+</div>
+
+<app-footer></app-footer>

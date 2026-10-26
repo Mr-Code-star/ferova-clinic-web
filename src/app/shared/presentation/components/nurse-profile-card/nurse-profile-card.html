@@ -1,0 +1,19 @@
+<div class="profile-card">
+  <div class="avatar-wrapper">
+    <mat-icon class="avatar-icon">medical_services</mat-icon>
+    <div class="status-dot"></div>
+  </div>
+  <div class="info">
+    <h2 class="nurse-name">Enf. {{ userName() }}</h2>
+    <p class="nurse-location">
+      <mat-icon>place</mat-icon>
+      @if (loading()) {
+        Cargando posta...
+      } @else if (facility()) {
+        {{ facility()!.facilityName }}
+      } @else {
+        Sin posta asignada
+      }
+    </p>
+  </div>
+</div>

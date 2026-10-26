@@ -1,0 +1,60 @@
+<div class="control-view-container">
+
+  <!-- Header con botón volver -->
+  <header class="page-header">
+    <button class="btn-back" (click)="onBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div>
+      <h1 class="title">
+        <span class="text-blue">Control de</span> <span class="text-red">Hemoglobina</span>
+      </h1>
+      <p class="subtitle">Seleccionar Paciente con historial medico</p>
+    </div>
+  </header>
+
+  <!-- Buscador (CONECTADO) -->
+  <div class="search-bar">
+    <mat-icon class="search-icon">search</mat-icon>
+    <input
+      type="text"
+      placeholder="Buscar paciente..."
+      [value]="searchTerm()"
+      (input)="onSearchChange($event)">
+    <span class="shortcut">Ctrl + K</span>
+  </div>
+
+  <!-- Lista de Pacientes (FILTRADA) -->
+  @if (loading()) {
+    <div class="loading-state">Cargando pacientes...</div>
+  } @else if (filteredPatients().length === 0) {
+    <div class="empty-state">
+      <mat-icon>search_off</mat-icon>
+      <p>No se encontraron pacientes con "<strong>{{ searchTerm() }}</strong>".</p>
+    </div>
+  } @else {
+    <div class="patients-list">
+      @for (patient of filteredPatients(); track patient.patientId) {
+        <div class="patient-card" (click)="onSelectPatient(patient)">
+          <div class="avatar-box">
+            <mat-icon>person_outline</mat-icon>
+          </div>
+          <div class="info">
+            <h3 class="name">{{ patient.patientName }} {{ patient.patientLastName }}</h3>
+            <p class="details">
+              <span class="dot">•</span> {{ patient.age }}
+            </p>
+          </div>
+          <mat-icon class="arrow">arrow_forward</mat-icon>
+        </div>
+      }
+    </div>
+  }
+
+  <!-- Banner informativo inferior -->
+  <div class="info-banner">
+    <mat-icon>info_outline</mat-icon>
+    <p>Criterio de visualización: Solo se muestran los pacientes que cuentan con historial médico activo para el registro de controles de hemoglobina y seguimiento de dosificación. Para dar de alta a un nuevo paciente infantil, diríjase al módulo de Admisión.</p>
+  </div>
+
+</div>

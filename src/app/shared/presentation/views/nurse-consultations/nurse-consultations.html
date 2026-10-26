@@ -1,0 +1,15 @@
+<div class="home-view">
+  <header class="page-header">
+    <h1 class="page-title">Bandeja de Consultas</h1>
+    <p class="page-subtitle">Gestión de teleconsultas abiertas</p>
+  </header>
+
+  <app-consultation-inbox
+    [consultations]="consultations()"
+    [status]="status()"
+    [loading]="loading()"
+    (searchChange)="onSearchChange($event)"
+    (clearFilter)="onClearFilter()"
+    (refreshList)="onRefreshList()">
+  </app-consultation-inbox>
+</div>

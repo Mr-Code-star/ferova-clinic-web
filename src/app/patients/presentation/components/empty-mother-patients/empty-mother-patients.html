@@ -1,0 +1,45 @@
+<div class="empty-view-wrapper">
+
+  <!-- Botón Volver -->
+  <button class="btn-back" (click)="onBack()">
+    <mat-icon>arrow_back</mat-icon>
+    Volver a búsqueda
+  </button>
+
+  <!-- Tarjeta principal -->
+  <div class="empty-card">
+
+    <div class="icon-main">
+      <mat-icon>people_outline</mat-icon>
+    </div>
+
+    <h2 class="title">No se encontraron niños<br>registrados</h2>
+
+    <p class="description">
+      El documento ingresado no tiene menores de edad vinculados en el sistema Ferova. Por favor verifique el número o solicite el registro inicial.
+    </p>
+
+    <!-- Tarjeta informativa 1 -->
+    <div class="info-box">
+      <div class="info-icon">
+        <mat-icon>search</mat-icon>
+      </div>
+      <div class="info-text">
+        <h3>Verificar DNI</h3>
+        <p>Asegúrese de que el número sea correcto y corresponda a la madre biológica o tutor legal autorizado.</p>
+      </div>
+    </div>
+
+    <!-- Tarjeta informativa 2 -->
+    <div class="info-box">
+      <div class="info-icon">
+        <mat-icon>edit_document</mat-icon>
+      </div>
+      <div class="info-text">
+        <h3>Pendiente de Registro Inicial</h3>
+        <p>El sistema no detecta menores vinculados a este DNI. Por favor, espere o solicite a la madre que realice el registro del paciente desde el aplicativo <span class="link">FerovaFamilia</span> para proceder con la asignación clínica.</p>
+      </div>
+    </div>
+
+  </div>
+</div>

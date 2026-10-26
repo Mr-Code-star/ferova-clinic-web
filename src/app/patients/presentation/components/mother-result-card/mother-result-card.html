@@ -1,0 +1,19 @@
+<div class="result-card">
+  <div class="info-section">
+    <div class="avatar"><mat-icon>person</mat-icon></div>
+    <div class="details">
+      <div class="dni-row">
+        <span class="dni">{{ mother.dni }}</span>
+        <span class="badge badge-success">DNI Registrado</span>
+        <span class="dot">•</span>
+      </div>
+      <p class="name">{{ mother.fullName }}</p>
+    </div>
+  </div>
+
+  <!-- ⬇️ CAMBIO AQUÍ ⬇️ -->
+  <button mat-flat-button class="btn-assign" (click)="ShowPatients()">
+    Ver pacientes
+    <mat-icon>groups</mat-icon>
+  </button>
+</div>

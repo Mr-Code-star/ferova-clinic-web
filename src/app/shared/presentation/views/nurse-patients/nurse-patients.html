@@ -1,0 +1,22 @@
+<div class="patients-view-container">
+  <header class="page-header">
+    <h1 class="page-title">Asignar Paciente</h1>
+    <p class="page-subtitle">Vincule un nuevo paciente al sistema buscando por el documento de identidad de la madre o titular.</p>
+  </header>
+
+  <main class="content-wrapper">
+    <app-mother-search-form
+      [loading]="loading()"
+    (search)="onSearch($event)">
+    </app-mother-search-form>
+
+    <!-- ⬇️ Añadimos los paréntesis a los signals -->
+    <app-mother-result-list
+      [results]="results()"
+      [hasSearched]="hasSearched()"
+      [loading]="loading()"
+      [searchTerm]="lastSearchTerm"
+      (showPatients)="onShowPatients($event)">
+    </app-mother-result-list>
+  </main>
+</div>

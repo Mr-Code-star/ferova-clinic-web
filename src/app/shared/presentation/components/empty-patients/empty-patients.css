@@ -1,0 +1,144 @@
+:host {
+  --color-text-main: #1e293b;
+  --color-text-muted: #64748b;
+  --color-blue-primary: var(--mat-primary-500, #0066cc);
+  --color-blue-light: var(--mat-primary-50, #f0f7ff);
+  --color-red-alert: #b91c1c;
+  --border-color: #cbd5e1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Centra la tarjeta verticalmente si el padre lo permite */
+  padding: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.empty-state-card {
+  width: 100%;
+  max-width: 900px; /* Ajusta este valor si quieres que sea más ancha */
+  min-height: 630px; /* <--- ESTO AUMENTA LA ALTURA DE LA TARJETA */
+  background-color: #ffffff;
+  box-shadow: none !important;
+  border: 1px dashed var(--border-color);
+  border-radius: 12px;
+  display: flex; /* Para que el contenido interno se expanda */
+  flex-direction: column;
+}
+
+.empty-state-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* Toma todo el alto disponible de la card */
+  padding: 0 !important; /* Quitamos el padding por defecto para manejarlo en el wrapper */
+}
+
+/* Nuevo contenedor para centrar todo vertical y horizontalmente */
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex: 1;
+  padding: 4rem 2rem; /* Aumentamos el padding vertical (4rem) */
+}
+
+/* --- Iconos --- */
+.icon-wrapper {
+  position: relative;
+  width: 110px; /* Un poco más grande para acompañar la nueva altura */
+  height: 110px;
+  background-color: var(--color-blue-light);
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.icon-wrapper::before {
+  content: '';
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  background-color: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.icon-wrapper .search-icon {
+  position: relative;
+  z-index: 1;
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+  color: var(--color-blue-primary);
+}
+
+.icon-wrapper .alert-badge {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  background-color: var(--color-red-alert);
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #ffffff;
+  z-index: 2;
+}
+
+.icon-wrapper .alert-badge mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  color: #ffffff;
+}
+
+/* --- Textos --- */
+.title {
+  font-size: 1.75rem; /* Un poco más grande */
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin: 0 0 1rem 0;
+}
+
+.description {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin: 0 0 2.5rem 0;
+  max-width: 500px;
+}
+
+.description .link {
+  color: var(--color-blue-primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.description .link:hover {
+  text-decoration: underline;
+}
+
+/* --- Botón --- */
+.btn-assign {
+  background: #0a4a56 !important;
+  color: #ffffff !important;
+  height: 48px; /* Botón un poco más alto */
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 0 32px;
+}
+
+.btn-assign mat-icon {
+  color: white;
+  margin-right: 8px;
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}

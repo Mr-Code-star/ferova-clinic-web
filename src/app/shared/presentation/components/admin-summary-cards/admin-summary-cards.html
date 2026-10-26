@@ -1,0 +1,30 @@
+@if (summary()) {
+  <div class="summary-grid">
+    <!-- Postas Activas -->
+    <div class="summary-card">
+      <div class="icon-box icon-blue">
+        <mat-icon>local_hospital</mat-icon>
+      </div>
+      <span class="value">{{ summary()!.totalActiveFacilities }}</span>
+      <span class="label">Postas Activas</span>
+    </div>
+
+    <!-- Postas Críticas -->
+    <div class="summary-card">
+      <div class="icon-box icon-red">
+        <mat-icon>warning</mat-icon>
+      </div>
+      <span class="value">{{ summary()!.totalCriticalFacilities }}</span>
+      <span class="label">Postas Críticas</span>
+    </div>
+
+    <!-- Adherencia Global -->
+    <div class="summary-card">
+      <div class="icon-box icon-blue">
+        <mat-icon>bar_chart</mat-icon>
+      </div>
+      <span class="value adherence">{{ summary()!.globalAdherenceRate }}%</span>
+      <span class="label">Adherencia global</span>
+    </div>
+  </div>
+}

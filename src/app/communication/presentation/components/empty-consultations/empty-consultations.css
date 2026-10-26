@@ -1,0 +1,132 @@
+:host {
+  --color-text-main: #1d434e; /* Un tono más oscuro para el título */
+  --color-text-muted: #64748b;
+  --color-blue-primary: #0d5c6b;
+  --color-blue-light: #f0f7ff;
+  --border-color: #e2e8f0;
+
+  display: block;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.empty-state-card {
+  width: 100%;
+  background-color: #ffffff;
+  box-shadow: none !important;
+  border: 1px solid var(--border-color); /* Borde sólido y suave */
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.empty-state-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 0 !important;
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex: 1;
+  padding: 3rem 2rem;/* Aumentamos el padding vertical (4rem) */
+}
+
+/* --- Iconos --- */
+.icon-wrapper {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  background-color: var(--color-blue-light);
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.icon-wrapper .main-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  color: var(--color-blue-primary);
+}
+
+/* Badge inferior derecho con fondo azul */
+.icon-wrapper .search-badge {
+  position: absolute;
+  bottom: -10px;
+  right: -10px;
+  background-color: var(--color-blue-primary);
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid #ffffff;
+  z-index: 2;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.icon-wrapper .search-badge mat-icon {
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+  color: #ffffff;
+}
+
+/* --- Textos --- */
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin: 0 0 1rem 0;
+  line-height: 1.3;
+}
+
+.description {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin: 0 0 2rem 0;
+  max-width: 500px;
+}
+
+/* --- Botón Secundario --- */
+.btn-clear-filter {
+  background-color: var(--color-blue-light) !important;
+  color: var(--color-blue-primary) !important;
+  height: 44px;
+  border-radius: 8px;
+  font-weight: 600;
+  padding: 0 24px;
+  font-size: 0.95rem;
+}
+
+.btn-clear-filter mat-icon {
+  margin-right: 6px;
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-clear-filter:hover {
+  background-color: #e0f0ff !important; /* Un azul un poco más oscuro al pasar el mouse */
+}
+
+.name-search {
+  color: var(--color-blue-primary);
+  font-weight: 700;
+}

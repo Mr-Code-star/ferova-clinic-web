@@ -1,0 +1,327 @@
+:host {
+  display: block;
+  background-color: #f8fafc;
+  min-height: 100vh;
+  padding: 3rem 4rem;
+  box-sizing: border-box;
+}
+
+.treatments-view-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Header */
+.btn-back {
+  background: transparent;
+  border: none;
+  color: #2563eb;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0;
+  align-self: flex-start;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 0.5rem;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 0.25rem 0;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.btn-new {
+  background-color: #0f3b5c !important;
+  color: white !important;
+  height: 48px;
+  border-radius: 10px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Filtros */
+.filters-bar {
+  display: flex;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 0.35rem;
+  gap: 0.25rem;
+  align-self: flex-start;
+}
+
+.filter-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: none;
+  padding: 0.6rem 1.25rem;
+  border-radius: 8px;
+  color: #64748b;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filter-btn.active {
+  background-color: #f1f5f9;
+  color: #1e293b;
+}
+
+.count {
+  background-color: white;
+  border: 1px solid #e2e8f0;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+}
+
+.filter-btn.active .count {
+  background-color: #e2e8f0;
+  border-color: transparent;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.dot-active { background-color: #10b981; }
+.dot-completed { background-color: #3b82f6; }
+.dot-abandoned { background-color: #ef4444; }
+
+/* Grid de Tratamientos */
+.treatments-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.treatment-card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  background-color: #e0f2fe;
+  color: #0284c7;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.patient-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+  flex: 1;
+}
+
+.status-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+}
+.badge-active { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+.badge-completed { background: #dbeafe; color: #1e40af; border: 1px solid #bfdbfe; }
+.badge-abandoned { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+
+.supplement-info {
+  background-color: #f8fafc;
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #64748b;
+  display: block;
+  margin-bottom: 0.25rem;
+  text-transform: uppercase;
+}
+
+.supplement-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.btn-details {
+  width: 100%;
+  height: 44px;
+  background-color: white;
+  border: 2px solid #0f3b5c;
+  color: #0f3b5c;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-details:hover {
+  background-color: #0f3b5c;
+  color: white;
+}
+
+/* Estado Vacío */
+.empty-state-card {
+  background: white;
+  border-radius: 20px;
+  padding: 4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 1px solid #e2e8f0;
+  max-width: 700px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.empty-illustration {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  background-color: #e0f2fe;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.empty-illustration mat-icon { font-size: 48px; width: 48px; height: 48px; color: #0284c7; }
+
+.badge-edit {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 32px;
+  height: 32px;
+  background-color: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badge-edit mat-icon { font-size: 18px; width: 18px; height: 18px; color: #64748b; }
+
+.empty-state-card h2 { font-size: 1.6rem; font-weight: 800; color: #0f172a; margin: 0 0 0.75rem 0; }
+.empty-state-card p { font-size: 1rem; color: #64748b; margin: 0 0 2rem 0; line-height: 1.5; }
+
+.btn-primary {
+  background-color: #0f3b5c !important;
+  color: white !important;
+  height: 48px;
+  padding: 0 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.info-box {
+  display: flex;
+  gap: 0.75rem;
+  background-color: #f0f9ff;
+  border: 1px solid #bae6fd;
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: left;
+  color: #0369a1;
+  font-size: 0.85rem;
+  width: 100%;
+}
+
+.info-box mat-icon { color: #0284c7; }
+.info-box strong { display: block; margin-bottom: 0.25rem; }
+.info-box p { margin: 0; font-size: 0.85rem; line-height: 1.4; }
+
+.empty-filter-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem;
+  color: #64748b;
+  gap: 0.5rem;
+}
+
+.empty-filter-state mat-icon { font-size: 40px; width: 40px; height: 40px; color: #cbd5e1; }
+
+/* Banner Inferior */
+.protocol-banner {
+  display: flex;
+  gap: 1rem;
+  background-color: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 12px;
+  padding: 1.25rem;
+  color: #1e40af;
+  font-size: 0.85rem;
+  margin-top: 1rem;
+}
+
+.protocol-icon {
+  width: 40px;
+  height: 40px;
+  background-color: #2563eb;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+}
+
+.protocol-banner strong { display: block; margin-bottom: 0.25rem; }
+.protocol-banner p { margin: 0; line-height: 1.5; }
+
+.loading-state { text-align: center; padding: 3rem; color: #64748b; }

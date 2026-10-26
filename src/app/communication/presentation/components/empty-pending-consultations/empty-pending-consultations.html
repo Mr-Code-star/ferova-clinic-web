@@ -1,0 +1,30 @@
+<mat-card class="empty-state-card">
+  <mat-card-content class="empty-state-content">
+    <div class="content-wrapper">
+
+      <div class="icon-wrapper">
+        <!-- Icono principal: Bandeja de entrada -->
+        <mat-icon class="main-icon">inbox</mat-icon>
+
+        <!-- Badge inferior derecho con el icono de chat -->
+        <div class="chat-badge">
+          <mat-icon>chat_bubble</mat-icon>
+        </div>
+      </div>
+
+      <h2 class="title">Sin consultas pendientes</h2>
+
+      <p class="description">
+        Aún no has recibido consultas de las madres asignadas a tu cartera.<br>
+        Aquí aparecerán las inquietudes que ellas envíen desde<br>
+        FerovaFamilia.
+      </p>
+
+      <button mat-stroked-button class="btn-refresh" (click)="onRefresh()">
+        <mat-icon>refresh</mat-icon>
+        Actualizar bandeja
+      </button>
+
+    </div>
+  </mat-card-content>
+</mat-card>

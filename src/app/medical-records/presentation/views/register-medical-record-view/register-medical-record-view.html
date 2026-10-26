@@ -1,0 +1,32 @@
+<div class="register-view-container">
+
+  <!-- Botón Volver con el nombre del paciente -->
+  <button class="btn-back" (click)="onBack()">
+    <mat-icon>arrow_back</mat-icon>
+    {{ patientName() }}
+  </button>
+
+  <!-- Tarjeta del formulario -->
+  <div class="form-card">
+    <header class="form-header">
+      <h1 class="title">Registrar Historial Médico</h1>
+      <p class="subtitle">Complete los datos de la consulta actual para el seguimiento del paciente.</p>
+    </header>
+
+    <!-- Banner de error (si el backend falla) -->
+    @if (error()) {
+      <div class="error-banner">
+        <mat-icon>error_outline</mat-icon>
+        <span>{{ error() }}</span>
+      </div>
+    }
+
+    <!-- Formulario (ya incluye el banner azul informativo) -->
+    <app-medical-record-form
+      [patientId]="patientId"
+      [loading]="loading()"
+      (save)="onSave($event)">
+    </app-medical-record-form>
+  </div>
+
+</div>

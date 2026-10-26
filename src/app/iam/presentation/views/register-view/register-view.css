@@ -1,0 +1,146 @@
+:host {
+  --bg-page: #eef4f7;
+  --bg-page-gradient: linear-gradient(180deg, #eef4f7 0%, #e8f0f4 100%);
+  --col-width: 556px;
+  --col-gap: 6rem;
+}
+
+/* ============================================
+   LAYOUT PRINCIPAL (simétrico)
+   ============================================ */
+.register-view {
+  min-height: calc(100vh - 72px);
+  background: var(--bg-page-gradient);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, var(--col-width)));
+  column-gap: var(--col-gap);
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 2.5rem;
+  box-sizing: border-box;
+}
+
+/* Los componentes hijos son <app-...> (inline por defecto) */
+app-register-info,
+app-register-form {
+  display: block;
+  width: 100%;
+}
+
+/* Columna izquierda: info */
+.register-view__info {
+  width: 100%;
+  max-width: var(--col-width);
+  display: flex;
+  justify-content: center;
+}
+
+/* Columna derecha: formulario */
+.register-view__form {
+  width: 100%;
+  max-width: var(--col-width);
+  display: flex;
+  justify-content: center;
+}
+
+/* ============================================
+   BANNER DE ERROR
+   ============================================ */
+.error-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  color: #991b1b;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  width: 100%;
+  max-width: 520px;
+  box-sizing: border-box;
+  animation: slideDown 0.25s ease-out;
+}
+
+.error-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  color: #dc2626;
+  flex-shrink: 0;
+}
+
+.error-banner span {
+  flex: 1;
+}
+
+.error-close {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: #991b1b;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.error-close:hover {
+  opacity: 1;
+}
+
+.error-close mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   RESPONSIVO - Laptops pequeñas
+   ============================================ */
+@media (max-width: 1280px) {
+  .register-view {
+    padding: 3rem 2rem;
+    --col-gap: 3.5rem;
+  }
+}
+
+/* ============================================
+   RESPONSIVO - Tablets y menores:
+   se oculta la info y queda solo el formulario
+   ============================================ */
+@media (max-width: 1024px) {
+  .register-view {
+    grid-template-columns: minmax(0, var(--col-width));
+    padding: 3rem 2rem;
+    align-items: center;
+  }
+
+  .register-view__info {
+    display: none;
+  }
+}
+
+/* ============================================
+   RESPONSIVO - Móvil
+   ============================================ */
+@media (max-width: 640px) {
+  .register-view {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 1.5rem 1rem;
+  }
+}

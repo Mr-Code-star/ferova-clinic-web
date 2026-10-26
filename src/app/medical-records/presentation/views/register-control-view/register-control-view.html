@@ -1,0 +1,76 @@
+<div class="view-container">
+  <div class="content-wrapper">
+
+    <!-- Header -->
+    <header class="page-header">
+      <div class="header-left">
+        <button class="btn-back-circle" (click)="onBack()">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <div>
+          <h1 class="title">Nuevo Control</h1>
+          <p class="subtitle">Registro diagnóstico y dosificación hematológica para seguimiento pediátrico</p>
+        </div>
+      </div>
+      <div class="header-right">
+        <span class="date-label">Fecha de evaluación:</span>
+        <span class="date-value">Hoy, {{ currentDate }}</span>
+      </div>
+    </header>
+
+    <!-- Tarjeta Paciente -->
+    <div class="card patient-card">
+      <span class="section-label">PACIENTE SELECCIONADO</span>
+      <div class="patient-info-row">
+        <div class="patient-details">
+          <div class="avatar">
+            <mat-icon>person_outline</mat-icon>
+          </div>
+          <div class="text-info">
+            <h2 class="patient-name">{{ patient()?.patientName }}</h2>
+            <div class="patient-meta">
+              <span>Edad: {{ patient()?.age || '2' }} años</span>
+              <span class="dot">•</span>
+              <span>Sexo: {{ patient()?.gender === 'MALE' ? 'Masculino' : 'Femenino' }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="history-id">
+          HISTORIAL MEDICO ID: {{ patientId | slice:0:8 | uppercase }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Tarjeta Formulario -->
+    <div class="card form-card">
+      <label class="section-label">HEMOGLOBINA (G/DL)</label>
+
+      <div class="input-wrapper">
+        <input
+          type="number"
+          [(ngModel)]="hemoglobinLevel"
+          placeholder="10.2"
+          step="0.1"
+          min="0"
+          class="big-input">
+        <span class="unit">g/dL</span>
+      </div>
+
+      <p class="helper-text">Ingrese el valor obtenido por microcubeta o hemoglobinómetro digital certificado.</p>
+
+      <div class="info-banner">
+        <mat-icon>info_outline</mat-icon>
+        <p>Este registro se integrará inmediatamente a la curva de evolución del paciente. Asegúrese de que el valor sea preciso antes de guardar.</p>
+      </div>
+    </div>
+
+    <!-- Botones -->
+    <div class="footer-actions">
+      <button mat-stroked-button class="btn-cancel" (click)="onBack()">Cancelar</button>
+      <button mat-flat-button class="btn-save" [disabled]="!hemoglobinLevel || loading()" (click)="onSave()">
+        <mat-icon>add</mat-icon> Añadir Control
+      </button>
+    </div>
+
+  </div>
+</div>

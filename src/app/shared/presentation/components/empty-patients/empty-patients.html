@@ -1,0 +1,26 @@
+<mat-card class="empty-state-card">
+  <mat-card-content class="empty-state-content">
+    <div class="content-wrapper">
+
+      <div class="icon-wrapper">
+        <mat-icon class="search-icon">search</mat-icon>
+        <div class="alert-badge">
+          <mat-icon>warning_amber</mat-icon>
+        </div>
+      </div>
+
+      <h2 class="title">Sin pacientes asignados</h2>
+
+      <p class="description">
+        Aún no has incorporado pacientes a tu cartera. Ve a la sección de
+        Pacientes para buscar y asignar a tu primer menor mediante el DNI de la madre.
+      </p>
+
+      <button mat-flat-button color="primary" class="btn-assign" (click)="onAssignClick()">
+        <mat-icon>person_add</mat-icon>
+        ASIGNAR PACIENTE
+      </button>
+
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,68 @@
+.step-header { display: flex; gap: 1rem; margin-bottom: 2rem; border-bottom: 1px solid #f1f5f9; padding-bottom: 1rem;}
+.icon-box { width: 40px; height: 40px; background: #e0f2fe; color: #0284c7; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.step-header h2 { font-size: 1.2rem; color: #0f172a; margin: 0 0 0.25rem 0; }
+.step-header p { font-size: 0.85rem; color: #64748b; margin: 0; }
+
+.section { margin-bottom: 2rem; }
+.section label { font-size: 0.75rem; font-weight: 700; color: #475569; display: block; margin-bottom: 1rem; }
+
+.days-row { display: flex; gap: 0.75rem; margin-bottom: 0.5rem; }
+.day-btn { width: 44px; height: 44px; border-radius: 8px; border: 1px solid #cbd5e1; background: white; font-weight: 600; color: #64748b; cursor: pointer; transition: all 0.2s;}
+.day-btn.selected { background: #0f3b5c; color: white; border-color: #0f3b5c; }
+.helper { font-size: 0.8rem; color: #94a3b8; margin: 0; }
+
+.slots-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+.link-btn { background: none; border: none; color: #2563eb; font-weight: 600; font-size: 0.85rem; cursor: pointer; padding: 0; }
+
+.slots-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.slot-btn { padding: 0.85rem; border-radius: 8px; border: 1px solid #cbd5e1; background: white; font-weight: 600; color: #64748b; cursor: pointer; transition: all 0.2s;}
+.slot-btn.selected { background: #0f3b5c; color: white; border-color: #0f3b5c; }
+
+.add-slot-inline {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.time-input {
+  padding: 0.4rem 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  outline: none;
+  color: #1e293b;
+}
+
+.time-input:focus {
+  border-color: #2563eb;
+}
+
+.btn-save-slot {
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.btn-save-slot:hover { background: #1d4ed8; }
+
+.btn-cancel-slot {
+  background: transparent;
+  color: #64748b;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.btn-cancel-slot:hover { background: #f1f5f9; }

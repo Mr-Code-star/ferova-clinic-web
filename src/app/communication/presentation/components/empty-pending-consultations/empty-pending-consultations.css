@@ -1,0 +1,128 @@
+:host {
+  --color-text-main: #1e293b;
+  --color-text-muted: #64748b;
+  --color-blue-primary: #1d434e;
+  --color-blue-light: #f0f7ff;
+  --border-color: #e2e8f0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.empty-state-card {
+  width: 100%;
+  max-width: 900px;
+  min-height: 630px;
+  background-color: #ffffff;
+  box-shadow: none !important;
+  border: 1px solid var(--border-color); /* Borde sólido y suave */
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.empty-state-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 0 !important;
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex: 1;
+  padding: 4rem 2rem; /* Aumentamos el padding vertical (4rem) */
+}
+
+
+/* --- Iconos --- */
+.icon-wrapper {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  background-color: var(--color-blue-light);
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+/* El icono principal tiene un color azul muy clarito en el diseño para que resalte el badge */
+.icon-wrapper .main-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  color: #b3d4f5; /* Azul clarito */
+}
+
+/* Badge inferior derecho (fondo azul sólido) */
+.icon-wrapper .chat-badge {
+  position: absolute;
+  bottom: -12px;
+  right: -12px;
+  background-color: var(--color-blue-primary);
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid #ffffff;
+  z-index: 2;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.icon-wrapper .chat-badge mat-icon {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+  color: #ffffff;
+}
+
+/* --- Textos --- */
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin: 0 0 1rem 0;
+}
+
+.description {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin: 0 0 2.5rem 0;
+  max-width: 500px;
+}
+
+/* --- Botón --- */
+.btn-refresh {
+  border-color: var(--border-color) !important;
+  color: var(--color-text-main) !important;
+  height: 44px;
+  border-radius: 8px;
+  font-weight: 500;
+  padding: 0 24px;
+  font-size: 0.95rem;
+}
+
+.btn-refresh mat-icon {
+  margin-right: 8px;
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  color: var(--color-text-muted);
+}
+
+.btn-refresh:hover {
+  background-color: #f8fafc !important;
+}

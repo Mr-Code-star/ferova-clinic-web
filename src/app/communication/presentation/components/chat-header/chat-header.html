@@ -1,0 +1,34 @@
+<header class="chat-header">
+  <div class="header-left">
+    <button mat-button class="btn-back" (click)="onBack()">
+      <mat-icon>arrow_back</mat-icon>
+      Volver a Consultas
+    </button>
+
+    <div class="divider"></div>
+
+    <div class="user-info">
+      <div class="avatar">
+        <mat-icon>person</mat-icon>
+      </div>
+      <div class="details">
+        <div class="name-row">
+          <h2>{{ motherName }}</h2>
+          <span class="status-badge">Consulta Activa</span>
+        </div>
+        <p class="sub-info">
+          Madre de {{ patientName }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="header-right">
+    <button mat-flat-button class="btn-close" (click)="onClose()">
+      Cerrar Consulta
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</header>

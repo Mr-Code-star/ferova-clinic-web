@@ -1,0 +1,18 @@
+<div class="tag-input-container">
+  <div class="header">
+    <label class="field-label">{{ label }}</label>
+    <button class="btn-add" (click)="openModal()" type="button">
+      <mat-icon>add_circle_outline</mat-icon>
+      Añadir
+    </button>
+  </div>
+
+  <div class="tags-list">
+    @for (tag of tags; track $index) {
+      <span class="tag-chip">
+        {{ tag }}
+        <mat-icon class="close-icon" (click)="removeTag($index)">close</mat-icon>
+      </span>
+    }
+  </div>
+</div>

@@ -1,0 +1,102 @@
+<div class="treatments-view-container">
+
+  <!-- Header -->
+  <header class="page-header">
+    <button class="btn-back" (click)="onBack()">
+      <mat-icon>arrow_back</mat-icon> Volver al Menú Principal
+    </button>
+
+    <div class="header-content">
+      <div>
+        <h1 class="page-title">Mis Tratamientos</h1>
+        <p class="subtitle">Monitoreo y control del esquema terapéutico de suplementación de hierro en pacientes pediátricos.</p>
+      </div>
+      <button mat-flat-button class="btn-new" (click)="onStartNewTreatment()">
+        <mat-icon>add</mat-icon>
+        Iniciar Nuevo Tratamiento
+      </button>
+    </div>
+  </header>
+
+  <!-- Filtros / Tabs -->
+  <div class="filters-bar">
+    <button class="filter-btn" [class.active]="activeFilter() === 'ALL'" (click)="setFilter('ALL')">
+      Todos <span class="count">{{ counters().all }}</span>
+    </button>
+    <button class="filter-btn" [class.active]="activeFilter() === 'ACTIVE'" (click)="setFilter('ACTIVE')">
+      <span class="dot dot-active"></span> Activos <span class="count">{{ counters().active }}</span>
+    </button>
+    <button class="filter-btn" [class.active]="activeFilter() === 'COMPLETED'" (click)="setFilter('COMPLETED')">
+      <span class="dot dot-completed"></span> Completados <span class="count">{{ counters().completed }}</span>
+    </button>
+    <button class="filter-btn" [class.active]="activeFilter() === 'ABANDONED'" (click)="setFilter('ABANDONED')">
+      <span class="dot dot-abandoned"></span> Abandonados <span class="count">{{ counters().abandoned }}</span>
+    </button>
+  </div>
+
+  <!-- Contenido -->
+  @if (loading()) {
+    <div class="loading-state">Cargando tratamientos...</div>
+  } @else if (treatments().length === 0) {
+    <!-- Estado Vacío Total -->
+    <div class="empty-state-card">
+      <div class="empty-illustration">
+        <mat-icon>assignment</mat-icon>
+        <div class="badge-edit"><mat-icon>edit</mat-icon></div>
+      </div>
+      <h2>No hay tratamientos registrados</h2>
+      <p>Aún no se ha iniciado ningún tratamiento.<br>Comienza uno ahora para realizar el seguimiento.</p>
+
+      <button mat-flat-button class="btn-primary" (click)="onStartNewTreatment()">
+        <mat-icon>add_circle_outline</mat-icon>
+        Iniciar Tratamiento
+      </button>
+
+      <div class="info-box">
+        <mat-icon>info</mat-icon>
+        <div>
+          <strong>¿Cómo iniciar un tratamiento?</strong>
+          <p>Para prescribir esquemas de Hierro Polimaltosado o Sulfato Ferroso, ubique al infante en el padrón de pacientes y verifique el último dosaje de hemoglobina registrado.</p>
+        </div>
+      </div>
+    </div>
+  } @else if (filteredTreatments().length === 0) {
+    <!-- Estado Vacío por Filtro -->
+    <div class="empty-filter-state">
+      <mat-icon>filter_list_off</mat-icon>
+      <p>No hay tratamientos en estado <strong>{{ activeFilter() }}</strong>.</p>
+    </div>
+  } @else {
+    <!-- Grilla de Tratamientos -->
+    <div class="treatments-grid">
+      @for (treatment of filteredTreatments(); track treatment.treatmentId) {
+        <div class="treatment-card">
+          <div class="card-header">
+            <div class="avatar">{{ treatment.initials }}</div>
+            <h3 class="patient-name">{{ treatment.patientName }}</h3>
+            <span class="status-badge" [ngClass]="treatment.statusClass">{{ treatment.statusLabel }}</span>
+          </div>
+
+          <div class="supplement-info">
+            <span class="label">SUPLEMENTO ASIGNADO</span>
+            <p class="supplement-name">{{ treatment.supplementName }}</p>
+          </div>
+
+          <button class="btn-details" (click)="onViewDetails(treatment)">
+            VER DETALLES
+          </button>
+        </div>
+      }
+    </div>
+  }
+
+  <!-- Banner Inferior (siempre visible) -->
+  <div class="protocol-banner">
+    <div class="protocol-icon"><mat-icon>info</mat-icon></div>
+    <div>
+      <strong>PROTOCOLO NACIONAL MINSA DE ADHERENCIA TERAPÉUTICA</strong>
+      <p>Los pacientes con estado <strong>ABANDONADO</strong> requieren contacto telefónico inmediato o visita domiciliaria por parte del promotor de salud dentro de las próximas 48 horas. Se debe corroborar el registro en el padrón HIS-MINSA.</p>
+    </div>
+  </div>
+
+</div>

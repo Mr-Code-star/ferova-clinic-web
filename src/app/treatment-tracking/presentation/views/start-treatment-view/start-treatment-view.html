@@ -1,0 +1,87 @@
+<div class="start-treatment-container">
+
+  <button class="btn-back" (click)="onBack()">
+    <mat-icon>arrow_back</mat-icon> Volver
+  </button>
+
+  <header class="page-header">
+    <h1 class="page-title">Seleccionar Paciente</h1>
+    <p class="page-subtitle">
+      Seleccione el menor asignado a su cartera para registrar dosis de suplemento de hierro, control de hemoglobina o evolución clínica correspondiente a la sesión de hoy.
+    </p>
+  </header>
+
+  @if (loading()) {
+    <div class="loading-state">Cargando pacientes...</div>
+  } @else {
+
+    @if (state()?.hasPatientsAssigned === false) {
+      <div class="empty-state-card">
+        <div class="empty-illustration">
+          <mat-icon>assignment_turned_in</mat-icon>
+        </div>
+        <h2>No tienes pacientes asignados</h2>
+        <p>Para comenzar, debes asignar pacientes a tu lista de trabajo.</p>
+        <button class="btn-primary" (click)="onAssignPatients()">
+          + Asignar Pacientes
+        </button>
+        <a class="link-small" href="#">¿Cómo buscar en el padrón nominal?</a>
+      </div>
+    }
+
+   @else if (state()?.hasPendingPatients === false && state()?.hasPatientsAssigned === true) {
+      <div class="empty-state-card">
+        <div class="empty-illustration">
+          <mat-icon>assignment_turned_in</mat-icon>
+        </div>
+        <h2>Ya todos los pacientes han iniciado su tratamiento.</h2>
+        <p>No hay pacientes pendientes de selección en este momento.</p>
+      </div>
+    }
+
+    @else if (patients().length > 0) {
+      <div class="search-bar">
+        <mat-icon>search</mat-icon>
+        <input
+          type="text"
+          placeholder="Buscar paciente por nombre de menor o número de DNI..."
+          [value]="searchTerm()"
+          (input)="onSearchChange($event)">
+      </div>
+
+      <div class="patients-list">
+        @for (patient of filteredPatients(); track patient.patientId) {
+          <div class="patient-card">
+            <div class="card-left">
+              <div class="avatar">
+                <mat-icon>person_outline</mat-icon>
+              </div>
+              <div class="info">
+                <div class="name-row">
+                  <h3>{{ patient.patientName }}</h3>
+                  <span class="badge-active">Activo</span>
+                </div>
+              </div>
+            </div>
+            <div class="card-right">
+              <span class="action-label">Iniciar Control</span>
+              <button class="btn-arrow" (click)="onStartControl(patient)">
+                <mat-icon>arrow_forward</mat-icon>
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+    }
+
+  }
+
+  <div class="info-banner">
+    <mat-icon>info</mat-icon>
+    <div>
+      <strong>Cartera de Pacientes en Turno Activo</strong>
+      <p>Solo se muestran los pacientes con tratamiento activo asignados a su turno en Posta Médica Huáscar. Para asignar un nuevo menor o transferir un expediente, diríjase al módulo de Pacientes Generales.</p>
+    </div>
+  </div>
+
+</div>

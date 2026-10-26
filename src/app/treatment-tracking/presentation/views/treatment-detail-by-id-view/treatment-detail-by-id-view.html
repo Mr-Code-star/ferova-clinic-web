@@ -1,0 +1,169 @@
+<div class="detail-view-container">
+
+  <!-- Header -->
+  <header class="page-header">
+    <button class="btn-back" (click)="onBack()">
+      <mat-icon>arrow_back</mat-icon> Volver a Mis Tratamientos
+    </button>
+    <div class="title-block">
+      <h1 class="page-title">Detalle de Tratamiento</h1>
+      <p class="page-subtitle">Monitoreo de dosificación, adherencia terapéutica y evolución clínica del esquema de suplementación.</p>
+    </div>
+  </header>
+
+  @if (loading()) {
+    <div class="loading-state">Cargando detalle...</div>
+  } @else if (detail()) {
+
+    <!-- Tarjeta Paciente -->
+    <div class="patient-summary">
+      <div class="patient-left">
+        <div class="avatar"><mat-icon>person_outline</mat-icon></div>
+        <div>
+          <span class="label">PACIENTE</span>
+          <h2 class="patient-name">{{ detail()!.patientName }}</h2>
+        </div>
+      </div>
+      <span class="status-badge" [ngClass]="detail()!.statusBadgeClass">
+        <mat-icon>circle</mat-icon>
+        {{ detail()!.statusLabel }}
+      </span>
+    </div>
+
+    <div class="grid-container">
+
+      <!-- Columna Izquierda -->
+      <div class="col-left">
+
+        <!-- Plan de Dosis -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Plan de Dosis</h3>
+            <span class="card-subtitle">Esquema preventivo/terapéutico</span>
+          </div>
+          <div class="dose-grid">
+            <div class="dose-item">
+              <span class="label">Suplemento</span>
+              <div class="value-row">
+                <strong>{{ detail()!.supplementName }}</strong>
+                <span class="tag">Gotas</span>
+              </div>
+            </div>
+            <div class="dose-item">
+              <span class="label">Cantidad</span>
+              <strong>{{ detail()!.quantity }} <span class="small">(vía oral diaria)</span></strong>
+            </div>
+            <div class="dose-item">
+              <span class="label">Horario</span>
+              <strong class="with-icon"><mat-icon>schedule</mat-icon> {{ detail()!.dosingHours }}</strong>
+            </div>
+            <div class="dose-item">
+              <span class="label">Duración</span>
+              <strong>{{ detail()!.durationDays }} días</strong>
+            </div>
+          </div>
+          <div class="dose-footer">
+            <span class="text-blue">Dosis única diaria</span>
+          </div>
+        </div>
+
+        <!-- Cronología -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">CRONOLOGÍA</h3>
+            <span class="badge-blue">{{ detail()!.daysPassed }} de {{ detail()!.durationDays }} días transcurridos</span>
+          </div>
+          <div class="timeline">
+            <div class="date-block">
+              <span class="label">INICIO</span>
+              <strong>{{ detail()!.formatDate(detail()!.startDate) }}</strong>
+            </div>
+            <mat-icon class="arrow-icon">arrow_forward</mat-icon>
+            <div class="date-block right">
+              <span class="label">FIN EST.</span>
+              <strong>{{ detail()!.formatDate(detail()!.endDate) }}</strong>
+            </div>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" [style.width.%]="detail()!.progressPercentage"></div>
+          </div>
+          <div class="timeline-footer">
+            <span>Etapa actual: {{ detail()!.stageText }}</span>
+            <span>{{ detail()!.daysLeft }} días restantes</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Columna Derecha -->
+      <div class="col-right">
+        <div class="card adherence-card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Adherencia</h3>
+              <span class="card-subtitle">Desempeño del paciente</span>
+            </div>
+            <div class="icon-box"><mat-icon>bar_chart</mat-icon></div>
+          </div>
+
+          <!-- Anillo de progreso -->
+          <div class="circular-progress-wrapper">
+            <div class="circular-progress" [style.background]="'conic-gradient(#2563eb ' + detail()!.adherenceScore + '%, #e2e8f0 0)'">
+              <div class="circular-inner">
+                <span class="percentage">{{ detail()!.adherenceScore }}%</span>
+                <span class="percentage-label">TASA CUMPLIDA</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="stats-row">
+            <div class="stat-box">
+              <span class="label">Tomas Confirmadas</span>
+              <strong>{{ detail()!.totalConfirmed }}</strong>
+            </div>
+            <div class="stat-box">
+              <span class="label">Tomas Omitidas</span>
+              <strong>{{ detail()!.totalOmitted }}</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Botones o Notas -->
+        @if (detail()!.isFinished) {
+          <!-- Notas clínicas si ya terminó -->
+          <div class="card notes-card">
+            <div class="notes-header">
+              <h3 class="card-title">NOTAS ADICIONALES / JUSTIFICACIÓN CLÍNICA</h3>
+              <span class="ficha">Ficha MINSA</span>
+            </div>
+            <div class="notes-body">
+              <p>{{ detail()!.completionObservation || detail()!.abandonmentObservation }}</p>
+            </div>
+            <p class="notes-footer">
+              <mat-icon>info</mat-icon>
+              Esta justificación quedará registrada con la firma de Enf. Elena García.
+            </p>
+          </div>
+        } @else {
+          <!-- Botones si sigue activo -->
+          <div class="actions-wrapper">
+            <button mat-flat-button class="btn-complete" (click)="onMarkCompleted()">
+              <mat-icon>check_circle_outline</mat-icon>
+              MARCAR COMO COMPLETADO
+            </button>
+            <button mat-stroked-button class="btn-abandon" (click)="onRegisterAbandonment()">
+              <mat-icon>remove_circle_outline</mat-icon>
+              REGISTRAR ABANDONO
+            </button>
+            <p class="actions-footer">
+              La confirmación del alta o abandono actualizará automáticamente la ficha epidemiológica y el padrón HIS-MINSA.
+            </p>
+          </div>
+        }
+
+      </div>
+    </div>
+  } @else {
+    <div class="error-state">No se pudo cargar el detalle del tratamiento.</div>
+  }
+</div>

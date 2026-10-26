@@ -1,0 +1,27 @@
+<div class="facility-card">
+  <div class="card-header">
+    <h3>Estado de Postas</h3>
+    @if (facilities().length > 0) {
+      <a class="link" (click)="onViewMore()">Ver más &rarr;</a>
+    }
+  </div>
+
+  @if (facilities().length === 0) {
+    <div class="empty-state">
+      No tienes postas asignadas
+    </div>
+  } @else {
+    <div class="facility-list">
+      @for (facility of facilities(); track facility.facilityId) {
+        <div class="facility-item">
+          <div class="dot" [style.background]="facility.riskColor"></div>
+          <div class="info">
+            <h4>{{ facility.facilityName }}</h4>
+            <p>{{ facility.districtName }}</p>
+          </div>
+          <span class="percentage">{{ facility.adherenceRate }}%</span>
+        </div>
+      }
+    </div>
+  }
+</div>

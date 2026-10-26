@@ -1,0 +1,51 @@
+<div class="page-wrapper">
+
+  <!-- Header -->
+  <div class="page-header">
+    <h1 class="page-title">Mapa de Calor</h1>
+    <p class="page-subtitle">
+      Distribución geoespacial de adherencia al suplemento de hierro y nivel de riesgo hematológico por postas médicas y sectores.
+    </p>
+  </div>
+
+  <!-- Barra de Filtros -->
+  <div class="filters-bar">
+    <button class="filter-btn" [class.active]="activeFilter() === 'all'" (click)="setFilter('all')">
+      Todas
+    </button>
+    <button class="filter-btn" [class.active]="activeFilter() === 'HIGH'" (click)="setFilter('HIGH')">
+      <span class="dot critical"></span> Crítico
+    </button>
+    <button class="filter-btn" [class.active]="activeFilter() === 'MEDIUM'" (click)="setFilter('MEDIUM')">
+      <span class="dot moderate"></span> Moderado
+    </button>
+    <button class="filter-btn" [class.active]="activeFilter() === 'LOW'" (click)="setFilter('LOW')">
+      <span class="dot good"></span> Bien
+    </button>
+  </div>
+
+  <!-- Contenedor del Mapa -->
+  <div class="map-container">
+
+    @if (loading()) {
+      <div class="loading-overlay">Cargando datos...</div>
+    }
+
+    @if (error()) {
+      <div class="error-overlay">{{ error() }}</div>
+    }
+
+    <!-- Mapa con los puntos del store (filtrados) -->
+    <app-heat-map [points]="filteredPoints()"></app-heat-map>
+
+    <!-- Badges sobre el mapa -->
+    <div class="map-badge top-left">
+      <span class="badge-dot"></span> Sectores Sanitarios Activos ({{ filteredPoints().length }})
+    </div>
+    <div class="map-badge top-right">
+      <span class="badge-dot blue"></span> Cartografía MINSA / DIRIS
+    </div>
+
+  </div>
+
+</div>

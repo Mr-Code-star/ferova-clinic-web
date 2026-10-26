@@ -1,0 +1,16 @@
+@if (loading()) {
+  <div class="loading-state">Cargando pacientes...</div>
+} @else {
+
+  @if (patients().length === 0) {
+    <app-empty-mother-patients (back)="onBack()"></app-empty-mother-patients>
+  } @else {
+    <app-mother-patients-list
+      [motherName]="motherName()?.fullName || 'Madre'"
+      [patients]="patients()"
+      (back)="onBack()"
+      (assign)="onAssign($event)">
+    </app-mother-patients-list>
+  }
+
+}

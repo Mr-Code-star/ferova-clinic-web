@@ -1,0 +1,28 @@
+<div class="messages-container" #scrollContainer>
+
+  <div class="security-banner">
+    <mat-icon class="icon-lock">lock</mat-icon>
+    <span>Canal encriptado de Teleorientación Médica • MINSA</span>
+  </div>
+
+  <div class="message-list">
+    @for (msg of messages; track msg.id) {
+      <!-- Si el rol es NURSE, va a la derecha -->
+      <div class="message-wrapper" [class.nurse-message]="msg.senderRole === 'NURSE'">
+
+        <div class="message-bubble">
+          {{ msg.content }}
+        </div>
+
+        <div class="message-meta">
+          <span class="time">{{ formatTime(msg.sentAt) }}</span>
+          @if (msg.senderRole === 'NURSE') {
+            <mat-icon class="check-icon">done_all</mat-icon>
+          }
+        </div>
+
+      </div>
+    }
+  </div>
+
+</div>

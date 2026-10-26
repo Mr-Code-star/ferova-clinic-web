@@ -1,0 +1,86 @@
+.modal-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 1.5rem;
+  font-family: inherit;
+  background-color: #ffffff;
+}
+
+.icon-success {
+  width: 56px;
+  height: 56px;
+  background-color: #dcfce7;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.icon-success mat-icon {
+  color: #16a34a;
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 0.75rem 0;
+}
+
+.description {
+  font-size: 0.95rem;
+  color: #64748b;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.5;
+}
+
+/* Recuadro del valor de hemoglobina */
+.value-box {
+  width: 100%;
+  background-color: #f0f9ff;
+  border: 1px dashed #bae6fd;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.value-box .label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #0284c7;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.value-box .value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1;
+}
+
+.value-box .value small {
+  font-size: 1rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* Botón */
+.btn-primary {
+  width: 100%;
+  height: 48px;
+  background-color: #2563eb !important;
+  color: white !important;
+  border-radius: 8px;
+  font-weight: 600;
+}

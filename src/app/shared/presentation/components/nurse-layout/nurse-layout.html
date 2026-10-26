@@ -1,0 +1,48 @@
+<div class="nurse-shell">
+
+  <!-- Toolbar -->
+  <header class="toolbar">
+
+    <a class="brand" routerLink="/nurse/home">
+      <button mat-icon-button type="button" (click)="onLogout()" aria-label="Cerrar sesión">
+        <mat-icon>logout</mat-icon>
+      </button>
+      <mat-icon class="brand-icon">local_hospital</mat-icon>
+      <span class="brand-name">FerovaClinic</span>
+      <span class="brand-tag">ATENCIÓN CLÍNICA</span>
+    </a>
+
+    <nav class="nav-menu">
+      @for (option of navOptions; track option.link) {
+        <a
+          class="nav-item"
+          [routerLink]="option.link"
+          routerLinkActive="nav-item--active"
+          [routerLinkActiveOptions]="{ exact: true }">
+          <mat-icon>{{ option.icon }}</mat-icon>
+          <span>{{ option.label }}</span>
+        </a>
+      }
+    </nav>
+
+    <div class="user-section">
+      <span class="user-badge">{{ userName() || 'Enfermero/a' }}</span>
+    </div>
+
+  </header>
+
+  <!-- Contenido -->
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span class="footer-brand">FerovaClinic</span>
+    <span class="footer-dot">•</span>
+    <span>© 2026 FerovaClinic</span>
+    <span class="footer-dot">•</span>
+    <span>Sistema de Atención Clínica y Monitoreo - MINSA</span>
+  </footer>
+
+</div>

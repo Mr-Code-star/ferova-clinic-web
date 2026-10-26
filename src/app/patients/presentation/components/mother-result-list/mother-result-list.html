@@ -1,0 +1,34 @@
+<div class="list-container">
+  <!-- Cabecera de resultados -->
+  @if (hasSearched && !loading) {
+    <div class="list-header">
+      <h3 class="results-title">RESULTADOS ENCONTRADOS ({{ results.length }})</h3>
+      <span class="results-filter">Filtro: coincidencia exacta por DNI</span>
+    </div>
+  }
+
+  <!-- Spinner de carga -->
+  @if (loading) {
+    <div class="loading-state">Buscando paciente...</div>
+  }
+
+  <!-- Resultados -->
+  @if (!loading && hasSearched && results.length > 0) {
+    <div class="results-card">
+      <!-- ⬇️ Cambiamos el track a motherId -->
+      @for (mother of results; track mother.motherId) {
+        <app-mother-result-card
+          [mother]="mother"
+          (patients)="onShowPatients($event)">
+        </app-mother-result-card>
+      }
+    </div>
+  }
+
+  <!-- Sin resultados -->
+  @if (!loading && hasSearched && results.length === 0) {
+    <div class="empty-state">
+      <p>No se encontraron resultados para "<strong>{{ searchTerm }}</strong>"</p>
+    </div>
+  }
+</div>

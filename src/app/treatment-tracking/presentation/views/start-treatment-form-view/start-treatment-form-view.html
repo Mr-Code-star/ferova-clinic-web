@@ -1,0 +1,98 @@
+<div class="form-view-container">
+
+  <!-- Header -->
+  <header class="page-header">
+    <button class="btn-back" (click)="onBack()">
+      <mat-icon>arrow_back</mat-icon> Volver a Tratamientos
+    </button>
+    <div class="module-badge">
+      <mat-icon>local_hospital</mat-icon>
+      Módulo de Tratamiento de Anemia Infantil
+    </div>
+  </header>
+
+  <!-- Tarjeta Paciente -->
+  <div class="patient-card">
+    <div class="avatar"><mat-icon>person_outline</mat-icon></div>
+    <h2 class="patient-name">{{ patientName() }}</h2>
+    <span class="status-badge">Pendiente de inicio</span>
+  </div>
+
+  <!-- Tarjeta Principal del Formulario -->
+  <div class="form-card">
+    <div class="form-card-header">
+      <h2 class="title">Configuración del Suplemento</h2>
+      <p class="subtitle">Defina el esquema terapéutico según la tabla de suplementación para anemia infantil del MINSA.</p>
+    </div>
+
+    <div class="form-body">
+
+      <!-- Suplemento -->
+      <div class="form-group full-width">
+        <label>SUPLEMENTO DE HIERRO</label>
+        <div class="input-icon-wrapper">
+          <input type="text" [(ngModel)]="supplementName">
+          <mat-icon class="input-icon">science</mat-icon>
+        </div>
+      </div>
+
+      <!-- Fila Cantidad y Hora -->
+      <div class="form-row">
+        <div class="form-group">
+          <label>CANTIDAD POR DOSIS</label>
+          <div class="input-icon-wrapper">
+            <input type="text" [(ngModel)]="quantity">
+            <mat-icon class="input-icon">water_drop</mat-icon>
+          </div>
+          <span class="helper">Equivalente a 20 gotas/día vía oral.</span>
+        </div>
+
+        <div class="form-group">
+          <label>HORA DE DOSIS</label>
+          <div class="input-icon-wrapper">
+            <input type="text" [(ngModel)]="dosageHours">
+            <mat-icon class="input-icon">schedule</mat-icon>
+          </div>
+          <span class="helper">Horario recomendado en ayunas o media mañana.</span>
+        </div>
+      </div>
+
+      <!-- Duración -->
+      <div class="form-group full-width">
+        <label>DURACIÓN DEL TRATAMIENTO</label>
+        <div class="input-icon-wrapper">
+          <input type="number" [(ngModel)]="durationDays">
+          <mat-icon class="input-icon">calendar_today</mat-icon>
+        </div>
+        <span class="helper">Finaliza aproximadamente el: 12 de Agosto, 2024</span>
+      </div>
+
+      <!-- Nota de Dosificación -->
+      <div class="info-banner">
+        <mat-icon>info_outline</mat-icon>
+        <div>
+          <strong>Nota de Dosificación</strong>
+          <p>La dosis recomendada para un peso de 12.5kg es de 1.5ml a 2.5ml. Verifique la tolerancia del paciente en los primeros 3 días.</p>
+        </div>
+      </div>
+
+      <!-- Advertencia -->
+      <div class="warning-banner">
+        <mat-icon>warning</mat-icon>
+        <p>Asegúrese de que el paciente no consuma lácteos 2 horas antes o después de la dosis.</p>
+      </div>
+
+    </div>
+
+    <!-- Botón Activar -->
+    <div class="form-footer">
+      <button class="btn-activate" [disabled]="loading()" (click)="onActivate()">
+        ACTIVAR TRATAMIENTO
+        <mat-icon>toggle_on</mat-icon>
+      </button>
+      <p class="footer-note">Esta acción notificará al cuidador del paciente automáticamente.</p>
+    </div>
+
+  </div>
+
+</div>

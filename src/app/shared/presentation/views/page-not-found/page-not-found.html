@@ -1,0 +1,40 @@
+<app-header></app-header>
+
+<main class="not-found">
+
+  <div class="not-found__content">
+
+    <!-- Número 404 grande -->
+    <div class="error-code">
+      <span class="digit">4</span>
+      <span class="digit digit--zero">
+        <mat-icon class="magnifier">search</mat-icon>
+      </span>
+      <span class="digit">4</span>
+    </div>
+
+    <!-- Mensaje -->
+    <h1 class="title">Página no encontrada</h1>
+    <p class="subtitle">
+      Lo sentimos, la página que buscas no existe o fue movida.
+      Verifica la URL o vuelve al inicio.
+    </p>
+
+    <!-- Botones de acción -->
+    <div class="actions">
+      <button mat-flat-button class="btn-primary" routerLink="/auth/login">
+        <mat-icon>home</mat-icon>
+        Ir al Inicio
+      </button>
+
+      <button mat-stroked-button class="btn-secondary" type="button" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+        Volver Atrás
+      </button>
+    </div>
+
+  </div>
+
+</main>
+
+<app-footer></app-footer>

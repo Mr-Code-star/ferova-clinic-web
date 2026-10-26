@@ -1,0 +1,22 @@
+@if (apiLoaded | async) {
+  <google-map
+    height="100%"
+    width="100%"
+    [center]="center"
+    [zoom]="zoom"
+    [options]="{ disableDefaultUI: false, clickableIcons: false }"
+    (mapClick)="onMapClick($event)">
+
+    @if (markerPosition && markerIcon) { <!-- ⬅️ Validamos que el icono ya exista -->
+      <map-marker
+        [position]="markerPosition"
+        [icon]="markerIcon">
+      </map-marker>
+    }
+
+  </google-map>
+} @else {
+  <div class="map-loading">
+    <span>Cargando mapa...</span>
+  </div>
+}

@@ -1,0 +1,136 @@
+<div class="view-container">
+
+  <!-- Botón Volver y Header -->
+  <header class="page-header">
+    <button class="btn-back" (click)="onBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="title">Paciente <strong>{{ patientName() }}</strong></h1>
+    <div class="status-badge">
+      <span class="dot"></span> Expediente Activo
+    </div>
+  </header>
+
+  @if (loading()) {
+    <div class="loading">Cargando expediente...</div>
+  } @else if (record()) {
+
+    <!-- Grid de Datos Principales -->
+    <div class="info-grid">
+      <div class="info-card">
+        <mat-icon class="icon-blue">calendar_today</mat-icon>
+        <div class="data">
+          <span class="label">FECHA</span>
+          <h3 class="value">{{ record()?.updatedAt | date:'dd MMM, yyyy' }}</h3>
+          <span class="sub">Último registro</span>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <mat-icon class="icon-blue">male</mat-icon>
+        <div class="data">
+          <span class="label">SEXO</span>
+          <h3 class="value">{{ record()?.gender === 'MALE' ? 'Masculino' : 'Femenino' }}</h3>
+          <span class="sub">Sexo biológico</span>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <mat-icon class="icon-blue">shopping_bag</mat-icon>
+        <div class="data">
+          <span class="label">PESO</span>
+          <h3 class="value">{{ record()?.weight }} kg</h3>
+          <span class="sub">Adecuado para edad</span>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <mat-icon class="icon-blue">straighten</mat-icon>
+        <div class="data">
+          <span class="label">ALTURA</span>
+          <h3 class="value">{{ record()?.height }} cm</h3>
+          <span class="sub">Talla clínica</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Banner de Hemoglobina -->
+    <div class="hemoglobin-banner">
+      <div class="hemo-left">
+        <div class="hemo-icon" [class.no-data]="!hasHemoglobinData()">
+          <mat-icon>{{ hasHemoglobinData() ? 'water_drop' : 'add_circle_outline' }}</mat-icon>
+        </div>
+        <div class="hemo-text">
+          <span class="label">HEMOGLOBINA</span>
+          @if (hasHemoglobinData()) {
+            <h2 class="value">{{ record()?.hemoglobinLevel }} <small>g/dL</small></h2>
+            <button class="btn-link" (click)="goToControls()">
+              <mat-icon>visibility</mat-icon> VER HISTORIAL DE CONTROLES
+            </button>
+          } @else {
+            <h2 class="value text-muted">Sin registros</h2>
+            <span class="sub">Pendiente de control</span>
+          }
+        </div>
+      </div>
+
+      @if (!hasHemoglobinData()) {
+        <button mat-flat-button class="btn-primary" (click)="onRegisterFirstControl()">
+          <mat-icon>add</mat-icon> REALIZAR PRIMER CONTROL
+        </button>
+      }
+    </div>
+
+    <!-- Motivo y Observaciones -->
+    <div class="text-grid">
+      <div class="text-card">
+        <div class="card-header">
+          <mat-icon>assignment</mat-icon> Motivo de Consulta
+        </div>
+        <div class="card-body">
+          <p>{{ record()?.motivoConsulta }}</p>
+        </div>
+      </div>
+
+      <div class="text-card">
+        <div class="card-header">
+          <mat-icon>visibility</mat-icon> Observaciones
+        </div>
+        <div class="card-body obs-body">
+          <div class="vertical-line"></div>
+          <p>"{{ record()?.observaciones }}"</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Antecedentes y Síntomas -->
+    <div class="tags-container">
+      <div class="tag-section">
+        <span class="section-label">ANTECEDENTES <span>({{ record()?.antecedentes?.length }} REGISTRADOS)</span></span>
+        <div class="tags-list">
+          @for (ant of record()?.antecedentes; track ant.type) {
+            <span class="tag tag-grey">{{ ant.type }}: {{ ant.description }}</span>
+          }
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="tag-section">
+        <span class="section-label">SÍNTOMAS ACTUALES <span>({{ record()?.sintomas?.length }} ACTIVOS)</span></span>
+        <div class="tags-list">
+          @for (sintoma of record()?.sintomas; track sintoma) {
+            <span class="tag tag-blue">{{ sintoma }}</span>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Action -->
+    <div class="footer-actions">
+    <button mat-flat-button class="btn-download" [disabled]="!canDownload()" (click)="onDownload()">
+      <mat-icon>download</mat-icon> Descargar
+    </button>
+    </div>
+  }
+</div>

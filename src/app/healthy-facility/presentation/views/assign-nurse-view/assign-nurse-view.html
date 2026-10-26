@@ -1,0 +1,62 @@
+<div class="assign-view-container">
+
+  <!-- Header -->
+  <header class="page-header">
+    <button class="btn-back" (click)="onBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="page-title">Asignar a {{ facilityName }}</h1>
+  </header>
+
+  <!-- Escenario 1: Sin enfermeros disponibles -->
+  @if (!canRegister()) {
+    <div class="empty-state-card">
+      <div class="empty-icon">
+        <mat-icon>person_off</mat-icon>
+      </div>
+      <h2>Sin enfermeros disponibles</h2>
+      <p>{{ canRegisterMessage() || 'Actualmente, todo el personal de enfermería registrado ha sido asignado a una posta médica. Por favor, espere al registro de nuevo personal.' }}</p>
+      <button class="btn-primary" (click)="onBack()">
+        <mat-icon>arrow_back</mat-icon> Volver
+      </button>
+    </div>
+  }
+  @else {
+    <div class="assign-card">
+      <h2 class="card-title">Personal médico disponible</h2>
+
+      <div class="nurses-list">
+        @for (nurse of nurses(); track nurse.id) {
+          <div
+            class="nurse-item"
+            [class.selected]="selectedNurseId() === nurse.id"
+            (click)="selectNurse(nurse)">
+            <span class="nurse-name">{{ nurse.fullName }}</span>
+            <div class="radio-btn">
+              @if (selectedNurseId() === nurse.id) {
+                <div class="radio-inner"></div>
+              }
+            </div>
+          </div>
+        }
+
+        @if (nurses().length === 0) {
+          <p class="loading-text">Cargando personal...</p>
+        }
+      </div>
+
+      <div class="info-box">
+        <mat-icon>info</mat-icon>
+        <p>Solo puedes asignar un enfermero para esta posta y para el resto de postas.</p>
+      </div>
+
+      <button
+        class="btn-confirm"
+        [disabled]="!selectedNurseId() || assigning()"
+        (click)="onConfirm()">
+        <mat-icon>person_add</mat-icon>
+        {{ assigning() ? 'Asignando...' : 'Confirmar Asignación' }}
+      </button>
+    </div>
+  }
+</div>
